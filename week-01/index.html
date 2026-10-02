@@ -1,0 +1,954 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Week 1 lecture notes and interactive practices: algorithms, pseudocode, flowcharts, and an introduction to Python." data-i18n-content>
+  <title data-i18n>Week 01 · Algorithms &amp; Python</title>
+  <style>
+    :root { --paper:#f6f5ef; --card:#fffefa; --ink:#1d302a; --muted:#58665e; --green:#235a46; --soft:#e7eee6; --line:#d9ded3; --orange:#ad481f; --warm:#faebdd; --error:#a42b2b; --code:#1d302a; --mono:ui-monospace,SFMono-Regular,Consolas,monospace; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:auto; }
+    body { margin:0; color:var(--ink); background:var(--paper); font:16px/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+    h1,h2,h3,p { margin-top:0; }
+    h1,h2 { font-family:Georgia,"Times New Roman",serif; font-weight:400; letter-spacing:-.035em; line-height:1.12; }
+    h1 { font-size:clamp(2.5rem,5vw,4.8rem); margin-bottom:22px; }
+    h2 { font-size:clamp(2rem,4vw,3.5rem); margin-bottom:18px; }
+    h3 { font-size:1.1rem; line-height:1.4; margin-bottom:12px; }
+    p { margin-bottom:16px; }
+    a { color:var(--green); text-underline-offset:4px; }
+    button,input,select { font:inherit; }
+    button,a,input,select,summary { -webkit-tap-highlight-color:transparent; }
+    button { cursor:pointer; border:1px solid var(--line); border-radius:8px; background:var(--card); color:var(--ink); padding:9px 15px; line-height:1.4; font-weight:600; }
+    button:hover { background:var(--soft); border-color:#8b9e8e; }
+    button.primary { background:var(--green); color:#fff; border-color:var(--green); }
+    button.primary:hover { background:#174531; }
+    button:disabled { opacity:.45; cursor:default; }
+    :focus-visible { outline:3px solid var(--orange); outline-offset:4px; }
+    input:not([type=radio]):not([type=checkbox]),select { max-width:100%; border:1px solid #a4b1a4; background:var(--card); color:var(--ink); border-radius:7px; padding:8px 10px; }
+    input[type=number] { width:100px; }
+    input[type=range] { width:100%; accent-color:var(--green); padding:0; border:0; }
+    input[type=radio] { accent-color:var(--green); width:18px; height:18px; flex-shrink:0; }
+    label { font-weight:600; }
+    .skip { position:fixed; top:-100px; left:16px; z-index:100; padding:10px 15px; background:var(--card); }
+    .skip:focus { top:16px; }
+    .sidebar { position:fixed; inset:0 auto 0 0; width:254px; padding:30px 22px 24px; background:var(--ink); color:#f6f5ef; display:flex; flex-direction:column; overflow:auto; }
+    .brand { font-size:12px; letter-spacing:.16em; font-weight:700; display:flex; align-items:center; gap:10px; }
+    .brand-mark { width:28px; height:28px; border:1px solid #7c9384; display:grid; place-items:center; font:15px var(--mono); }
+    .week-tag { margin:36px 0 8px; color:#b5c6b6; font-size:12px; letter-spacing:.13em; text-transform:uppercase; }
+    .nav { display:grid; gap:4px; }
+    .nav a { display:flex; gap:13px; align-items:center; padding:10px 11px; color:#c9d4c9; text-decoration:none; font-size:14px; border-radius:7px; line-height:1.4; }
+    .nav a:hover { background:#2c4238; color:#fff; }
+    .nav a[aria-current=page] { background:#f6f5ef; color:var(--ink); }
+    .nav-num { font:11px var(--mono); opacity:.7; }
+    .workspace { margin-left:254px; }
+    .topbar { padding:17px 42px; border-bottom:1px solid var(--line); display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px; }
+    .breadcrumb { color:var(--muted); font-size:13px; }
+    .breadcrumb span { color:var(--ink); margin-left:9px; }
+    .toolbar { display:flex; flex-wrap:wrap; gap:8px; max-width:100%; }
+    .toolbar button { font-size:12px; padding:7px 11px; }
+    .language-switch { display:flex; align-items:center; gap:4px; }
+    main { max-width:1280px; margin:0 auto; padding:46px 42px 24px; }
+    .lesson { margin-bottom:60px; scroll-margin-top:30px; }
+    body.enhanced .lesson:not(.active) { display:none; }
+    .eyebrow { color:var(--orange); font-size:12px; font-weight:700; letter-spacing:.15em; text-transform:uppercase; margin-bottom:18px; }
+    .lead { color:var(--muted); font-size:18px; max-width:750px; margin-bottom:28px; }
+    .tags { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:30px; }
+    .tag { padding:4px 10px; border:1px solid var(--line); border-radius:5px; font-size:12px; color:var(--muted); }
+    .hero { display:grid; grid-template-columns:1.25fr 1fr; gap:36px; align-items:center; padding-bottom:28px; }
+    .hero-visual { min-height:285px; border:1px solid var(--line); border-radius:16px; background-color:#edf0e7; background-image:radial-gradient(#bfcbbc 1px,transparent 1px); background-size:18px 18px; padding:28px; display:flex; flex-direction:column; justify-content:center; }
+    .hero-step { background:var(--card); border:1px solid #bdcbbb; border-radius:8px; padding:14px 17px; display:flex; justify-content:space-between; align-items:center; gap:10px; }
+    .hero-step code { color:var(--green); font-size:13px; }
+    .hero-arrow { margin:4px 24px; color:var(--green); font-size:23px; line-height:1.2; }
+    .hero-step:last-child { background:var(--green); color:#fff; }
+    .hero-step:last-child code { color:#fff; }
+    .section-label { display:flex; align-items:center; gap:15px; margin:28px 0 18px; font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); }
+    .section-label::after { content:""; height:1px; background:var(--line); flex:1; }
+    .grid-2,.grid-3 { display:grid; gap:20px; }
+    .grid-2 > *,.grid-3 > * { min-width:0; }
+    .grid-2 { grid-template-columns:1fr 1fr; }
+    .grid-3 { grid-template-columns:repeat(3,1fr); }
+    .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:24px; min-width:0; }
+    .card p:last-child { margin-bottom:0; }
+    .route-card { display:block; color:var(--ink); text-decoration:none; position:relative; padding-right:44px; }
+    .route-card:hover { border-color:var(--green); background:var(--soft); }
+    .route-card::after { content:"↗"; position:absolute; right:20px; top:21px; color:var(--green); }
+    .route-card small { display:block; font:11px var(--mono); color:var(--orange); margin-bottom:12px; }
+    .route-card p { font-size:14px; color:var(--muted); }
+    .callout { padding:18px 22px; border-left:3px solid var(--green); background:var(--soft); border-radius:0 9px 9px 0; margin:22px 0; }
+    .callout.warm { background:var(--warm); border-color:var(--orange); }
+    .callout p:last-child { margin-bottom:0; }
+    .muted,.help { color:var(--muted); }
+    .help { font-size:13px; margin:10px 0 0; }
+    .compact { padding-left:22px; margin:12px 0 0; }
+    .compact li { margin-bottom:7px; }
+    .activity { border:1px solid var(--line); border-radius:14px; background:var(--card); overflow:hidden; margin-top:26px; }
+    .activity-head { padding:18px 24px; border-bottom:1px solid var(--line); display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; }
+    .activity-head h3 { margin:0; }
+    .activity-tag { color:var(--orange); font:11px var(--mono); text-transform:uppercase; letter-spacing:.08em; white-space:nowrap; }
+    .activity-body { padding:24px; }
+    .controls { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin:18px 0; }
+    .fields { display:flex; flex-wrap:wrap; gap:18px; align-items:end; margin-bottom:20px; }
+    .field { display:flex; flex-direction:column; gap:6px; font-size:14px; min-width:0; max-width:100%; }
+    .feedback { border-radius:7px; background:var(--soft); padding:12px 15px; font-size:14px; margin-top:16px; min-height:47px; }
+    .feedback.error { background:#f9e7e2; color:var(--error); }
+    .feedback.success { color:#1b5336; background:#e6f0e3; }
+    details { border-top:1px solid var(--line); padding:15px 0 0; margin-top:20px; }
+    summary { cursor:pointer; font-weight:600; color:var(--green); }
+    details > :not(summary) { margin-top:14px; }
+    code { font-family:var(--mono); font-size:.9em; }
+    p code,li code,td code { background:var(--soft); padding:2px 5px; border-radius:4px; }
+    pre { margin:0; padding:20px; background:var(--code); color:#ecf1e7; border-radius:9px; line-height:1.75; overflow:auto; tab-size:4; }
+    pre code { font-size:14px; }
+    .code-lines { margin:0; list-style:none; padding:12px 0; counter-reset:line; font:14px/1.8 var(--mono); background:var(--code); color:#e8eee5; border-radius:9px; overflow:auto; }
+    .code-lines li { counter-increment:line; padding:7px 18px 7px 12px; white-space:pre; border-left:3px solid transparent; }
+    .code-lines li::before { content:counter(line); display:inline-block; width:28px; color:#aebfb0; font-size:11px; }
+    .code-lines li.current { background:#335644; border-left-color:#e4bb80; }
+    .memory { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:18px 0; }
+    .memory div { background:var(--soft); padding:12px 14px; border-radius:7px; }
+    .memory small { display:block; color:var(--muted); font:12px var(--mono); }
+    .memory strong { font:24px var(--mono); display:block; margin-top:8px; }
+    .output { border:1px dashed #98ad9b; border-radius:8px; padding:14px 17px; margin-top:15px; }
+    .output small { display:block; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:8px; }
+    .output code { white-space:pre-wrap; overflow-wrap:anywhere; }
+    .robot-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:5px; max-width:350px; margin:auto; }
+    .robot-cell { aspect-ratio:1; display:grid; place-items:center; position:relative; border:1px solid var(--line); border-radius:7px; background:#f4f5ef; color:var(--muted); font-size:12px; }
+    .robot-cell.wall { background:#d5dcd1; color:#56635b; }
+    .robot-cell.goal { background:var(--warm); color:var(--orange); border-color:#d6b798; }
+    .robot-cell.visited { background:var(--soft); }
+    .robot-cell.robot { background:var(--green); color:#fff; border-color:var(--green); }
+    .robot-token { font:22px var(--mono); }
+    .legend { display:flex; flex-wrap:wrap; gap:16px; color:var(--muted); font-size:12px; margin:16px 0 0; }
+    .legend i { display:inline-block; height:10px; width:10px; border-radius:2px; background:#d5dcd1; margin-right:5px; }
+    .legend i.goal-key { background:#efd2ae; }
+    .queue { display:flex; gap:6px; flex-wrap:wrap; min-height:58px; align-items:center; border:1px dashed #a8b7a7; border-radius:8px; padding:10px; }
+    .queue button { font:14px var(--mono); padding:7px 10px; }
+    .queue button.current { background:var(--green); color:#fff; }
+    .queue .help { margin:0; }
+    .rectangle-stage { height:230px; background:#edf0e7; border-radius:9px; display:grid; place-items:center; padding:24px; }
+    .rectangle { display:grid; place-items:center; border:2px solid var(--green); background:#dbe8d6; min-width:20px; min-height:20px; position:relative; }
+    .rectangle .area-value { background:var(--card); border-radius:4px; padding:2px 7px; font:14px var(--mono); }
+    .ipo { display:grid; grid-template-columns:1fr auto 1fr auto 1fr; gap:12px; align-items:center; margin:20px 0; }
+    .ipo > div { padding:16px; background:var(--soft); border-radius:8px; }
+    .ipo strong { display:block; margin-bottom:7px; }
+    .ipo small { color:var(--muted); }
+    .sort-list { list-style:none; padding:0; margin:15px 0; display:grid; gap:8px; }
+    .sort-list li { display:flex; gap:10px; align-items:center; border:1px solid var(--line); padding:9px 12px; border-radius:7px; }
+    .sort-list code { flex:1; }
+    .sort-list button { padding:4px 10px; }
+    .sort-num { font:12px var(--mono); color:var(--muted); width:20px; }
+    .symbols { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+    .symbol { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:16px 10px; text-align:center; }
+    .symbol svg { width:90px; height:42px; display:block; margin:0 auto 10px; fill:var(--soft); stroke:var(--green); stroke-width:1.5; }
+    .symbol strong { display:block; font-size:13px; }
+    .symbol small { color:var(--muted); font-size:12px; }
+    .flowchart { width:100%; max-width:480px; display:block; margin:auto; }
+    .flowchart .node { fill:#f4f5ef; stroke:#a3b4a4; stroke-width:1.5; }
+    .flowchart text { fill:var(--ink); font:14px system-ui,sans-serif; text-anchor:middle; dominant-baseline:middle; }
+    .flowchart .edge { fill:none; stroke:#8b9e8e; stroke-width:1.7; }
+    .flowchart .node.active { fill:#dbe9d6; stroke:var(--green); stroke-width:2.5; }
+    .flowchart .edge.active { stroke:var(--green); stroke-width:3; }
+    .flowchart .branch-label { font-size:12px; fill:var(--muted); }
+    .table-wrap { overflow:auto; }
+    table { border-collapse:collapse; width:100%; font-size:14px; text-align:left; }
+    th { color:var(--muted); font-size:12px; font-weight:600; background:var(--soft); }
+    th,td { padding:12px; border-bottom:1px solid var(--line); }
+    .pass { color:#24633e; font-weight:600; }
+    .fail { color:var(--error); font-weight:600; }
+    .timeline { display:flex; gap:12px; margin-bottom:18px; }
+    .timeline button { flex:1; text-align:left; padding:16px; }
+    .timeline button strong { display:block; font:25px Georgia,serif; margin-bottom:8px; }
+    .timeline button span { font-size:13px; }
+    button[aria-pressed=true],.tab[aria-selected=true] { background:var(--green); color:#fff; border-color:var(--green); }
+    .timeline-note { min-height:150px; }
+    .tabs { display:flex; gap:7px; flex-wrap:wrap; margin-bottom:20px; }
+    .tab { font-size:13px; }
+    .syntax-note { min-height:100px; margin-top:18px; }
+    .choice-buttons { display:flex; gap:10px; flex-wrap:wrap; margin:15px 0; }
+    .quiz-question { border:0; border-top:1px solid var(--line); padding:20px 0; margin:0; }
+    .quiz-question legend { font-weight:600; padding:0 0 10px; }
+    .quiz-question label { display:flex; align-items:start; gap:10px; padding:8px 10px; border-radius:7px; font-size:14px; font-weight:400; }
+    .quiz-question label:hover { background:var(--soft); }
+    .quiz-answer { font-size:14px; padding:10px 13px; margin-top:10px; background:var(--soft); border-radius:6px; }
+    .sample-links { display:grid; gap:10px; margin:18px 0; }
+    .sample-links a { display:flex; justify-content:space-between; gap:15px; padding:12px 15px; border:1px solid var(--line); border-radius:7px; font-size:14px; text-decoration:none; }
+    .sample-links a:hover { background:var(--soft); }
+    .sample-links small { color:var(--muted); }
+    .lesson-footer { padding:22px 0; border-top:1px solid var(--line); display:flex; align-items:center; justify-content:space-between; gap:12px; }
+    .lesson-footer small { color:var(--muted); }
+    .references { font-size:13px; color:var(--muted); margin-top:28px; }
+    .print-only { display:none; }
+    body.lecture-view { font-size:18px; }
+    body.lecture-view .lead { font-size:21px; }
+    body.lecture-view pre code,body.lecture-view .code-lines { font-size:17px; }
+    body.lecture-view #branch-flow text { font-size:20px; }
+    body.lecture-view .help,body.lecture-view table { font-size:16px; }
+    [hidden] { display:none !important; }
+    @media (min-width:1500px) { main { padding-top:65px; } }
+    @media (max-width:1100px) { .sidebar { width:225px; padding:25px 16px; } .workspace { margin-left:225px; } main { padding:32px 26px; } .topbar { padding:16px 26px; } .hero { grid-template-columns:1fr; gap:15px; } .hero-visual { min-height:230px; } .grid-3 { grid-template-columns:1fr; } .ipo { grid-template-columns:1fr; } .ipo > span { text-align:center; transform:rotate(90deg); } }
+    @media (max-width:760px) { .sidebar { position:static; width:auto; padding:18px; } .brand { font-size:11px; } .week-tag { margin:20px 0 5px; } .nav { display:flex; overflow:auto; padding-bottom:7px; } .nav a { flex-shrink:0; padding:9px 11px; } .workspace { margin-left:0; } main { padding:27px 18px 12px; } .topbar { padding:12px 18px; flex-wrap:wrap; } .grid-2 { grid-template-columns:1fr; } .card,.activity-body { padding:18px; } .activity-head { padding:15px 18px; } .symbols { grid-template-columns:1fr 1fr; } .timeline { flex-direction:column; } .timeline button { display:flex; gap:20px; align-items:center; } .timeline button strong { margin:0; } .lesson-footer small { display:none; } .memory strong { font-size:20px; } .hero { padding-bottom:10px; } .lead { font-size:17px; } }
+    @media (max-width:760px) { #branch-flow text { font-size:22px; } #branch-flow .branch-label { font-size:19px; } }
+    @media print { body { background:white; font-size:11pt; } .sidebar,.topbar,.lesson-footer,.controls,button,.skip,.activity-tag { display:none !important; } .workspace { margin:0; } main { padding:0; max-width:none; } body.enhanced .lesson:not(.active),.lesson { display:block !important; page-break-before:always; } .lesson:first-child { page-break-before:auto; } .card,.activity { break-inside:avoid; } .grid-2,.grid-3,.hero { display:block; } h1,h2 { font-size:28pt; } .hero-visual { display:none; } .code-lines,pre { background:#eee; color:#111; } .code-lines li::before { color:#555; } .references a { color:#111; } .timeline { display:none; } body.enhanced #timeline-note,body.enhanced #syntax-panel { display:none; } body.enhanced .print-only { display:block; } .print-only .card { margin-bottom:16px; } }
+    @media (prefers-reduced-motion:no-preference) { button,.route-card { transition:background .15s,border-color .15s; } }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main" data-i18n>Skip to lesson</a>
+  <aside class="sidebar" aria-label="Course navigation" data-i18n-aria-label>
+    <div class="brand" data-i18n><span class="brand-mark" aria-hidden="true">a↗</span> ALGORITHM &amp; PROGRAMMING 101</div>
+    <p class="week-tag" data-i18n>Week 01 / Foundations</p>
+    <nav class="nav" aria-label="Lesson sections" data-i18n-aria-label>
+      <a href="#overview" aria-current="page" data-i18n><span class="nav-num">00</span> Lesson overview</a>
+      <a href="#algorithms" data-i18n><span class="nav-num">01</span> What is an algorithm?</a>
+      <a href="#problems" data-i18n><span class="nav-num">02</span> Understand the problem</a>
+      <a href="#pseudocode" data-i18n><span class="nav-num">03</span> Steps &amp; pseudocode</a>
+      <a href="#flowcharts" data-i18n><span class="nav-num">04</span> Flowcharts &amp; decisions</a>
+      <a href="#testing" data-i18n><span class="nav-num">05</span> Trace, test, debug</a>
+      <a href="#python-story" data-i18n><span class="nav-num">06</span> The story of Python</a>
+      <a href="#python-syntax" data-i18n><span class="nav-num">07</span> Read &amp; write Python</a>
+      <a href="#python-input" data-i18n><span class="nav-num">08</span> From input to output</a>
+      <a href="#practice" data-i18n><span class="nav-num">09</span> Practice &amp; recap</a>
+    </nav>
+  </aside>
+  <div class="workspace">
+    <header class="topbar">
+      <div class="breadcrumb" data-i18n>Course notebook <span>/ Week 01</span></div>
+      <div class="toolbar"><div class="language-switch" role="group" aria-label="Language / Dil"><button type="button" data-language="en" lang="en" aria-label="English" aria-pressed="true" disabled>EN</button><button type="button" data-language="tr" lang="tr" aria-label="Türkçe" aria-pressed="false" disabled>TR</button></div><button id="lecture-view" type="button" aria-pressed="false" data-i18n>Lecture view</button><button id="print-notes" type="button" data-i18n>Print notes</button></div>
+    </header>
+    <main id="main" tabindex="-1">
+      <noscript><div class="callout warm">The notes are readable without JavaScript. Enable JavaScript to use the interactive practices.</div></noscript>
+
+      <section class="lesson active" id="overview" aria-labelledby="overview-title">
+        <div class="hero">
+          <div>
+            <p class="eyebrow" data-i18n>Week 01 / Overview</p>
+            <h1 id="overview-title" tabindex="-1" data-i18n>Algorithms and Python</h1>
+            <p class="lead" data-i18n>This lesson covers algorithms, pseudocode, flowcharts, testing, and Python basics.</p>
+            <div class="tags"><span class="tag" data-i18n>Algorithms</span><span class="tag" data-i18n>Pseudocode</span><span class="tag" data-i18n>Flowcharts</span><span class="tag" data-i18n>Python basics</span></div>
+            <a href="#algorithms" data-i18n>Begin with algorithms →</a>
+          </div>
+          <div class="hero-visual" aria-label="An example: inputs 8 and 3, add the values, output 11" data-i18n-aria-label>
+            <div class="hero-step"><strong data-i18n>01 / Input</strong><code>a = 8, b = 3</code></div>
+            <div class="hero-arrow" aria-hidden="true">↓</div>
+            <div class="hero-step"><strong data-i18n>02 / Process</strong><code>total ← a + b</code></div>
+            <div class="hero-arrow" aria-hidden="true">↓</div>
+            <div class="hero-step"><strong data-i18n>03 / Output</strong><code>11</code></div>
+          </div>
+        </div>
+        <div class="section-label" data-i18n>By the end of this lesson</div>
+        <div class="grid-3">
+          <div class="card"><h3 data-i18n>Describe a solution</h3><p class="muted" data-i18n>Identify inputs and outputs. Write precise steps and explain their order.</p></div>
+          <div class="card"><h3 data-i18n>Represent &amp; check it</h3><p class="muted" data-i18n>Use pseudocode and flowcharts. Trace values and test both decision paths.</p></div>
+          <div class="card"><h3 data-i18n>Write a small program</h3><p class="muted" data-i18n>Use Python variables, expressions, input, output, and a simple condition.</p></div>
+        </div>
+        <div class="section-label" data-i18n>Explore the lesson</div>
+        <div class="grid-2">
+          <a class="card route-card" href="#algorithms"><small data-i18n>01–03 / DESIGN</small><h3 data-i18n>Algorithms and pseudocode</h3><p data-i18n>Guide a robot, model a rectangle, and build a sequence of steps.</p></a>
+          <a class="card route-card" href="#flowcharts"><small data-i18n>04–05 / REASON</small><h3 data-i18n>Flowcharts and testing</h3><p data-i18n>Watch a flowchart make a decision and find a bug with test cases.</p></a>
+          <a class="card route-card" href="#python-story"><small data-i18n>06–08 / PROGRAM</small><h3 data-i18n>Python introduction</h3><p data-i18n>Explore its origins, read the syntax, and see why input types matter.</p></a>
+          <a class="card route-card" href="#practice"><small data-i18n>09 / APPLY</small><h3 data-i18n>Perimeter exercise</h3><p data-i18n>Design a perimeter algorithm and check your understanding.</p></a>
+        </div>
+        <div class="callout"><strong data-i18n>How to use these notes</strong><p data-i18n>Predict the result before pressing a button. Use <strong>Step</strong> to follow one instruction, <strong>Run</strong> to watch the sequence, and <strong>Reset</strong> to try again. Explain what changed and why.</p></div>
+      </section>
+
+      <section class="lesson" id="algorithms" aria-labelledby="algorithms-title">
+        <p class="eyebrow" data-i18n>01 / Algorithms</p>
+        <h2 id="algorithms-title" tabindex="-1" data-i18n>What is an algorithm?</h2>
+        <p class="lead" data-i18n>An algorithm is a precise sequence of steps for solving a problem. For the problems in this lesson, it must finish and produce the intended result for valid inputs.</p>
+        <div class="grid-3">
+          <div class="card"><h3 data-i18n>Precise</h3><p data-i18n>Each instruction has a clear meaning. “Move one cell east” can be executed; “go somewhere near the goal” needs clarification.</p></div>
+          <div class="card"><h3 data-i18n>Ordered &amp; finite</h3><p data-i18n>The order matters, and the process must stop. A finite description alone does not guarantee that its execution will finish.</p></div>
+          <div class="card"><h3 data-i18n>Correct</h3><p data-i18n>The steps must meet the problem’s requirements for every allowed input. Finishing with the wrong result is still a failure.</p></div>
+        </div>
+        <div class="callout"><strong data-i18n>Algorithm and program</strong><p data-i18n>The algorithm describes the solution. A program expresses those steps in a language a computer can execute. One algorithm can be implemented in many languages.</p></div>
+        <div class="activity">
+          <div class="activity-head"><h3 data-i18n>Practice / Give the robot a plan</h3><span class="activity-tag" data-i18n>Sequence + precision</span></div>
+          <div class="activity-body grid-2">
+            <div>
+              <p data-i18n>Move from <strong>S</strong> at the bottom left to <strong>G</strong> at the top right. Each command moves exactly one cell in a fixed compass direction. Walls and the grid boundary block movement.</p>
+              <div class="robot-grid" id="robot-grid" role="img" aria-label="Robot grid" data-i18n-aria-label></div>
+              <div class="legend"><span data-i18n><i></i>Wall</span><span data-i18n><i class="goal-key"></i>Goal</span><span data-i18n>S = start · R = robot</span></div>
+            </div>
+            <div>
+              <h3 data-i18n>Build your command sequence</h3>
+              <div class="controls" id="robot-commands" aria-label="Add a command" data-i18n-aria-label><button type="button" data-command="N" data-i18n>↑ North</button><button type="button" data-command="E" data-i18n>→ East</button><button type="button" data-command="S" data-i18n>↓ South</button><button type="button" data-command="W" data-i18n>← West</button></div>
+              <div class="queue" id="robot-queue" aria-label="Command sequence" data-i18n-aria-label></div>
+              <p class="help" data-i18n>Click a queued command to remove it. Editing the plan returns the robot to its start. Up to 30 commands.</p>
+              <div class="controls"><button type="button" class="primary" id="robot-step" data-i18n>Step</button><button type="button" id="robot-run" data-i18n>Run</button><button type="button" id="robot-reset" data-i18n>Reset robot</button><button type="button" id="robot-clear" data-i18n>Clear plan</button></div>
+              <div class="feedback" id="robot-feedback" role="status" data-i18n>Add commands, then predict where the robot will finish.</div>
+              <details><summary data-i18n>Reveal one possible solution</summary><p data-i18n>East four times, then North four times: <code>E E E E N N N N</code>. It reaches the goal in eight moves.</p><p data-i18n>Discuss: can another correct sequence solve the same problem?</p></details>
+            </div>
+          </div>
+        </div>
+        <details><summary data-i18n>Pause for discussion</summary><p data-i18n>If a robot reaches the goal and then moves away, did the plan meet the requirement to <em>finish</em> at the goal? How would you state that requirement more precisely?</p></details>
+      </section>
+
+      <section class="lesson" id="problems" aria-labelledby="problems-title">
+        <p class="eyebrow" data-i18n>02 / Problem definition</p>
+        <h2 id="problems-title" tabindex="-1" data-i18n>Understand the problem first.</h2>
+        <p class="lead" data-i18n>Identify what you know, what you need to produce, and which inputs are allowed. A clear problem statement gives you something to check your solution against.</p>
+        <div class="card"><h3 data-i18n>Our problem: calculate a rectangle’s area</h3><p data-i18n>Given a positive width and height measured in centimetres, calculate the area in square centimetres. In this practice, both dimensions are whole numbers from 1 to 12.</p>
+          <div class="ipo"><div><strong data-i18n>Input</strong><small data-i18n>width, height · cm</small></div><span aria-hidden="true">→</span><div><strong data-i18n>Process</strong><small data-i18n>area ← width × height</small></div><span aria-hidden="true">→</span><div><strong data-i18n>Output</strong><small data-i18n>area · cm²</small></div></div>
+        </div>
+        <div class="activity">
+          <div class="activity-head"><h3 data-i18n>Practice / Change the inputs</h3><span class="activity-tag" data-i18n>Input → process → output</span></div>
+          <div class="activity-body grid-2">
+            <div>
+              <label for="area-width"><span data-i18n>Width:</span> <span id="area-width-label">6</span> cm</label><input id="area-width" type="range" min="1" max="12" value="6">
+              <label for="area-height"><span data-i18n>Height:</span> <span id="area-height-label">4</span> cm</label><input id="area-height" type="range" min="1" max="12" value="4">
+              <div class="output" aria-live="polite"><small data-i18n>Calculation</small><code id="area-formula">6 × 4 = 24 cm²</code></div>
+              <p class="help" data-i18n>Predict: if you double only the width, what happens to the area?</p>
+            </div>
+            <div><div class="rectangle-stage"><div class="rectangle" id="area-rectangle"><span class="area-value" id="area-value">24 cm²</span></div></div><p class="help" data-i18n>The rectangle scales with its dimensions. Its area is measured in square units.</p></div>
+          </div>
+        </div>
+        <div class="activity">
+          <div class="activity-head"><h3 data-i18n>Practice / Classify each part</h3><span class="activity-tag" data-i18n>Check understanding</span></div>
+          <div class="activity-body">
+            <div class="fields"><label class="field" for="ipo-width"><span data-i18n>The width and height</span><select id="ipo-width"><option value="" data-i18n>Choose…</option><option value="Input" data-i18n>Input</option><option value="Process" data-i18n>Process</option><option value="Output" data-i18n>Output</option></select></label><label class="field" for="ipo-multiply"><span data-i18n>Multiplying the dimensions</span><select id="ipo-multiply"><option value="" data-i18n>Choose…</option><option value="Input" data-i18n>Input</option><option value="Process" data-i18n>Process</option><option value="Output" data-i18n>Output</option></select></label><label class="field" for="ipo-area"><span data-i18n>The calculated area</span><select id="ipo-area"><option value="" data-i18n>Choose…</option><option value="Input" data-i18n>Input</option><option value="Process" data-i18n>Process</option><option value="Output" data-i18n>Output</option></select></label></div>
+            <button type="button" class="primary" id="ipo-check" data-i18n>Check classification</button><div class="feedback" id="ipo-feedback" role="status" data-i18n>Which information enters the algorithm, and which result leaves it?</div>
+          </div>
+        </div>
+        <div class="callout warm"><strong data-i18n>Assumptions are part of the problem.</strong><p data-i18n>A negative rectangle width is outside this task’s valid inputs. We state that restriction before designing the solution. Later, we can add input validation to enforce it.</p></div>
+      </section>
+
+      <section class="lesson" id="pseudocode" aria-labelledby="pseudocode-title">
+        <p class="eyebrow" data-i18n>03 / Pseudocode</p>
+        <h2 id="pseudocode-title" tabindex="-1" data-i18n>Sequence, variables &amp; pseudocode.</h2>
+        <p class="lead" data-i18n>Pseudocode is a readable description of an algorithm. It has no single universal syntax; we will use a small, consistent notation throughout the course.</p>
+        <div class="grid-2">
+          <div class="card"><h3 data-i18n>Our notation</h3><ul class="compact"><li data-i18n><code>INPUT</code> receives a value.</li><li data-i18n><code>OUTPUT</code> displays a result.</li><li data-i18n><code>←</code> assigns a value to a variable.</li><li data-i18n><code>IF / ELSE / END IF</code> describes a decision.</li></ul></div>
+          <div class="card"><h3 data-i18n>What is a variable?</h3><p data-i18n>A variable is a name associated with a value. In these examples, a memory table shows the current value for each name.</p><p data-i18n><code>total ← a + b</code> means: evaluate the expression on the right, then associate the result with <code>total</code>.</p></div>
+        </div>
+        <div class="activity">
+          <div class="activity-head"><h3 data-i18n>Practice / Trace the sum of two numbers</h3><span class="activity-tag" data-i18n>One instruction at a time</span></div>
+          <div class="activity-body">
+            <div class="fields"><label class="field" for="sum-a"><span data-i18n>Input a</span><input type="number" id="sum-a" value="8" min="-999" max="999" step="1"></label><label class="field" for="sum-b"><span data-i18n>Input b</span><input type="number" id="sum-b" value="3" min="-999" max="999" step="1"></label><span class="help" data-i18n>Use whole numbers from −999 to 999. Changing an input resets the trace.</span></div>
+            <div class="grid-2"><div><ol class="code-lines" id="sum-code"><li>INPUT a</li><li>INPUT b</li><li>total ← a + b</li><li>OUTPUT total</li></ol><div class="controls"><button type="button" class="primary" id="sum-step" data-i18n>Step</button><button type="button" id="sum-run" data-i18n>Run</button><button type="button" id="sum-reset" data-i18n>Reset</button></div></div>
+              <div><h3 data-i18n>Current variable values</h3><div class="memory"><div><small>a</small><strong id="sum-var-a">—</strong></div><div><small>b</small><strong id="sum-var-b">—</strong></div><div><small>total</small><strong id="sum-var-total">—</strong></div></div><div class="output"><small data-i18n>Output</small><code id="sum-output" data-i18n>No output yet.</code></div><p class="help" data-i18n>“—” means that the variable has not received a value yet.</p></div>
+            </div>
+            <div class="feedback" id="sum-feedback" role="status" data-i18n>Predict the output, then execute the first instruction.</div>
+          </div>
+        </div>
+        <div class="activity">
+          <div class="activity-head"><h3 data-i18n>Practice / Put the steps in order</h3><span class="activity-tag" data-i18n>Dependencies</span></div>
+          <div class="activity-body"><p data-i18n>Use the arrows to build an algorithm that always displays the sum. Both inputs must be read before the calculation.</p><ol class="sort-list" id="sort-list"></ol><div class="controls"><button type="button" class="primary" id="sort-check" data-i18n>Check order</button><button type="button" id="sort-reset" data-i18n>Mix again</button></div><div class="feedback" id="sort-feedback" role="status" data-i18n>Which steps depend on values from earlier steps?</div></div>
+        </div>
+        <div class="callout"><strong data-i18n>Assignment is an action.</strong><p data-i18n><code>x ← x + 1</code> uses the old value of <code>x</code> to calculate its new value. If <code>x</code> was 4, it becomes 5. This is different from a mathematical statement that two expressions are equal.</p></div>
+      </section>
+
+      <section class="lesson" id="flowcharts" aria-labelledby="flowcharts-title">
+        <p class="eyebrow" data-i18n>04 / Flowcharts</p>
+        <h2 id="flowcharts-title" tabindex="-1" data-i18n>Flowcharts and decisions</h2>
+        <p class="lead" data-i18n>A flowchart represents an algorithm visually. The arrows show the order of execution; a decision selects which path to follow.</p>
+        <div class="symbols">
+          <div class="symbol"><svg viewBox="0 0 100 45" aria-hidden="true"><rect x="5" y="5" width="90" height="35" rx="18"/></svg><strong data-i18n>Oval</strong><small data-i18n>Start / End</small></div>
+          <div class="symbol"><svg viewBox="0 0 100 45" aria-hidden="true"><path d="M16 5 H96 L84 40 H4 Z"/></svg><strong data-i18n>Parallelogram</strong><small data-i18n>Input / Output</small></div>
+          <div class="symbol"><svg viewBox="0 0 100 45" aria-hidden="true"><rect x="5" y="5" width="90" height="35" rx="1"/></svg><strong data-i18n>Rectangle</strong><small data-i18n>Process / Assignment</small></div>
+          <div class="symbol"><svg viewBox="0 0 100 45" aria-hidden="true"><path d="M50 2 L97 22.5 L50 43 L3 22.5 Z"/></svg><strong data-i18n>Diamond</strong><small data-i18n>Decision</small></div>
+        </div>
+        <details><summary data-i18n>See the sequential sum flowchart</summary>
+          <svg class="flowchart" viewBox="0 0 480 350" role="img" aria-labelledby="sum-flow-title"><title id="sum-flow-title" data-i18n>Start, input a and b, calculate total equals a plus b, output total, end.</title><defs><marker id="sum-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0 0 L7 3.5 L0 7" fill="#8b9e8e"/></marker></defs><path class="edge" d="M240 47 V79 M240 123 V154 M240 198 V229 M240 273 V305" marker-end="url(#sum-arrow)"/><rect class="node" x="180" y="12" width="120" height="35" rx="18"/><text x="240" y="30" data-i18n>Start</text><path class="node" d="M150 79 H350 L330 123 H130 Z"/><text x="240" y="101">INPUT a, b</text><rect class="node" x="140" y="154" width="200" height="44"/><text x="240" y="176">total ← a + b</text><path class="node" d="M150 229 H350 L330 273 H130 Z"/><text x="240" y="251">OUTPUT total</text><rect class="node" x="180" y="305" width="120" height="35" rx="18"/><text x="240" y="323" data-i18n>End</text></svg>
+          <p data-i18n>The two input instructions are combined into one input symbol here. The calculation remains a process; displaying the result remains an output.</p>
+        </details>
+        <div class="callout"><strong data-i18n>A decision introduces selection.</strong><p data-i18n>Our next problem is to output the larger value of two numbers. The condition <code>a ≥ b</code> is either true or false. If the numbers are equal, outputting either gives the same value.</p></div>
+        <div class="activity">
+          <div class="activity-head"><h3 data-i18n>Practice / Which path will execute?</h3><span class="activity-tag" data-i18n>Selection</span></div>
+          <div class="activity-body">
+            <div class="fields"><label class="field" for="branch-a"><span data-i18n>Input a</span><input id="branch-a" type="number" min="-999" max="999" step="1" value="8"></label><label class="field" for="branch-b"><span data-i18n>Input b</span><input id="branch-b" type="number" min="-999" max="999" step="1" value="3"></label><button type="button" id="branch-swap" data-i18n>Swap inputs</button><button type="button" id="branch-equal" data-i18n>Try equal values</button></div>
+            <div class="grid-2">
+              <div><h3 data-i18n>The flowchart</h3><svg class="flowchart" id="branch-flow" viewBox="0 0 480 430" role="img" aria-labelledby="branch-flow-title branch-flow-description"><title id="branch-flow-title" data-i18n>Flowchart: output the larger number</title><desc id="branch-flow-description" data-i18n>Start, input a and b, decide whether a is greater than or equal to b. Yes: output a. No: output b. Both branches join at End.</desc><defs><marker id="branch-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0 0 L7 3.5 L0 7" fill="#8b9e8e"/></marker></defs>
+                <path class="edge" data-edge="input" d="M240 52 V82" marker-end="url(#branch-arrow)"/><path class="edge" data-edge="decision" d="M240 130 V161" marker-end="url(#branch-arrow)"/>
+                <path class="edge" data-edge="yes" d="M150 207 H105 V293" marker-end="url(#branch-arrow)"/><path class="edge" data-edge="no" d="M330 207 H375 V293" marker-end="url(#branch-arrow)"/>
+                <path class="edge" data-edge="end-a" d="M105 341 V365 H240 V386" marker-end="url(#branch-arrow)"/><path class="edge" data-edge="end-b" d="M375 341 V365 H240 V386" marker-end="url(#branch-arrow)"/>
+                <rect class="node" data-node="start" x="180" y="16" width="120" height="36" rx="18"/><text x="240" y="34" data-i18n>Start</text>
+                <path class="node" data-node="input" d="M158 82 H342 L322 130 H138 Z"/><text x="240" y="106">INPUT a, b</text>
+                <path class="node" data-node="decision" d="M240 161 L330 207 L240 253 L150 207 Z"/><text x="240" y="207">a ≥ b?</text>
+                <text class="branch-label" x="117" y="188" data-i18n>Yes</text><text class="branch-label" x="362" y="188" data-i18n>No</text>
+                <path class="node" data-node="output-a" d="M38 293 H190 L172 341 H20 Z"/><text x="105" y="317">OUTPUT a</text><path class="node" data-node="output-b" d="M308 293 H460 L442 341 H290 Z"/><text x="375" y="317">OUTPUT b</text>
+                <rect class="node" data-node="end" x="180" y="386" width="120" height="36" rx="18"/><text x="240" y="404" data-i18n>End</text>
+              </svg></div>
+              <div><h3 data-i18n>The same algorithm in pseudocode</h3><ol class="code-lines" id="branch-code"><li>INPUT a, b</li><li>IF a ≥ b THEN</li><li>    OUTPUT a</li><li>ELSE</li><li>    OUTPUT b</li><li>END IF</li></ol><div class="memory"><div><small>a</small><strong id="branch-var-a">—</strong></div><div><small>b</small><strong id="branch-var-b">—</strong></div><div><small>a ≥ b</small><strong id="branch-condition">—</strong></div></div><div class="output"><small data-i18n>Output</small><code id="branch-output" data-i18n>No output yet.</code></div><div class="controls"><button type="button" class="primary" id="branch-step" data-i18n>Step</button><button type="button" id="branch-run" data-i18n>Run</button><button type="button" id="branch-reset" data-i18n>Reset</button></div></div>
+            </div>
+            <div class="feedback" id="branch-feedback" role="status" data-i18n>Predict Yes or No before stepping through the decision.</div>
+          </div>
+        </div>
+        <details><summary data-i18n>Pause for discussion</summary><p data-i18n>Why do we label both arrows leaving a decision? Which path runs for <code>a = −2</code> and <code>b = −7</code>? Why does equal input take the Yes path?</p></details>
+      </section>
+
+      <section class="lesson" id="testing" aria-labelledby="testing-title">
+        <p class="eyebrow" data-i18n>05 / Testing and debugging</p>
+        <h2 id="testing-title" tabindex="-1" data-i18n>Tracing, testing, and debugging</h2>
+        <p class="lead" data-i18n>Tracing follows execution step by step. Testing compares an actual result with an expected result. Debugging finds and fixes the cause of a mismatch.</p>
+        <div class="grid-3"><div class="card"><h3 data-i18n>Trace the state</h3><p data-i18n>Record which instruction runs and how variable values change. A trace table helps you explain an unexpected output.</p></div><div class="card"><h3 data-i18n>Choose useful inputs</h3><p data-i18n>Cover both branches, equal inputs, and allowed values such as zero and negative numbers.</p></div><div class="card"><h3 data-i18n>Compare with the requirement</h3><p data-i18n>Work out the expected result independently. Passing a few examples provides evidence; it does not prove correctness for every input.</p></div></div>
+        <div class="activity">
+          <div class="activity-head"><h3 data-i18n>Practice / Can your tests expose the bug?</h3><span class="activity-tag" data-i18n>Expected vs actual</span></div>
+          <div class="activity-body">
+            <p data-i18n>This version compares <code>a ≥ b</code>, but its outputs may be connected to the wrong branches. Choose a version, predict which tests fail, then run the cases.</p>
+            <div class="fields"><label class="field" for="test-version"><span data-i18n>Algorithm version</span><select id="test-version"><option value="bug" data-i18n>Bug: outputs swapped</option><option value="correct" data-i18n>Correct: output larger value</option></select></label><button type="button" class="primary" id="test-run" data-i18n>Run test cases</button></div>
+            <div class="grid-2"><pre><code id="test-code">IF a ≥ b THEN
+    OUTPUT b
+ELSE
+    OUTPUT a
+END IF</code></pre><div class="callout warm" style="margin:0"><strong data-i18n>Find a counterexample.</strong><p data-i18n>One input with a wrong result is enough to show the algorithm is incorrect. Equal values can hide this particular bug.</p></div></div>
+            <div class="table-wrap" style="margin-top:20px"><table><caption class="help" style="text-align:left;margin-bottom:10px" data-i18n>Test cases for the larger-number problem</caption><thead><tr><th scope="col" data-i18n>Case</th><th scope="col" data-i18n>a</th><th scope="col" data-i18n>b</th><th scope="col" data-i18n>Expected</th><th scope="col" data-i18n>Actual</th><th scope="col" data-i18n>Result</th></tr></thead><tbody id="test-results"></tbody></table></div>
+            <div class="fields" style="margin-top:20px"><label class="field" for="test-a"><span data-i18n>Your a</span><input type="number" min="-999" max="999" step="1" value="0" id="test-a"></label><label class="field" for="test-b"><span data-i18n>Your b</span><input type="number" min="-999" max="999" step="1" value="-2" id="test-b"></label><button type="button" id="test-add" data-i18n>Add &amp; run your case</button></div>
+            <div class="feedback" id="test-feedback" role="status" data-i18n>Test the algorithm against the requirement: output the larger value.</div>
+          </div>
+        </div>
+        <details><summary data-i18n>Three kinds of mistakes you will meet in Python</summary><ul class="compact"><li data-i18n><strong>Syntax error:</strong> the code breaks the language’s grammar, such as a missing colon.</li><li data-i18n><strong>Runtime error:</strong> execution encounters a problem, such as dividing by zero.</li><li data-i18n><strong>Logic error:</strong> the code runs, but its result does not meet the requirement.</li></ul><p data-i18n>Swapping the branch outputs is a logic error.</p></details>
+      </section>
+
+      <section class="lesson" id="python-story" aria-labelledby="python-story-title">
+        <p class="eyebrow" data-i18n>06 / Python history</p>
+        <h2 id="python-story-title" tabindex="-1" data-i18n>A short story of Python.</h2>
+        <p class="lead" data-i18n>Python began as Guido van Rossum’s project to create an extensible scripting language. Its readable style makes our algorithms easy to express.</p>
+        <div class="activity"><div class="activity-head"><h3 data-i18n>Explore / Three moments in the story</h3><span class="activity-tag" data-i18n>Click a moment</span></div><div class="activity-body">
+          <div class="timeline" id="python-timeline"><button type="button" data-moment="1989" aria-pressed="true" data-i18n><strong>1989</strong><span>An idea takes shape</span></button><button type="button" data-moment="1991" aria-pressed="false" data-i18n><strong>1991</strong><span>A public release</span></button><button type="button" data-moment="name" aria-pressed="false" data-i18n><strong>The name</strong><span>A comedy connection</span></button></div>
+          <div class="card timeline-note" id="timeline-note" aria-live="polite"><h3 data-i18n>1989 / The first implementation</h3><p data-i18n>During the Christmas holidays, Guido van Rossum began implementing Python while working at CWI in the Netherlands. His experience with ABC influenced features such as indentation for grouping statements.</p></div>
+          <div class="print-only" id="timeline-print"></div>
+          <p class="references" data-i18n>History source: <a href="https://docs.python.org/3/faq/general.html#why-was-python-created-in-the-first-place" target="_blank" rel="noopener noreferrer">Python’s official FAQ</a>.</p>
+        </div></div>
+        <div class="section-label" data-i18n>What kind of language is it?</div>
+        <div class="grid-3"><div class="card"><h3 data-i18n>High level</h3><p data-i18n>Write expressions and instructions using names and familiar operations. Python handles many lower-level details.</p></div><div class="card"><h3 data-i18n>General purpose</h3><p data-i18n>Python supports tasks such as automation, web development, scientific computing, and data analysis.</p></div><div class="card"><h3 data-i18n>Interpreted</h3><p data-i18n>You can enter instructions in a Python shell or run a saved script with a Python interpreter. The interpreter executes your program.</p></div></div>
+        <div class="callout"><strong data-i18n>Our course uses Python 3.</strong><p data-i18n>A <code>.py</code> file is a text file containing Python source code. The <code>&gt;&gt;&gt;</code> you may see in the interactive shell is a prompt, not something to copy into a script.</p></div>
+        <div class="grid-2"><div><h3 data-i18n>Interactive shell</h3><pre><code>&gt;&gt;&gt; 8 + 3
+11</code></pre><p class="help" data-i18n>The shell displays the value of an expression.</p></div><div><h3 data-i18n>Saved script</h3><pre><code># hello.py
+print("Hello, algorithms!")</code></pre><p class="help" data-i18n>A script uses <code>print()</code> to display this output. Run it from a terminal with <code>python3 hello.py</code>.</p></div></div>
+        <p class="references" data-i18n>Further reading: <a href="https://docs.python.org/3/faq/general.html#what-is-python" target="_blank" rel="noopener noreferrer">What is Python?</a> · <a href="https://www.python.org/downloads/" target="_blank" rel="noopener noreferrer">Python downloads</a></p>
+      </section>
+
+      <section class="lesson" id="python-syntax" aria-labelledby="python-syntax-title">
+        <p class="eyebrow" data-i18n>07 / Python syntax</p>
+        <h2 id="python-syntax-title" tabindex="-1" data-i18n>Python syntax and basic operations</h2>
+        <p class="lead" data-i18n>Syntax is the set of rules for writing valid code. Start with a few building blocks: values, names, expressions, output, and conditions.</p>
+        <div class="activity"><div class="activity-head"><h3 data-i18n>Explore / The essential building blocks</h3><span class="activity-tag" data-i18n>Guided examples</span></div><div class="activity-body">
+          <div class="tabs" role="tablist" aria-label="Python building blocks" data-i18n-aria-label><button class="tab" role="tab" id="syntax-tab-output" aria-controls="syntax-panel" aria-selected="true" tabindex="0" data-syntax="output" data-i18n>Output &amp; comments</button><button class="tab" role="tab" id="syntax-tab-values" aria-controls="syntax-panel" aria-selected="false" tabindex="-1" data-syntax="values" data-i18n>Values &amp; variables</button><button class="tab" role="tab" id="syntax-tab-arithmetic" aria-controls="syntax-panel" aria-selected="false" tabindex="-1" data-syntax="arithmetic" data-i18n>Expressions</button><button class="tab" role="tab" id="syntax-tab-conditions" aria-controls="syntax-panel" aria-selected="false" tabindex="-1" data-syntax="conditions" data-i18n>Conditions &amp; blocks</button></div>
+          <div id="syntax-panel" role="tabpanel" aria-labelledby="syntax-tab-output" tabindex="0"><div class="grid-2"><pre><code id="syntax-code"># A comment explains the code.
+print("Hello, algorithms!")
+print(8 + 3)</code></pre><div><h3 id="syntax-title" data-i18n>Display a result</h3><p id="syntax-description" data-i18n>print() displays values. Text goes inside matching quotes. A comment starts with # and continues to the end of the line.</p><div class="output"><small data-i18n>Expected output</small><code id="syntax-output">Hello, algorithms!
+11</code></div></div></div><div class="callout syntax-note" id="syntax-note" data-i18n>Parentheses contain the values passed to print(). Quotes describe text; they are not printed here.</div></div>
+          <div class="print-only" id="syntax-print"></div>
+        </div></div>
+        <div class="grid-2" style="margin-top:24px"><div class="card"><h3 data-i18n>Names &amp; case matter</h3><p data-i18n>Use descriptive names such as <code>total</code> or <code>student_name</code>. Names can contain letters, digits, and underscores, but cannot start with a digit or be a keyword.</p><p data-i18n><code>score</code> and <code>Score</code> are different names. Python keywords such as <code>if</code> use their exact spelling.</p></div><div class="card"><h3 data-i18n>Assignment &amp; comparison</h3><p data-i18n><code>score = 10</code> assigns a value.</p><p data-i18n><code>score == 10</code> asks whether the values are equal. Comparisons produce <code>True</code> or <code>False</code>.</p><p data-i18n>Other comparisons: <code>!=</code>, <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, <code>&gt;=</code>.</p></div></div>
+        <div class="activity"><div class="activity-head"><h3 data-i18n>Practice / Python as a calculator</h3><span class="activity-tag" data-i18n>Predict the expression</span></div><div class="activity-body">
+          <div class="fields"><label class="field" for="calc-a"><span data-i18n>a</span><input type="number" id="calc-a" min="-20" max="20" step="1" value="7"></label><label class="field" for="calc-op"><span data-i18n>Operator</span><select id="calc-op"><option value="+" data-i18n>+ addition</option><option value="-" data-i18n>− subtraction</option><option value="*" data-i18n>* multiplication</option><option value="/" data-i18n>/ division</option><option value="//" data-i18n>// floor division</option><option value="%" data-i18n>% remainder</option></select></label><label class="field" for="calc-b"><span data-i18n>b</span><input type="number" id="calc-b" min="-20" max="20" step="1" value="2"></label><button type="button" class="primary" id="calc-evaluate" data-i18n>Reveal result</button></div>
+          <div class="output"><small data-i18n>Expression → result</small><code id="calc-output" data-i18n>Predict the result of 7 + 2.</code></div><div class="feedback" id="calc-feedback" role="status" data-i18n>Choose inputs and an operator, then predict the result.</div>
+          <p class="help" data-i18n>Try <code>7 / 2</code>, <code>7 // 2</code>, and <code>7 % 2</code>. Floor division rounds toward negative infinity; try <code>−7 // 2</code> too. These controls preview this fixed family of expressions.</p>
+        </div></div>
+        <div class="activity"><div class="activity-head"><h3 data-i18n>Practice / Spot the valid block</h3><span class="activity-tag" data-i18n>Colon + indentation</span></div><div class="activity-body"><p data-i18n>Which snippet correctly displays <code>a</code> when <code>a</code> is greater than or equal to <code>b</code>?</p><div class="grid-2"><div><pre><code># A
+if a &gt;= b
+print(a)</code></pre></div><div><pre><code># B
+if a &gt;= b:
+    print(a)</code></pre></div></div><div class="choice-buttons" id="indent-choices"><button type="button" data-answer="A" data-i18n>Choose A</button><button type="button" data-answer="B" data-i18n>Choose B</button></div><div class="feedback" id="indent-feedback" role="status" data-i18n>Look at the condition’s ending and the block beneath it.</div></div></div>
+        <p class="references" data-i18n>Syntax sources: <a href="https://docs.python.org/3/tutorial/introduction.html" target="_blank" rel="noopener noreferrer">Python’s introductory tutorial</a> · <a href="https://docs.python.org/3/tutorial/controlflow.html#if-statements" target="_blank" rel="noopener noreferrer">if statements</a></p>
+      </section>
+
+      <section class="lesson" id="python-input" aria-labelledby="python-input-title">
+        <p class="eyebrow" data-i18n>08 / Input and output</p>
+        <h2 id="python-input-title" tabindex="-1" data-i18n>From input to output.</h2>
+        <p class="lead" data-i18n>Our sum algorithm becomes a Python program with the same sequence of steps. One new detail matters: keyboard input arrives as text.</p>
+        <div class="grid-2"><div><h3 data-i18n>The plan / Pseudocode</h3><pre><code>INPUT a
+INPUT b
+total ← a + b
+OUTPUT total</code></pre></div><div><h3 data-i18n>The program / Python</h3><pre><code>a = int(input("First number: "))
+b = int(input("Second number: "))
+total = a + b
+print(total)</code></pre></div></div>
+        <div class="callout"><strong data-i18n>Read the nested calls from inside out.</strong><p data-i18n><code>input()</code> displays a prompt and returns the typed text as a <code>str</code>. <code>int()</code> converts valid integer text into an <code>int</code>. Then <code>=</code> assigns that integer to a name.</p></div>
+        <div class="activity"><div class="activity-head"><h3 data-i18n>Practice / Text addition or number addition?</h3><span class="activity-tag" data-i18n>Input types</span></div><div class="activity-body">
+          <p data-i18n>Type whole numbers using an optional sign and digits. Compare the result with and without conversion.</p>
+          <div class="fields"><label class="field" for="input-a"><span data-i18n>First typed value</span><input type="text" id="input-a" value="8" maxlength="8" inputmode="text"></label><label class="field" for="input-b"><span data-i18n>Second typed value</span><input type="text" id="input-b" value="3" maxlength="8" inputmode="text"></label><label class="field" for="input-mode"><span data-i18n>Read values as</span><select id="input-mode"><option value="text" data-i18n>Text: input()</option><option value="number" data-i18n>Integers: int(input())</option></select></label><button type="button" class="primary" id="input-run" data-i18n>Preview this example</button></div>
+          <div class="grid-2"><pre><code id="input-code">a = input("First number: ")
+b = input("Second number: ")
+total = a + b
+print(total)</code></pre><div><div class="output"><small data-i18n>Values and types</small><code id="input-values" data-i18n>Preview the example to inspect the values.</code></div><div class="output"><small data-i18n>Printed output</small><code id="input-output" data-i18n>No output yet.</code></div></div></div>
+          <div class="feedback" id="input-feedback" role="status" data-i18n>With text input, does + calculate a sum or join the strings?</div>
+        </div></div>
+        <details><summary data-i18n>What if the input is not an integer?</summary><p data-i18n><code>int("hello")</code> and <code>int("3.5")</code> raise a <code>ValueError</code>. The example assumes valid integer input. Handling invalid input is a later topic.</p><p data-i18n>Decimal values use <code>float()</code>, for example <code>float("3.5")</code>. Use one type consistently with the problem’s requirements.</p></details>
+        <div class="section-label" data-i18n>Run the real programs</div>
+        <p data-i18n>The guided controls preview the examples shown here. To execute Python, save a sample and run it with a Python 3 interpreter. From the repository folder:</p><pre><code>python3 week-01/src/sum.py</code></pre>
+        <div class="sample-links"><a href="src/hello.py" download><span>hello.py</span><small data-i18n>Output &amp; comments ↓</small></a><a href="src/sum.py" download><span>sum.py</span><small data-i18n>Input, conversion &amp; arithmetic ↓</small></a><a href="src/larger.py" download><span>larger.py</span><small data-i18n>A decision with two paths ↓</small></a><a href="src/rectangle.py" download><span>rectangle.py</span><small data-i18n>Calculate area ↓</small></a><a href="src/perimeter.py" download><span>perimeter.py</span><small data-i18n>Closing exercise solution ↓</small></a></div>
+        <p class="references" data-i18n>Input reference: <a href="https://docs.python.org/3/library/functions.html#input" target="_blank" rel="noopener noreferrer">input()</a> · <a href="https://docs.python.org/3/library/functions.html#int" target="_blank" rel="noopener noreferrer">int()</a></p>
+      </section>
+
+      <section class="lesson" id="practice" aria-labelledby="practice-title">
+        <p class="eyebrow" data-i18n>09 / Practice and recap</p>
+        <h2 id="practice-title" tabindex="-1" data-i18n>Perimeter exercise and recap</h2>
+        <p class="lead" data-i18n>Calculate a rectangle’s perimeter from its width and height. Work through the problem statement, pseudocode, flowchart, and Python before revealing the solution.</p>
+        <div class="card"><h3 data-i18n>What to produce</h3><ol class="compact"><li data-i18n>State the inputs, output, units, and valid input assumptions.</li><li data-i18n>Write pseudocode with a clear calculation step.</li><li data-i18n>Draw a flowchart using the correct symbols.</li><li data-i18n>Translate your algorithm into Python.</li><li data-i18n>Choose two test cases and calculate their expected outputs.</li></ol><p class="help" data-i18n>For this exercise, use positive whole-number dimensions from 1 to 12 cm. Perimeter is a length, measured in cm.</p></div>
+        <div class="activity"><div class="activity-head"><h3 data-i18n>Practice / Check your predicted perimeter</h3><span class="activity-tag" data-i18n>Closing exercise</span></div><div class="activity-body">
+          <div class="fields"><label class="field" for="practice-width"><span data-i18n>Width (cm)</span><input type="number" min="1" max="12" step="1" value="6" id="practice-width"></label><label class="field" for="practice-height"><span data-i18n>Height (cm)</span><input type="number" min="1" max="12" step="1" value="4" id="practice-height"></label><label class="field" for="practice-prediction"><span data-i18n>Your perimeter (cm)</span><input type="number" min="0" max="48" step="1" id="practice-prediction" placeholder="?" style="width:150px"></label><button type="button" class="primary" id="practice-check" data-i18n>Check prediction</button></div><div class="feedback" id="practice-feedback" role="status" data-i18n>Walk around all four sides in your mind. Which lengths do you add?</div>
+          <details><summary data-i18n>Reveal the worked solution</summary><p data-i18n><strong>Input:</strong> positive integer width and height in cm. <strong>Process:</strong> add the two widths and two heights. <strong>Output:</strong> perimeter in cm.</p><div class="grid-2"><pre><code>INPUT width, height
+perimeter ← 2 × (width + height)
+OUTPUT perimeter</code></pre><pre><code>width = int(input("Width (cm): "))
+height = int(input("Height (cm): "))
+perimeter = 2 * (width + height)
+print("Perimeter:", perimeter, "cm")</code></pre></div>
+            <svg class="flowchart" viewBox="0 0 480 350" role="img" aria-labelledby="perimeter-flow-title"><title id="perimeter-flow-title" data-i18n>Start, input width and height, calculate perimeter as two times width plus height in parentheses, output perimeter, end.</title><defs><marker id="perimeter-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0 0 L7 3.5 L0 7" fill="#8b9e8e"/></marker></defs><path class="edge" d="M240 47 V79 M240 123 V154 M240 198 V229 M240 273 V305" marker-end="url(#perimeter-arrow)"/><rect class="node" x="180" y="12" width="120" height="35" rx="18"/><text x="240" y="30" data-i18n>Start</text><path class="node" d="M125 79 H375 L355 123 H105 Z"/><text x="240" y="101">INPUT width, height</text><rect class="node" x="70" y="154" width="340" height="44"/><text x="240" y="176">perimeter ← 2 × (width + height)</text><path class="node" d="M125 229 H375 L355 273 H105 Z"/><text x="240" y="251">OUTPUT perimeter</text><rect class="node" x="180" y="305" width="120" height="35" rx="18"/><text x="240" y="323" data-i18n>End</text></svg>
+            <p data-i18n><strong>Test cases:</strong> width 6, height 4 → 20 cm; width 1, height 1 → 4 cm. The parentheses make the intended order of calculation explicit.</p>
+          </details>
+        </div></div>
+        <div class="activity"><div class="activity-head"><h3 data-i18n>Quick recap / Five questions</h3><span class="activity-tag" data-i18n>Explain your choices</span></div><div class="activity-body">
+          <form id="recap-form">
+            <fieldset class="quiz-question"><legend data-i18n>1. What describes an algorithm?</legend><label><input type="radio" name="q1" value="a"><span data-i18n>A precise sequence of steps for solving a problem</span></label><label><input type="radio" name="q1" value="b"><span data-i18n>Any program written in Python</span></label><div class="quiz-answer" id="recap-q1" hidden></div></fieldset>
+            <fieldset class="quiz-question"><legend data-i18n>2. Which flowchart symbol represents a decision?</legend><label><input type="radio" name="q2" value="a"><span data-i18n>Rectangle</span></label><label><input type="radio" name="q2" value="b"><span data-i18n>Diamond</span></label><div class="quiz-answer" id="recap-q2" hidden></div></fieldset>
+            <fieldset class="quiz-question"><legend data-i18n>3. After x = 4 and x = x + 1, what is x?</legend><label><input type="radio" name="q3" value="a">4</label><label><input type="radio" name="q3" value="b">5</label><div class="quiz-answer" id="recap-q3" hidden></div></fieldset>
+            <fieldset class="quiz-question"><legend data-i18n>4. What does print("5" + "3") display?</legend><label><input type="radio" name="q4" value="a">8</label><label><input type="radio" name="q4" value="b">53</label><div class="quiz-answer" id="recap-q4" hidden></div></fieldset>
+            <fieldset class="quiz-question"><legend data-i18n>5. Which input can expose the swapped-output bug?</legend><label><input type="radio" name="q5" value="a">a = 5, b = 5</label><label><input type="radio" name="q5" value="b">a = 8, b = 3</label><div class="quiz-answer" id="recap-q5" hidden></div></fieldset>
+            <div class="controls"><button type="submit" class="primary" data-i18n>Check answers</button><button type="button" id="recap-reset" data-i18n>Try again</button></div>
+          </form><div class="feedback" id="recap-feedback" role="status" data-i18n>Answer all five questions, then check your reasoning.</div>
+        </div></div>
+        <div class="callout"><strong data-i18n>Before the next lecture</strong><p data-i18n>Run the Python samples. Change their inputs, predict the outputs, and explain each line. Bring one example of a problem that needs a decision.</p></div>
+      </section>
+
+      <footer class="lesson-footer" aria-label="Navigate between lesson sections" data-i18n-aria-label><button type="button" id="previous-section" data-i18n>← Previous</button><small id="section-position" data-i18n>Section 1 of 10</small><button type="button" class="primary" id="next-section" data-i18n>Next section →</button></footer>
+    </main>
+  </div>
+  <script src="translations.js"></script>
+  <script>
+    "use strict";
+    const byId = (id) => document.getElementById(id);
+    const sections = [...document.querySelectorAll(".lesson")];
+    const navLinks = [...document.querySelectorAll(".nav a")];
+    const languageButtons = [...document.querySelectorAll("[data-language]")];
+    const timers = new Map();
+    let language = "en";
+    const localizedText = new Map();
+    const staticText = [...document.querySelectorAll("[data-i18n]")].map((element) => ({ element, english:element.innerHTML, key:element.innerHTML.replace(/\s+/g, " ").trim() }));
+    const staticAttributes = ["aria-label", "content"].flatMap((name) => [...document.querySelectorAll(`[data-i18n-${name}]`)].map((element) => ({ element, name, english:element.getAttribute(name) })));
+
+    function t(message, values = {}) {
+      const template = language === "tr" && Object.hasOwn(turkishTranslations, message) ? turkishTranslations[message] : message;
+      return template.replace(/\{(\w+)\}/g, (match, name) => values[name] ?? match);
+    }
+
+    function setText(id, message, values = {}) {
+      localizedText.set(id, { message:String(message), values });
+      byId(id).textContent = t(String(message), values);
+    }
+
+    function setLanguage(value) {
+      language = value === "tr" ? "tr" : "en";
+      document.documentElement.lang = language;
+      languageButtons.forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.language === language)));
+      staticText.forEach(({ element, english, key }) => element.innerHTML = language === "tr" ? turkishTranslations[key] ?? english : english);
+      staticAttributes.forEach(({ element, name, english }) => element.setAttribute(name, t(english)));
+      localizedText.forEach(({ message, values }, id) => byId(id).textContent = t(message, values));
+      renderRobot(); renderSort(); renderTests(false);
+      renderMoment(byId("python-timeline").querySelector('[aria-pressed="true"]').dataset.moment);
+      selectSyntax(document.querySelector('[data-syntax][aria-selected="true"]'));
+      if (document.querySelector(".quiz-answer:not([hidden])")) renderRecap(new FormData(byId("recap-form")));
+      try { localStorage.setItem("algorithm101-language", language); } catch { /* The switch also works when storage is unavailable. */ }
+    }
+
+    function feedback(id, message, kind = "", values = {}) {
+      const element = byId(id);
+      setText(id, message, values);
+      element.className = "feedback" + (kind ? " " + kind : "");
+    }
+
+    function stopRun(name) {
+      clearInterval(timers.get(name));
+      timers.delete(name);
+      const button = byId(name + "-run");
+      if (button) setText(name + "-run", "Run");
+    }
+
+    function toggleRun(name, step) {
+      if (timers.has(name)) { stopRun(name); return; }
+      if (!step()) return;
+      setText(name + "-run", "Pause");
+      timers.set(name, setInterval(() => { if (!step()) stopRun(name); }, 650));
+    }
+
+    function showSection(id, focus = false) {
+      let index = sections.findIndex((section) => section.id === id);
+      if (index < 0) index = 0;
+      sections.forEach((section, i) => section.classList.toggle("active", i === index));
+      navLinks.forEach((link, i) => { if (i === index) link.setAttribute("aria-current", "page"); else link.removeAttribute("aria-current"); });
+      byId("previous-section").disabled = index === 0;
+      byId("next-section").disabled = index === sections.length - 1;
+      setText("section-position", "Section {current} of {total}", { current:index + 1, total:sections.length });
+      navLinks[index].scrollIntoView({ block:"nearest", inline:"nearest" });
+      [...timers.keys()].forEach(stopRun);
+      if (focus) {
+        window.scrollTo(0, 0);
+        sections[index].querySelector("h1,h2").focus({ preventScroll:true });
+      }
+    }
+
+    document.body.classList.add("enhanced");
+    showSection(location.hash.slice(1));
+    window.addEventListener("hashchange", () => showSection(location.hash.slice(1), true));
+    document.querySelector(".skip").addEventListener("click", (event) => { event.preventDefault(); byId("main").focus(); byId("main").scrollIntoView({ block:"start" }); });
+    document.querySelectorAll('a[href^="#"]:not(.skip)').forEach((link) => link.addEventListener("click", (event) => {
+      const id = link.getAttribute("href").slice(1);
+      if (!sections.some((section) => section.id === id)) return;
+      event.preventDefault();
+      if (location.hash === "#" + id) showSection(id, true); else location.hash = id;
+    }));
+    byId("previous-section").addEventListener("click", () => { const index = sections.findIndex((section) => section.classList.contains("active")); if (index > 0) location.hash = sections[index - 1].id; });
+    byId("next-section").addEventListener("click", () => { const index = sections.findIndex((section) => section.classList.contains("active")); if (index < sections.length - 1) location.hash = sections[index + 1].id; });
+    byId("lecture-view").addEventListener("click", () => { const enabled = document.body.classList.toggle("lecture-view"); byId("lecture-view").setAttribute("aria-pressed", String(enabled)); });
+    byId("print-notes").addEventListener("click", () => window.print());
+    let closedDetails = [];
+    window.addEventListener("beforeprint", () => {
+      [...timers.keys()].forEach(stopRun);
+      closedDetails = [...document.querySelectorAll("details:not([open])")];
+      closedDetails.forEach((item) => item.open = true);
+      // Include every history moment and syntax tab in the printed notes.
+      function printCard(target, title, description, code = "", output = "", note = "") {
+        const card = document.createElement("div"); card.className = "card";
+        const heading = document.createElement("h3"); heading.textContent = t(title);
+        const paragraph = document.createElement("p"); paragraph.textContent = t(description);
+        card.append(heading, paragraph);
+        if (code) { const block = document.createElement("pre"); block.textContent = code; card.append(block); }
+        if (output) { const result = document.createElement("p"); result.textContent = t("Expected output") + ": " + output; result.style.whiteSpace = "pre-wrap"; card.append(result); }
+        if (note) { const explanation = document.createElement("p"); explanation.textContent = t(note); card.append(explanation); }
+        target.append(card);
+      }
+      byId("timeline-print").replaceChildren(); byId("syntax-print").replaceChildren();
+      Object.values(moments).forEach(([title, description]) => printCard(byId("timeline-print"), title, description));
+      Object.values(syntaxExamples).forEach(({ title, description, code, output, note }) => printCard(byId("syntax-print"), title, description, code, output, note));
+    });
+    window.addEventListener("afterprint", () => closedDetails.forEach((item) => item.open = false));
+
+    // Values are deliberately limited to small integers in the guided examples.
+    function readInteger(id) {
+      const input = byId(id);
+      return input.value !== "" && input.checkValidity() && Number.isInteger(Number(input.value)) ? Number(input.value) : null;
+    }
+
+    // Robot: commands use fixed compass directions, with no implicit rotation.
+    const walls = new Set(["1,1", "1,2", "2,2", "3,2"]);
+    const moves = { N:[-1,0], E:[0,1], S:[1,0], W:[0,-1] };
+    const arrows = { N:"↑", E:"→", S:"↓", W:"←" };
+    let robotPlan = [];
+    let robot = { row:4, col:0, index:0, stopped:false, visited:new Set(["4,0"]) };
+
+    function renderRobot() {
+      byId("robot-grid").replaceChildren();
+      for (let row = 0; row < 5; row++) for (let col = 0; col < 5; col++) {
+        const key = `${row},${col}`;
+        const cell = document.createElement("div");
+        cell.className = "robot-cell";
+        let text = row === 4 && col === 0 ? "S" : "";
+        if (robot.visited.has(key)) cell.classList.add("visited");
+        if (walls.has(key)) { cell.classList.add("wall"); text = "■"; }
+        if (row === 0 && col === 4) { cell.classList.add("goal"); text = "G"; }
+        if (row === robot.row && col === robot.col) { cell.classList.add("robot"); text = "R"; }
+        cell.textContent = text;
+        cell.setAttribute("aria-hidden", "true");
+        byId("robot-grid").append(cell);
+      }
+      byId("robot-grid").setAttribute("aria-label", t("5 by 5 grid. Robot at row {row}, column {column}. Start: row 5, column 1. Goal: row 1, column 5. Walls: row 2 columns 2 and 3, row 3 column 3, row 4 column 3.", { row:robot.row + 1, column:robot.col + 1 }));
+      byId("robot-queue").replaceChildren();
+      robotPlan.forEach((command, index) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.textContent = `${arrows[command]} ${command}`;
+        button.setAttribute("aria-label", t("Remove command {index}: {command}", { index:index + 1, command }));
+        if (index === robot.index - 1) button.classList.add("current");
+        button.addEventListener("click", () => { robotPlan.splice(index, 1); resetRobot(); });
+        byId("robot-queue").append(button);
+      });
+      if (!robotPlan.length) { const hint = document.createElement("span"); hint.className = "help"; hint.textContent = t("Your commands will appear here."); byId("robot-queue").append(hint); }
+      byId("robot-step").disabled = !robotPlan.length || robot.stopped;
+      byId("robot-run").disabled = !robotPlan.length || robot.stopped;
+    }
+
+    function resetRobot() {
+      stopRun("robot");
+      robot = { row:4, col:0, index:0, stopped:false, visited:new Set(["4,0"]) };
+      renderRobot();
+      feedback("robot-feedback", "Predict where this sequence will finish, then Step or Run.");
+    }
+
+    function stepRobot() {
+      if (robot.stopped || !robotPlan.length) return false;
+      const command = robotPlan[robot.index];
+      const [dr, dc] = moves[command];
+      const nextRow = robot.row + dr, nextCol = robot.col + dc;
+      robot.index++;
+      if (nextRow < 0 || nextRow > 4 || nextCol < 0 || nextCol > 4 || walls.has(`${nextRow},${nextCol}`)) {
+        robot.stopped = true;
+        feedback("robot-feedback", "Command {index} ({command}) is blocked. The plan stops here. Edit the sequence or reset to try again.", "error", { index:robot.index, command });
+      } else {
+        robot.row = nextRow; robot.col = nextCol; robot.visited.add(`${nextRow},${nextCol}`);
+        if (robot.index === robotPlan.length) {
+          robot.stopped = true;
+          const reached = robot.row === 0 && robot.col === 4;
+          feedback("robot-feedback", reached ? "Goal reached! The plan finished in {index} moves." : "The plan finished at row {row}, column {column}. It must finish at G.", reached ? "success" : "error", { index:robot.index, row:robot.row + 1, column:robot.col + 1 });
+        } else feedback("robot-feedback", "Executed command {index}: {command}. Robot at row {row}, column {column}.", "", { index:robot.index, command, row:robot.row + 1, column:robot.col + 1 });
+      }
+      renderRobot();
+      if (robot.stopped) stopRun("robot");
+      return !robot.stopped;
+    }
+    byId("robot-commands").addEventListener("click", (event) => { const command = event.target.closest("[data-command]"); if (!command) return; if (robotPlan.length >= 30) { feedback("robot-feedback", "This practice allows up to 30 commands. Remove a command before adding another.", "error"); return; } robotPlan.push(command.dataset.command); resetRobot(); });
+    byId("robot-step").addEventListener("click", () => { stopRun("robot"); stepRobot(); });
+    byId("robot-run").addEventListener("click", () => toggleRun("robot", stepRobot));
+    byId("robot-reset").addEventListener("click", resetRobot);
+    byId("robot-clear").addEventListener("click", () => { robotPlan = []; resetRobot(); });
+    renderRobot();
+
+    function updateArea() {
+      const width = Number(byId("area-width").value), height = Number(byId("area-height").value);
+      byId("area-width-label").textContent = width; byId("area-height-label").textContent = height;
+      byId("area-formula").textContent = `${width} × ${height} = ${width * height} cm²`;
+      byId("area-value").textContent = `${width * height} cm²`;
+      byId("area-rectangle").style.width = `${width / 12 * 100}%`;
+      byId("area-rectangle").style.height = `${height / 12 * 100}%`;
+    }
+    ["area-width", "area-height"].forEach((id) => byId(id).addEventListener("input", updateArea));
+    updateArea();
+    byId("ipo-check").addEventListener("click", () => {
+      const values = ["ipo-width", "ipo-multiply", "ipo-area"].map((id) => byId(id).value);
+      if (values.some((value) => !value)) { feedback("ipo-feedback", "Choose a category for all three parts first.", "error"); return; }
+      const correct = values.join(",") === "Input,Process,Output";
+      feedback("ipo-feedback", correct ? "Correct: dimensions enter as inputs, multiplication is the process, and area is the output." : "Try again: ask what is given, what action is performed, and what result is produced.", correct ? "success" : "error");
+    });
+
+    let sumStep = 0;
+    function resetSum() {
+      stopRun("sum"); sumStep = 0;
+      ["a", "b", "total"].forEach((name) => byId("sum-var-" + name).textContent = "—");
+      setText("sum-output", "No output yet.");
+      [...byId("sum-code").children].forEach((line) => line.classList.remove("current"));
+      byId("sum-step").disabled = false; byId("sum-run").disabled = false;
+      feedback("sum-feedback", "Predict the output, then execute the first instruction.");
+    }
+    function stepSum() {
+      const a = readInteger("sum-a"), b = readInteger("sum-b");
+      if (a === null || b === null) { feedback("sum-feedback", "Enter whole numbers from −999 to 999 for both inputs.", "error"); return false; }
+      if (sumStep >= 4) return false;
+      [...byId("sum-code").children].forEach((line, index) => line.classList.toggle("current", index === sumStep));
+      const messages = ["Read a. Its value is now {a}.", "Read b. Its value is now {b}.", "Evaluate {a} + {b}, then assign {total} to total.", "Display total: {total}. The algorithm is complete."];
+      if (sumStep === 0) byId("sum-var-a").textContent = a;
+      if (sumStep === 1) byId("sum-var-b").textContent = b;
+      if (sumStep === 2) byId("sum-var-total").textContent = a + b;
+      if (sumStep === 3) setText("sum-output", a + b);
+      feedback("sum-feedback", messages[sumStep], sumStep === 3 ? "success" : "", { a, b, total:a + b });
+      sumStep++;
+      if (sumStep === 4) { stopRun("sum"); byId("sum-step").disabled = true; byId("sum-run").disabled = true; }
+      return sumStep < 4;
+    }
+    ["sum-a", "sum-b"].forEach((id) => byId(id).addEventListener("input", resetSum));
+    byId("sum-step").addEventListener("click", () => { stopRun("sum"); stepSum(); });
+    byId("sum-run").addEventListener("click", () => toggleRun("sum", stepSum));
+    byId("sum-reset").addEventListener("click", resetSum);
+
+    const sortInstructions = ["INPUT a", "INPUT b", "total ← a + b", "OUTPUT total"];
+    let sortOrder = [3, 0, 2, 1];
+    function renderSort(focusIndex = null, direction = null) {
+      byId("sort-list").replaceChildren();
+      sortOrder.forEach((instruction, index) => {
+        const item = document.createElement("li");
+        const number = document.createElement("span"); number.className = "sort-num"; number.textContent = index + 1;
+        const code = document.createElement("code"); code.textContent = sortInstructions[instruction];
+        item.append(number, code);
+        [-1, 1].forEach((offset) => {
+          const button = document.createElement("button"); button.type = "button"; button.textContent = offset < 0 ? "↑" : "↓";
+          button.setAttribute("aria-label", t(offset < 0 ? "Move {instruction} up" : "Move {instruction} down", { instruction:sortInstructions[instruction] }));
+          button.disabled = index + offset < 0 || index + offset >= sortOrder.length;
+          button.addEventListener("click", () => { [sortOrder[index], sortOrder[index + offset]] = [sortOrder[index + offset], sortOrder[index]]; renderSort(index + offset, offset); feedback("sort-feedback", "Order updated. Check that every value exists before it is used."); });
+          item.append(button);
+        });
+        byId("sort-list").append(item);
+      });
+      if (focusIndex !== null) {
+        const buttons = byId("sort-list").children[focusIndex].querySelectorAll("button");
+        const preferred = buttons[direction < 0 ? 0 : 1];
+        (preferred.disabled ? buttons[direction < 0 ? 1 : 0] : preferred).focus();
+      }
+    }
+    byId("sort-check").addEventListener("click", () => {
+      const correct = sortOrder.indexOf(0) < sortOrder.indexOf(2) && sortOrder.indexOf(1) < sortOrder.indexOf(2) && sortOrder.indexOf(2) < sortOrder.indexOf(3);
+      feedback("sort-feedback", correct ? "Correct! Read both inputs, calculate total, then output it. Reading b before a is also valid for this task." : "A value is used too early. Read both inputs before calculating total, and calculate total before displaying it.", correct ? "success" : "error");
+    });
+    byId("sort-reset").addEventListener("click", () => { sortOrder = [3, 0, 2, 1]; for (let i = 3; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [sortOrder[i], sortOrder[j]] = [sortOrder[j], sortOrder[i]]; } renderSort(); feedback("sort-feedback", "Arrange the instructions so every value is available when it is used."); });
+    renderSort();
+
+    let branchStep = 0;
+    function resetBranch() {
+      stopRun("branch"); branchStep = 0;
+      ["branch-var-a", "branch-var-b", "branch-condition"].forEach((id) => byId(id).textContent = "—");
+      setText("branch-output", "No output yet.");
+      byId("branch-flow").querySelectorAll(".active").forEach((node) => node.classList.remove("active"));
+      [...byId("branch-code").children].forEach((line) => line.classList.remove("current"));
+      byId("branch-step").disabled = false; byId("branch-run").disabled = false;
+      feedback("branch-feedback", "Predict Yes or No before stepping through the decision.");
+    }
+    function stepBranch() {
+      const a = readInteger("branch-a"), b = readInteger("branch-b");
+      if (a === null || b === null) { feedback("branch-feedback", "Enter whole numbers from −999 to 999 for both inputs.", "error"); return false; }
+      if (branchStep >= 5) return false;
+      const yes = a >= b;
+      const node = ["start", "input", "decision", yes ? "output-a" : "output-b", "end"][branchStep];
+      const edge = [null, "input", "decision", yes ? "yes" : "no", yes ? "end-a" : "end-b"][branchStep];
+      const lineIndex = [-1, 0, 1, yes ? 2 : 4, 5][branchStep];
+      byId("branch-flow").querySelectorAll(".node").forEach((item) => item.classList.toggle("active", item.dataset.node === node));
+      if (edge) byId("branch-flow").querySelector(`[data-edge="${edge}"]`).classList.add("active");
+      [...byId("branch-code").children].forEach((line, index) => line.classList.toggle("current", index === lineIndex));
+      if (branchStep === 1) { byId("branch-var-a").textContent = a; byId("branch-var-b").textContent = b; }
+      if (branchStep === 2) byId("branch-condition").textContent = yes ? "True" : "False";
+      if (branchStep === 3) setText("branch-output", yes ? a : b);
+      const messages = ["Start the algorithm.", "Read a = {a} and b = {b}.", yes ? "{a} ≥ {b} is True. Follow the Yes path." : "{a} ≥ {b} is False. Follow the No path.", "Output {variable}: {output}. The other output branch is skipped.", "End. One output branch was executed."];
+      feedback("branch-feedback", messages[branchStep], branchStep === 4 ? "success" : "", { a, b, variable:yes ? "a" : "b", output:yes ? a : b });
+      branchStep++;
+      if (branchStep === 5) { stopRun("branch"); byId("branch-step").disabled = true; byId("branch-run").disabled = true; }
+      return branchStep < 5;
+    }
+    ["branch-a", "branch-b"].forEach((id) => byId(id).addEventListener("input", resetBranch));
+    byId("branch-swap").addEventListener("click", () => { const a = byId("branch-a").value; byId("branch-a").value = byId("branch-b").value; byId("branch-b").value = a; resetBranch(); });
+    byId("branch-equal").addEventListener("click", () => { byId("branch-a").value = 5; byId("branch-b").value = 5; resetBranch(); });
+    byId("branch-step").addEventListener("click", () => { stopRun("branch"); stepBranch(); });
+    byId("branch-run").addEventListener("click", () => toggleRun("branch", stepBranch));
+    byId("branch-reset").addEventListener("click", resetBranch);
+
+    const testCases = [{ name:"First larger", a:8, b:3 }, { name:"Second larger", a:3, b:8 }, { name:"Equal values", a:5, b:5 }, { name:"Negative values", a:-2, b:-7 }];
+    let testsRun = false;
+    function renderTests(updateFeedback = true) {
+      const bug = byId("test-version").value === "bug";
+      byId("test-code").textContent = `IF a ≥ b THEN\n    OUTPUT ${bug ? "b" : "a"}\nELSE\n    OUTPUT ${bug ? "a" : "b"}\nEND IF`;
+      byId("test-results").replaceChildren();
+      let passes = 0;
+      testCases.forEach(({ name, a, b }) => {
+        const expected = Math.max(a, b), actual = bug ? (a >= b ? b : a) : (a >= b ? a : b);
+        if (expected === actual) passes++;
+        const row = document.createElement("tr");
+        [t(name), a, b, expected, testsRun ? actual : "—", testsRun ? t(expected === actual ? "Pass" : "Fail") : t("Not run")].forEach((value, index) => { const cell = document.createElement("td"); cell.textContent = value; if (index === 5 && testsRun) cell.className = expected === actual ? "pass" : "fail"; row.append(cell); });
+        byId("test-results").append(row);
+      });
+      if (testsRun && updateFeedback) feedback("test-feedback", bug ? "{passes} of {total} cases passed. The equal-value case hides the swapped-output bug. Unequal values expose it." : "{passes} of {total} cases passed. Both paths and equal values give the expected result for these cases.", bug ? "error" : "success", { passes, total:testCases.length });
+    }
+    byId("test-run").addEventListener("click", () => { testsRun = true; renderTests(); });
+    byId("test-version").addEventListener("change", () => { testsRun = false; renderTests(); feedback("test-feedback", "Version changed. Predict the outcomes, then run the test cases."); });
+    byId("test-add").addEventListener("click", () => { const a = readInteger("test-a"), b = readInteger("test-b"); if (a === null || b === null) { feedback("test-feedback", "Use whole numbers from −999 to 999 for your test case.", "error"); return; } if (testCases.length >= 12) { feedback("test-feedback", "This practice allows eight custom cases. Compare their results with the requirement.", "error"); return; } testCases.push({ name:"Your case", a, b }); testsRun = true; renderTests(); });
+    renderTests();
+
+    const moments = {
+      "1989": ["1989 / The first implementation", "During the Christmas holidays, Guido van Rossum began implementing Python while working at CWI in the Netherlands. His experience with ABC influenced features such as indentation for grouping statements."],
+      "1991": ["1991 / Shared with the public", "In February 1991, after a little over a year of development, van Rossum shared Python on USENET. Feedback from colleagues had already helped improve the early language."],
+      "name": ["The name / Monty Python", "The name came from Monty Python’s Flying Circus, the comedy series. Van Rossum was reading its published scripts while developing the language and wanted a short, distinctive name."]
+    };
+    function renderMoment(moment) {
+      const [title, description] = moments[moment];
+      const heading = document.createElement("h3"); heading.textContent = t(title);
+      const paragraph = document.createElement("p"); paragraph.textContent = t(description);
+      byId("timeline-note").replaceChildren(heading, paragraph);
+    }
+    byId("python-timeline").addEventListener("click", (event) => {
+      const button = event.target.closest("[data-moment]"); if (!button) return;
+      [...byId("python-timeline").children].forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
+      renderMoment(button.dataset.moment);
+    });
+
+    const syntaxExamples = {
+      output: { title:"Display a result", code:'# A comment explains the code.\nprint("Hello, algorithms!")\nprint(8 + 3)', output:"Hello, algorithms!\n11", description:"print() displays values. Text goes inside matching quotes. A comment starts with # and continues to the end of the line.", note:"Parentheses contain the values passed to print(). Quotes describe text; they are not printed here." },
+      values: { title:"Names refer to values", code:'count = 3\nheight = 1.5\nname = "Enver"\nis_ready = True\nprint(count, height, name, is_ready)', output:"3 1.5 Enver True", description:"These values have types int, float, str, and bool. Assignment uses =. A variable name refers to a value; you do not need to declare its type in this example.", note:"3 is an integer; 1.5 is a floating-point number; quoted text is a string; True and False are Boolean values. Values have types, even though assignments do not include type declarations." },
+      arithmetic: { title:"Evaluate the right-hand side", code:"a = 8\nb = 3\ntotal = a + b\nprint(total)\nprint(2 * (a + b))", output:"11\n22", description:"An expression combines values and operators. Calculate a + b first, then assign that result to total. Parentheses group operations.", note:"Multiplication and division take precedence over addition and subtraction. Use parentheses to state your intended grouping clearly. Python uses * for multiplication and ** for powers." },
+      conditions: { title:"A condition selects a block", code:"a = 8\nb = 3\nif a >= b:\n    print(a)\nelse:\n    print(b)", output:"8", description:"The comparison produces True or False. The colon introduces a block; indentation groups its instructions. Only one of these print() calls executes.", note:"Indentation is part of Python syntax. Use four spaces consistently for the body of each block. else: aligns with if. Python uses >= where our pseudocode uses ≥." }
+    };
+    function selectSyntax(button) {
+      document.querySelectorAll("[data-syntax]").forEach((tab) => { tab.setAttribute("aria-selected", String(tab === button)); tab.tabIndex = tab === button ? 0 : -1; });
+      byId("syntax-panel").setAttribute("aria-labelledby", button.id);
+      const example = syntaxExamples[button.dataset.syntax];
+      ["title", "description", "note"].forEach((key) => setText("syntax-" + key, example[key]));
+      ["code", "output"].forEach((key) => byId("syntax-" + key).textContent = example[key]);
+    }
+    document.querySelectorAll("[data-syntax]").forEach((button) => {
+      button.addEventListener("click", () => selectSyntax(button));
+      button.addEventListener("keydown", (event) => {
+        const tabs = [...document.querySelectorAll("[data-syntax]")]; let index = tabs.indexOf(button);
+        if (event.key === "ArrowRight") index = (index + 1) % tabs.length;
+        else if (event.key === "ArrowLeft") index = (index + tabs.length - 1) % tabs.length;
+        else if (event.key === "Home") index = 0;
+        else if (event.key === "End") index = tabs.length - 1;
+        else return;
+        event.preventDefault(); selectSyntax(tabs[index]); tabs[index].focus();
+      });
+    });
+    function resetCalculator() { setText("calc-output", "Predict the result of {a} {operator} {b}.", { a:byId("calc-a").value || "a", operator:byId("calc-op").value, b:byId("calc-b").value || "b" }); feedback("calc-feedback", "Inputs changed. Predict before revealing the result."); }
+    ["calc-a", "calc-b", "calc-op"].forEach((id) => byId(id).addEventListener("input", resetCalculator));
+    byId("calc-evaluate").addEventListener("click", () => {
+      const a = readInteger("calc-a"), b = readInteger("calc-b"), op = byId("calc-op").value;
+      if (a === null || b === null) { feedback("calc-feedback", "Use whole numbers from −20 to 20.", "error"); return; }
+      if (["/", "//", "%"].includes(op) && b === 0) { setText("calc-output", "ZeroDivisionError"); feedback("calc-feedback", "Division and remainder operations cannot use zero as the divisor.", "error"); return; }
+      const operations = { "+":() => a + b, "-":() => a - b, "*":() => a * b, "/":() => a / b, "//":() => Math.floor(a / b), "%":() => a - Math.floor(a / b) * b };
+      const result = operations[op]();
+      const display = op === "/" && Object.is(result, -0) ? "-0.0" : op === "/" && Number.isInteger(result) ? result.toFixed(1) : String(result);
+      setText("calc-output", "{a} {operator} {b} → {result}", { a, operator:op, b, result:display });
+      const explanations = { "+":"Add the two integer values.", "-":"Subtract b from a.", "*":"Multiply the values.", "/":"Python / returns a float, even when the division is exact.", "//":"Floor division rounds the quotient toward negative infinity.", "%":"The remainder satisfies a = (a // b) * b + (a % b)." };
+      feedback("calc-feedback", explanations[op], "success");
+    });
+    byId("indent-choices").addEventListener("click", (event) => { const button = event.target.closest("[data-answer]"); if (!button) return; const correct = button.dataset.answer === "B"; feedback("indent-feedback", correct ? "Correct. The colon introduces the block, and the indented print(a) belongs to it." : "Snippet A is missing a colon and an indented block. Inspect snippet B and try again.", correct ? "success" : "error"); });
+
+    function resetInputPreview() {
+      const convert = byId("input-mode").value === "number";
+      byId("input-code").textContent = convert ? 'a = int(input("First number: "))\nb = int(input("Second number: "))\ntotal = a + b\nprint(total)' : 'a = input("First number: ")\nb = input("Second number: ")\ntotal = a + b\nprint(total)';
+      setText("input-values", "Preview the example to inspect the values.");
+      setText("input-output", "No output yet.");
+      feedback("input-feedback", "Predict whether the result will be text or a number.");
+    }
+    ["input-a", "input-b", "input-mode"].forEach((id) => byId(id).addEventListener("input", resetInputPreview));
+    byId("input-run").addEventListener("click", () => {
+      const rawA = byId("input-a").value, rawB = byId("input-b").value, convert = byId("input-mode").value === "number";
+      if (!convert) {
+        setText("input-values", "a: {a} (str)\nb: {b} (str)\ntotal: {total} (str)", { a:JSON.stringify(rawA), b:JSON.stringify(rawB), total:JSON.stringify(rawA + rawB) });
+        if (rawA + rawB) setText("input-output", "{output}", { output:rawA + rawB });
+        else setText("input-output", "(an empty line)");
+        feedback("input-feedback", "For strings, + joins the text. With 8 and 3, the result is 83, not the numeric sum.", "success");
+        return;
+      }
+      if (!/^[+-]?\d+$/.test(rawA.trim()) || !/^[+-]?\d+$/.test(rawB.trim())) {
+        setText("input-values", "An integer conversion failed. Execution stops before total is calculated.");
+        setText("input-output", "No printed result: ValueError.");
+        feedback("input-feedback", "Use signed or unsigned whole-number text in this practice. For example, 3.5 and hello cannot be converted by int().", "error"); return;
+      }
+      const a = Number(rawA.trim()), b = Number(rawB.trim());
+      setText("input-values", "a: {a} (int)\nb: {b} (int)\ntotal: {total} (int)", { a, b, total:a + b });
+      setText("input-output", a + b);
+      feedback("input-feedback", "int() converts the typed text first. + now performs integer addition.", "success");
+    });
+
+    ["practice-width", "practice-height", "practice-prediction"].forEach((id) => byId(id).addEventListener("input", () => feedback("practice-feedback", "Inputs changed. Check your prediction again.")));
+    byId("practice-check").addEventListener("click", () => {
+      const width = readInteger("practice-width"), height = readInteger("practice-height"), prediction = readInteger("practice-prediction");
+      if (width === null || height === null || prediction === null) { feedback("practice-feedback", "Enter dimensions from 1 to 12 and a whole-number perimeter prediction from 0 to 48.", "error"); return; }
+      const result = 2 * (width + height), correct = prediction === result;
+      feedback("practice-feedback", correct ? "Correct: {width} + {height} + {width} + {height} = {result} cm." : "Try again. A rectangle has two sides of each length; area and perimeter use different calculations.", correct ? "success" : "error", { width, height, result });
+    });
+    const recapAnswers = [
+      { answer:"a", explanation:"An algorithm specifies precise steps for a solution. Python is one language for implementing it." },
+      { answer:"b", explanation:"A diamond represents a decision. Its outgoing paths are labelled with the condition’s outcomes." },
+      { answer:"b", explanation:"The right-hand side uses the old value 4. Assignment then associates x with the new value 5." },
+      { answer:"b", explanation:'"5" and "3" are strings, so + joins them and print() displays 53.' },
+      { answer:"b", explanation:"With 8 and 3, the bug outputs 3 instead of 8. Equal values hide the bug." }
+    ];
+    function renderRecap(data) {
+      let score = 0;
+      recapAnswers.forEach(({ answer, explanation }, index) => { const correct = data.get("q" + (index + 1)) === answer; if (correct) score++; const result = byId("recap-q" + (index + 1)); result.hidden = false; result.textContent = t(correct ? "Correct." : "Review.") + " " + t(explanation); });
+      return score;
+    }
+    byId("recap-form").addEventListener("submit", (event) => {
+      event.preventDefault();
+      const data = new FormData(event.target);
+      if (recapAnswers.some((_, index) => !data.get("q" + (index + 1)))) { feedback("recap-feedback", "Answer all five questions before checking.", "error"); return; }
+      const score = renderRecap(data);
+      feedback("recap-feedback", "{score} of 5 correct. Read each explanation and discuss the reasoning.", score === 5 ? "success" : "", { score });
+    });
+    byId("recap-form").addEventListener("change", () => { document.querySelectorAll(".quiz-answer").forEach((item) => item.hidden = true); feedback("recap-feedback", "Answer updated. Check the questions again."); });
+    byId("recap-reset").addEventListener("click", () => { byId("recap-form").reset(); document.querySelectorAll(".quiz-answer").forEach((item) => item.hidden = true); feedback("recap-feedback", "Answer all five questions, then check your reasoning."); });
+    ["sum-output", "branch-output", "input-output"].forEach((id) => setText(id, "No output yet."));
+    setText("input-values", "Preview the example to inspect the values.");
+    setText("calc-output", "Predict the result of {a} {operator} {b}.", { a:7, operator:"+", b:2 });
+    languageButtons.forEach((button) => button.addEventListener("click", () => setLanguage(button.dataset.language)));
+    let savedLanguage = "en";
+    try { savedLanguage = localStorage.getItem("algorithm101-language") || "en"; } catch { /* Default to English when storage is unavailable. */ }
+    setLanguage(savedLanguage);
+    languageButtons.forEach((button) => button.disabled = false);
+  </script>
+</body>
+</html>
