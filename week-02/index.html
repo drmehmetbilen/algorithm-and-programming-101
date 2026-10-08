@@ -1,0 +1,982 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Week 2: variables, data types, expressions, decisions, string methods, the math module, and a preview of Python collections." data-i18n-content>
+<title data-i18n>Week 02 · Variables and Decisions</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#main" data-i18n>Skip to lesson</a>
+<aside class="sidebar" aria-label="Course navigation" data-i18n-aria-label>
+  <div class="brand"><span class="brand-mark" aria-hidden="true">a↗</span><span data-i18n>ALGORITHM &amp; PROGRAMMING 101</span>
+  </div>
+  <p class="week-tag" data-i18n>Week 02 / Variables and decisions</p>
+  <nav class="nav" aria-label="Lesson sections" data-i18n-aria-label>
+    <a href="#overview" aria-current="page"><span class="nav-num">00</span><span data-i18n>Lesson overview</span></a>
+    <a href="#recap"><span class="nav-num">01</span><span data-i18n>Week 1 recap</span></a>
+    <a href="#variables"><span class="nav-num">02</span><span data-i18n>Variables and assignment</span></a>
+    <a href="#types"><span class="nav-num">03</span><span data-i18n>Basic data types</span></a>
+    <a href="#input"><span class="nav-num">04</span><span data-i18n>Input and conversion</span></a>
+    <a href="#expressions"><span class="nav-num">05</span><span data-i18n>Expressions and operators</span></a>
+    <a href="#logic"><span class="nav-num">06</span><span data-i18n>Comparisons and logic</span></a>
+    <a href="#decisions"><span class="nav-num">07</span><span data-i18n>Conditional statements</span></a>
+    <a href="#combining"><span class="nav-num">08</span><span data-i18n>Combining decisions</span></a>
+    <a href="#practice"><span class="nav-num">09</span><span data-i18n>Practice and recap</span></a>
+    <a href="#strings"><span class="nav-num">10</span><span data-i18n>String methods</span></a>
+    <a href="#math"><span class="nav-num">11</span><span data-i18n>Math library</span></a>
+    <a href="#collections"><span class="nav-num">12</span><span data-i18n>Collections preview</span></a>
+  </nav>
+  <a class="week-link" href="../week-01/index.html" data-i18n>← Week 1 notes</a>
+</aside>
+<div class="workspace">
+  <header class="topbar">
+    <div class="breadcrumb"><a href="../index.html" data-i18n>All weeks</a> / <span data-i18n>Week 02</span>
+    </div>
+    <div class="language-switch" role="group" aria-label="Language / Dil"><button type="button" data-language="en" lang="en" aria-label="English" aria-pressed="true" disabled>EN</button><button type="button" data-language="tr" lang="tr" aria-label="Türkçe" aria-pressed="false" disabled>TR</button>
+    </div>
+  </header>
+  <main id="main" tabindex="-1">
+    <noscript>
+    <div class="callout">The notes and Python examples are readable without JavaScript. Enable JavaScript for the exercises and EN/TR controls.<br>Notlar ve Python örnekleri JavaScript olmadan okunabilir. Alıştırmalar ve EN/TR düğmeleri için JavaScript’i etkinleştirin.
+    </div></noscript>
+    <section class="lesson active" id="overview" aria-labelledby="overview-title">
+      <div class="hero">
+        <div>
+          <p class="eyebrow" data-i18n>Week 02 / Overview</p>
+          <h1 id="overview-title" tabindex="-1" data-i18n>Variables, types, and decisions</h1>
+          <p class="lead" data-i18n>Work with values and expressions, translate rules into conditions, and explore string methods and the math module.</p>
+          <div class="tags"><span class="tag" data-i18n>Assignment</span><span class="tag" data-i18n>Data types</span><span class="tag" data-i18n>Boolean logic</span><span class="tag">if / elif / else</span>
+          </div>
+          <a href="#recap" data-i18n>Week 1 recap →</a>
+        </div>
+        <div class="hero-visual" aria-label="A score passes through a condition to an output" data-i18n-aria-label>
+          <div class="hero-step"><strong data-i18n>01 / Value</strong><code>score = 60</code>
+          </div>
+          <div class="hero-arrow" aria-hidden="true">↓
+          </div>
+          <div class="hero-step"><strong data-i18n>02 / Condition</strong><code>score &gt;= 60 → True</code>
+          </div>
+          <div class="hero-arrow" aria-hidden="true">↓
+          </div>
+          <div class="hero-step"><strong data-i18n>03 / Output</strong><code>Pass</code>
+          </div>
+        </div>
+      </div>
+      <div class="section-label" data-i18n>Learning objectives
+      </div>
+      <div class="grid-3">
+        <div class="card">
+          <h3 data-i18n>Trace values and types</h3>
+          <p data-i18n>Explain assignment, conversion, and the result of an expression.</p>
+        </div>
+        <div class="card">
+          <h3 data-i18n>Implement decisions</h3>
+          <p data-i18n>Use comparisons and Boolean operators to build conditional branches.</p>
+        </div>
+        <div class="card">
+          <h3 data-i18n>Use string methods</h3>
+          <p data-i18n>Clean and combine text without changing the original string.</p>
+        </div>
+      </div>
+      <div class="section-label" data-i18n>Lesson sections
+      </div>
+      <div class="grid-2">
+        <a class="card route-card" href="#variables">
+        <h3 data-i18n>Variables, types, and input</h3>
+        <p data-i18n>Assignment traces, type inspection, and a temperature converter.</p></a>
+        <a class="card route-card" href="#logic">
+        <h3 data-i18n>Logic and branching</h3>
+        <p data-i18n>Comparisons, truth tables, and a score classification flowchart.</p></a>
+        <a class="card route-card" href="#practice">
+        <h3 data-i18n>Shipping exercise and recap</h3>
+        <p data-i18n>A complete algorithm, worked examples, and downloadable samples.</p></a>
+<a class="card route-card" href="#strings"><h3 data-i18n>String methods</h3><p data-i18n>Transform text, inspect returned types, and trace a cleanup pipeline.</p></a>
+<a class="card route-card" href="#math"><h3 data-i18n>Math library</h3><p data-i18n>Explore rounding, roots, circle area, and trigonometry in radians.</p></a>
+        <a class="card route-card" href="#collections">
+        <h3 data-i18n>Next: collections</h3>
+        <p data-i18n>Lists, tuples, dictionaries, and sets before introducing loops.</p></a>
+      </div>
+      <div class="callout">
+        <p data-i18n>Use Step to execute one instruction, Run to play a trace, and Reset to restore it. The guided examples use fixed programs; run the .py samples to execute Python.</p>
+      </div>
+    </section>
+    <section class="lesson" id="recap" aria-labelledby="recap-title">
+      <p class="eyebrow" data-i18n>01 / Week 1 recap</p>
+      <h2 id="recap-title" tabindex="-1" data-i18n>Week 1 recap</h2>
+      <p class="lead" data-i18n>Review the order of execution and the difference between a variable name and its current value.</p>
+      <div class="grid-2">
+        <div class="card">
+          <h3 data-i18n>Input → process → output</h3>
+          <p data-i18n>An algorithm specifies the steps. Pseudocode and flowcharts describe those steps; Python implements them.</p>
+        </div>
+        <pre><code>a = 8
+b = 3
+total = a + b
+a = 20
+print(total)</code></pre>
+      </div>
+      <div class="activity">
+        <div class="activity-head">
+          <h3 data-i18n>Practice / Predict the output</h3><span class="activity-tag" data-i18n>Sequence</span>
+        </div>
+        <div class="activity-body">
+          <div class="fields">
+            <label class="field" for="recap-prediction"><span data-i18n>Printed value</span><input id="recap-prediction" type="number" step="1">
+            </label><button type="button" id="recap-check" class="primary" data-i18n>Check prediction</button>
+          </div>
+          <div class="feedback" id="recap-feedback" role="status" data-i18n>Predict what print(total) displays after a changes.
+          </div>
+          <details><summary data-i18n>Show the explanation</summary>
+            <p data-i18n>total receives 11 before a becomes 20. Changing a later does not recalculate total automatically.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+    <section class="lesson" id="variables" aria-labelledby="variables-title">
+      <p class="eyebrow" data-i18n>02 / Variables and assignment</p>
+      <h2 id="variables-title" tabindex="-1" data-i18n>Variables and assignment</h2>
+      <p class="lead" data-i18n>Evaluate the expression on the right first, then associate the result with the name on the left. Assignment can replace a previous value.</p>
+      <div class="grid-2">
+        <div class="card">
+          <h3 data-i18n>Names refer to values</h3>
+          <p data-i18n>For these numbers, y = x gives y the current value of x. Later reassignment of x does not update y.</p>
+        </div>
+        <div class="card">
+          <h3 data-i18n>Augmented assignment</h3>
+          <p data-i18n>For the numeric variables here, y += 2 has the same effect as y = y + 2. The old value is used to calculate the new one.</p>
+        </div>
+      </div>
+      <div class="activity">
+        <div class="activity-head">
+          <h3 data-i18n>Practice / Trace reassignment</h3><span class="activity-tag" data-i18n>Values over time</span>
+        </div>
+        <div class="activity-body">
+          <div class="grid-2">
+            <ol class="code-lines" id="assignment-code"><li>x = 4</li><li>y = x</li><li>x = x + 3</li><li>y += 2</li><li>print(x, y)</li></ol>
+            <div>
+              <div class="memory">
+                <div><small>x</small><strong id="assignment-x">—</strong>
+                </div>
+                <div><small>y</small><strong id="assignment-y">—</strong>
+                </div>
+              </div>
+              <div class="output"><small data-i18n>Printed output</small><code id="assignment-output">—</code>
+              </div>
+              <div class="controls"><button type="button" id="assignment-step" class="primary" data-i18n>Step</button><button type="button" id="assignment-run" data-i18n>Run</button><button type="button" id="assignment-reset" data-i18n>Reset</button>
+              </div>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th data-i18n>After instruction</th><th>x</th><th>y</th>
+                </tr>
+              </thead>
+              <tbody id="assignment-history">
+              </tbody>
+            </table>
+          </div>
+          <div class="feedback" id="assignment-feedback" role="status" data-i18n>Predict x and y before executing each instruction.
+          </div>
+        </div>
+      </div>
+      <div class="callout">
+        <p data-i18n>Use descriptive names such as student_score. Names are case-sensitive; = assigns, while == compares. Reading a name before assignment raises NameError.</p>
+      </div>
+    </section>
+    <section class="lesson" id="types" aria-labelledby="types-title">
+      <p class="eyebrow" data-i18n>03 / Basic data types</p>
+      <h2 id="types-title" tabindex="-1" data-i18n>Basic data types</h2>
+      <p class="lead" data-i18n>A value has a type. The type determines which operations make sense and how the value behaves.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th data-i18n>Type</th><th data-i18n>Purpose</th><th data-i18n>Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>int</code></td><td data-i18n>Whole numbers</td><td><code>count = 5</code></td>
+            </tr>
+            <tr><td><code>float</code></td><td data-i18n>Floating-point numbers</td><td><code>temperature = 5.0</code></td>
+            </tr>
+            <tr><td><code>str</code></td><td data-i18n>Text</td><td><code>label = &quot;5&quot;</code></td>
+            </tr>
+            <tr><td><code>bool</code></td><td data-i18n>True or False</td><td><code>is_ready = True</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="activity">
+        <div class="activity-head">
+          <h3 data-i18n>Practice / Inspect a value</h3><span class="activity-tag" data-i18n>Type and behavior</span>
+        </div>
+        <div class="activity-body">
+          <div class="tabs" role="group" aria-label="Choose a type example" data-i18n-aria-label><button type="button" data-type="int" aria-pressed="true"><code>5</code></button><button type="button" data-type="float" aria-pressed="false"><code>5.0</code></button><button type="button" data-type="str" aria-pressed="false"><code>&quot;5&quot;</code></button><button type="button" data-type="bool" aria-pressed="false"><code>True</code></button><button type="button" data-type="textbool" aria-pressed="false"><code>&quot;False&quot;</code></button>
+          </div>
+          <div class="grid-2">
+            <pre id="type-code"><code>value = 5
+print(type(value).__name__)
+print(value + value)</code></pre>
+            <div>
+              <div class="output"><small data-i18n>Printed output</small><code id="type-output">int
+                10</code>
+              </div>
+              <p id="type-description" data-i18n>Integers support arithmetic. Adding two 5 values produces 10.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="callout">
+        <p data-i18n>A name can be reassigned to a value of a different type. "False" is non-empty text, not the Boolean False. bool("False") returns True; converting user answers requires an explicit rule.</p>
+      </div>
+      <p class="help" data-i18n>Most decimal fractions are approximations in binary floating point. For example, 0.1 + 0.2 may display 0.30000000000000004. Output formatting changes the display, not the stored value.</p>
+    </section>
+    <section class="lesson" id="input" aria-labelledby="input-title">
+      <p class="eyebrow" data-i18n>04 / Input, conversion, and output</p>
+      <h2 id="input-title" tabindex="-1" data-i18n>Input, conversion, and output</h2>
+      <p class="lead" data-i18n>input() returns text. Convert that text to the numeric type required by the problem before calculating.</p>
+      <div class="grid-2">
+        <div class="card">
+          <h3 data-i18n>Conversion rules</h3>
+          <pre><code>int("12")      # 12
+float("12.5")  # 12.5
+int("12.5")    # ValueError</code></pre>
+          <p data-i18n>int() cannot parse a decimal point in a string. int(12.9) truncates a numeric value toward zero; it does not round it.</p>
+        </div>
+        <div class="card">
+          <h3 data-i18n>Formatted output</h3>
+          <pre><code>temperature = 21.5
+print(f"Celsius: {temperature:.1f}")</code></pre>
+          <p data-i18n>An f-string inserts expressions inside braces. :.1f displays one digit after the decimal point. Python uses a dot for decimal input in these examples.</p>
+        </div>
+      </div>
+      <div class="activity">
+        <div class="activity-head">
+          <h3 data-i18n>Practice / Temperature converter</h3><span class="activity-tag" data-i18n>Celsius → Fahrenheit</span>
+        </div>
+        <div class="activity-body">
+          <div class="fields">
+            <label class="field" for="celsius"><span data-i18n>Celsius</span><input id="celsius" type="number" min="-100" max="100" step="0.5" value="20">
+            </label>
+            <label class="field" for="conversion-mode"><span data-i18n>Input handling</span><select id="conversion-mode"><option value="float">float(input(...))</option><option value="raw">input(...)</option></select>
+            </label><button type="button" id="conversion-run" class="primary" data-i18n>Preview</button>
+          </div>
+          <div class="grid-2">
+            <pre id="conversion-code"><code>celsius = float(input("Celsius: "))
+fahrenheit = celsius * 9 / 5 + 32
+print(f"Fahrenheit: {fahrenheit:.1f}")</code></pre>
+            <div>
+              <div class="output"><small data-i18n>Values and types</small><code id="conversion-values">—</code>
+              </div>
+              <div class="output"><small data-i18n>Printed output</small><code id="conversion-output">—</code>
+              </div>
+            </div>
+          </div>
+          <div class="feedback" id="conversion-feedback" role="status" data-i18n>Use 0, 20, or −40. Then compare converted input with raw text.
+          </div>
+          <p class="help" data-i18n>Guided input: −100 to 100 in steps of 0.5. The sample assumes valid numeric input; exception handling is a later topic.</p>
+        </div>
+      </div>
+    </section>
+    <section class="lesson" id="expressions" aria-labelledby="expressions-title">
+      <p class="eyebrow" data-i18n>05 / Expressions and operators</p>
+      <h2 id="expressions-title" tabindex="-1" data-i18n>Expressions and operators</h2>
+      <p class="lead" data-i18n>An expression produces a value. Parentheses control grouping; multiplication and division take precedence over addition and subtraction.</p>
+      <div class="activity">
+        <div class="activity-head">
+          <h3 data-i18n>Practice / Evaluate an expression</h3><span class="activity-tag" data-i18n>Grouping and numeric types</span>
+        </div>
+        <div class="activity-body">
+          <div class="fields">
+            <label class="field" for="expression-choice"><span data-i18n>Expression</span><select id="expression-choice"><option value="0">7 + 2 * 3</option><option value="1">(7 + 2) * 3</option><option value="2">7 / 2</option><option value="3">7 // 2</option><option value="4">-7 // 2</option><option value="5">7 % 2</option><option value="6">-7 % 2</option><option value="7">2 ** 3</option></select>
+            </label>
+            <label class="field" for="expression-prediction"><span data-i18n>Predicted result</span><input id="expression-prediction" type="number" step="any">
+            </label><button type="button" id="expression-check" class="primary" data-i18n>Check prediction</button>
+          </div>
+          <div class="output"><small data-i18n>Result and type</small><code id="expression-output">—</code>
+          </div>
+          <div class="feedback" id="expression-feedback" role="status" data-i18n>Choose an expression and predict its result.
+          </div>
+        </div>
+      </div>
+      <div class="callout">
+        <p data-i18n>/ performs true division; // floors the quotient, including for negative values. With a positive divisor, % gives a non-negative remainder. Use parentheses when grouping might be unclear.</p>
+      </div>
+      <div class="activity">
+        <div class="activity-head">
+          <h3 data-i18n>Practice / Even or odd</h3><span class="activity-tag" data-i18n>Remainder</span>
+        </div>
+        <div class="activity-body">
+          <div class="fields">
+            <label class="field" for="parity-number"><span data-i18n>Integer</span><input id="parity-number" type="number" min="-100" max="100" step="1" value="7">
+            </label><button type="button" id="parity-check" class="primary" data-i18n>Calculate</button>
+          </div>
+          <div class="grid-2">
+            <pre><code>number = int(input("Integer: "))
+if number % 2 == 0:
+    print("Even")
+else:
+    print("Odd")</code></pre>
+            <div>
+              <div class="output"><small data-i18n>Printed output</small><code id="parity-output">—</code>
+              </div>
+              <div class="feedback" id="parity-feedback" role="status" data-i18n>Try a positive number, zero, and a negative number.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="lesson" id="logic" aria-labelledby="logic-title">
+      <p class="eyebrow" data-i18n>06 / Comparisons and Boolean logic</p>
+      <h2 id="logic-title" tabindex="-1" data-i18n>Comparisons and Boolean logic</h2>
+      <p class="lead" data-i18n>Comparisons produce True or False. Combine conditions with and, or, and not to express a rule.</p>
+      <div class="grid-3">
+        <div class="card">
+          <h3 data-i18n>Comparison</h3>
+          <pre><code>score == 60
+score != 60
+score &gt;= 60</code></pre>
+          <p data-i18n>Other comparisons: &lt;, &lt;=, &gt;. == compares values; = assigns a value.</p>
+        </div>
+        <div class="card">
+          <h3 data-i18n>and / or</h3>
+          <p data-i18n>For Boolean operands, and requires both to be True. or requires at least one to be True.</p>
+        </div>
+        <div class="card">
+          <h3 data-i18n>not</h3>
+          <p data-i18n>not reverses a Boolean result. Parentheses make the intended grouping explicit.</p>
+        </div>
+      </div>
+      <div class="activity">
+        <div class="activity-head">
+          <h3 data-i18n>Practice / Allowed temperature range</h3><span class="activity-tag" data-i18n>Inclusive range: 10 to 30</span>
+        </div>
+        <div class="activity-body">
+          <div class="fields">
+            <label class="field" for="logic-temperature"><span data-i18n>Temperature</span><input id="logic-temperature" type="number" min="-50" max="100" step="1" value="20">
+            </label>
+            <label class="field" for="logic-mode"><span data-i18n>Condition</span><select id="logic-mode"><option value="and">A and B</option><option value="or">A or B</option><option value="not">not (A and B)</option></select>
+            </label><button type="button" id="logic-evaluate" class="primary" data-i18n>Evaluate</button>
+          </div>
+          <pre id="logic-code"><code>temperature &gt;= 10 and temperature &lt;= 30</code></pre>
+          <div class="logic-parts">
+            <div class="logic-part"><code>A: temperature &gt;= 10</code><strong id="logic-a">—</strong>
+            </div>
+            <div class="logic-part"><code>B: temperature &lt;= 30</code><strong id="logic-b">—</strong>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>A</th><th>B</th><th>A and B</th><th>A or B</th><th>not (A and B)</th>
+                </tr>
+              </thead>
+              <tbody id="truth-table">
+              </tbody>
+            </table>
+          </div>
+          <div class="output"><small data-i18n>Condition result</small><code id="logic-output">—</code>
+          </div>
+          <div class="feedback" id="logic-feedback" role="status" data-i18n>Check 9, 10, 30, and 31. Which condition describes the allowed range?
+          </div>
+        </div>
+      </div>
+      <div class="callout">
+        <p data-i18n>Python short-circuits: and skips the right operand when the left is False; or skips it when the left is True. The display shows both comparisons for teaching, even when Python would skip one. In general, and/or return an operand; these examples use Boolean operands.</p>
+      </div>
+    </section>
+    <section class="lesson" id="decisions" aria-labelledby="decisions-title">
+      <p class="eyebrow" data-i18n>07 / Conditional statements</p>
+      <h2 id="decisions-title" tabindex="-1" data-i18n>Conditional statements</h2>
+      <p class="lead" data-i18n>An if/elif/else chain chooses the first matching branch. Check the higher threshold first when ranges overlap.</p>
+      <div class="card">
+        <h3 data-i18n>Problem / Classify a score</h3>
+        <p data-i18n>For an integer score from 0 to 100: 85–100 → High; 60–84 → Pass; 0–59 → Retry.</p>
+      </div>
+      <div class="activity">
+        <div class="activity-head">
+          <h3 data-i18n>Practice / Trace the selected branch</h3><span class="activity-tag" data-i18n>Pseudocode · Flowchart · Python</span>
+        </div>
+        <div class="activity-body">
+          <div class="fields">
+            <label class="field" for="grade-score"><span data-i18n>Score (0–100)</span><input id="grade-score" type="number" min="0" max="100" step="1" value="60">
+            </label><button type="button" id="grade-step" class="primary" data-i18n>Step</button><button type="button" id="grade-run" data-i18n>Run</button><button type="button" id="grade-reset" data-i18n>Reset</button>
+          </div>
+          <div class="grid-2">
+            <div>
+              <svg class="flowchart" id="grade-flow" viewBox="0 0 480 580" role="img" aria-labelledby="grade-flow-title"><title id="grade-flow-title" data-i18n>Input score; test 85, then 60; select High, Pass, or Retry; output category.</title><defs><marker id="grade-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0 0 L7 3.5 L0 7" fill="#8b97bd"/></marker></defs>
+<path class="edge" d="M185 46 V75 M185 117 V145 M185 225 V265 M185 345 V380 M185 420 V460 M185 502 V530" marker-end="url(#grade-arrow)"/>
+<path class="edge" id="grade-edge-high" d="M285 185 H350 V200 M350 240 V250 H450 V444 H185" marker-end="url(#grade-arrow)"/>
+<path class="edge" id="grade-edge-pass" d="M285 305 H365 V325 M365 365 V435 H185" marker-end="url(#grade-arrow)"/>
+<rect class="node" x="130" y="10" width="110" height="36" rx="18"/><text x="185" y="28" data-i18n>Start</text>
+<path class="node" id="grade-node-input" d="M110 75 H280 L260 117 H90 Z"/><text x="185" y="96">INPUT score</text>
+<path class="node" id="grade-node-85" d="M185 145 L285 185 L185 225 L85 185 Z"/><text x="185" y="185">score ≥ 85?</text><text class="branch-label" x="305" y="170">True</text><text class="branch-label" x="210" y="245">False</text>
+<rect class="node" id="grade-node-high" x="295" y="200" width="110" height="40"/><text x="350" y="212">category ←</text><text x="350" y="229">"High"</text>
+<path class="node" id="grade-node-60" d="M185 265 L285 305 L185 345 L85 305 Z"/><text x="185" y="305">score ≥ 60?</text><text class="branch-label" x="305" y="289">True</text><text class="branch-label" x="210" y="363">False</text>
+<rect class="node" id="grade-node-pass" x="310" y="325" width="110" height="40"/><text x="365" y="337">category ←</text><text x="365" y="354">"Pass"</text>
+<rect class="node" id="grade-node-retry" x="130" y="380" width="110" height="40"/><text x="185" y="392">category ←</text><text x="185" y="409">"Retry"</text>
+<path class="node" id="grade-node-output" d="M110 460 H280 L260 502 H90 Z"/><text x="185" y="481">OUTPUT category</text>
+<rect class="node" x="130" y="530" width="110" height="36" rx="18"/><text x="185" y="548" data-i18n>End</text>
+</svg>
+            </div>
+            <div>
+              <ol class="code-lines" id="grade-code"><li>score = int(input("Score (0-100): "))</li><li>if score &gt;= 85:</li><li>    category = "High"</li><li>elif score &gt;= 60:</li><li>    category = "Pass"</li><li>else:</li><li>    category = "Retry"</li><li>print(category)</li></ol>
+              <div class="memory">
+                <div><small>score</small><strong id="grade-value">—</strong>
+                </div>
+                <div><small>category</small><strong id="grade-category">—</strong>
+                </div>
+              </div>
+              <div class="output"><small data-i18n>Printed output</small><code id="grade-output">—</code>
+              </div>
+            </div>
+          </div>
+          <div class="feedback" id="grade-feedback" role="status" data-i18n>Predict the category, then step through the conditions.
+          </div>
+          <details><summary data-i18n>Pseudocode and discussion</summary>
+            <pre><code>INPUT score
+IF score ≥ 85 THEN
+    category ← "High"
+ELSE IF score ≥ 60 THEN
+    category ← "Pass"
+ELSE
+    category ← "Retry"
+END IF
+OUTPUT category</code></pre>
+            <p data-i18n>A colon ends each Python branch header; indentation groups its statements. What happens at 85? Why is the 60 condition skipped for a score of 90?</p>
+          </details>
+        </div>
+      </div>
+    </section>
+    <section class="lesson" id="combining" aria-labelledby="combining-title">
+      <p class="eyebrow" data-i18n>08 / Combining decisions</p>
+      <h2 id="combining-title" tabindex="-1" data-i18n>Combining decisions</h2>
+      <p class="lead" data-i18n>Separate if statements can both execute. An elif chain selects one branch. An else belongs to its matching if at the same indentation level.</p>
+      <div class="activity">
+        <div class="activity-head">
+          <h3 data-i18n>Practice / Independent if or elif chain?</h3><span class="activity-tag" data-i18n>Compare execution</span>
+        </div>
+        <div class="activity-body">
+          <div class="fields">
+            <label class="field" for="combine-score"><span data-i18n>Score (0–100)</span><input id="combine-score" type="number" min="0" max="100" step="1" value="75">
+            </label><button type="button" id="combine-run" class="primary" data-i18n>Compare</button>
+          </div>
+          <div class="grid-2">
+            <div>
+              <h3 data-i18n>Independent conditions</h3>
+              <pre><code>if score &gt;= 60:
+    print("Pass")
+if score &gt;= 85:
+    print("High")
+else:
+    print("Below 85")</code></pre>
+              <div class="output"><small data-i18n>Printed output</small><code id="independent-output">—</code>
+              </div>
+            </div>
+            <div>
+              <h3 data-i18n>One classification chain</h3>
+              <pre><code>if score &gt;= 85:
+    print("High")
+elif score &gt;= 60:
+    print("Pass")
+else:
+    print("Retry")</code></pre>
+              <div class="output"><small data-i18n>Printed output</small><code id="chain-output">—</code>
+              </div>
+            </div>
+          </div>
+          <div class="feedback" id="combine-feedback" role="status" data-i18n>Try 59, 75, and 90. Count how many lines each version prints.
+          </div>
+        </div>
+      </div>
+      <div class="activity">
+        <div class="activity-head">
+          <h3 data-i18n>Practice / A nested decision</h3><span class="activity-tag" data-i18n>Registration and score</span>
+        </div>
+        <div class="activity-body">
+          <div class="fields">
+            <label class="check-field"><input type="checkbox" id="registered" checked><span data-i18n>Registered</span>
+            </label>
+            <label class="field" for="nested-score"><span data-i18n>Score (0–100)</span><input id="nested-score" type="number" min="0" max="100" step="1" value="75">
+            </label><button type="button" id="nested-run" class="primary" data-i18n>Evaluate</button>
+          </div>
+          <div class="grid-2">
+            <pre><code>if registered:
+    if score &gt;= 60:
+        print("Eligible")
+    else:
+        print("Score too low")
+else:
+    print("Registration required")</code></pre>
+            <div>
+              <div class="output"><small data-i18n>Printed output</small><code id="nested-output">—</code>
+              </div>
+              <div class="feedback" id="nested-feedback" role="status" data-i18n>The inner score check runs only when registered is True.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="lesson" id="practice" aria-labelledby="practice-title">
+      <p class="eyebrow" data-i18n>09 / Shipping exercise and recap</p>
+      <h2 id="practice-title" tabindex="-1" data-i18n>Shipping exercise and recap</h2>
+      <p class="lead" data-i18n>Combine a multi-branch rule with a separate membership discount. Define the input domain before writing the algorithm.</p>
+      <div class="card">
+        <h3 data-i18n>Classroom shipping rules</h3>
+        <p data-i18n>Weight must be greater than 0 and at most 10 kg. Up to 2 kg costs 5 credits; above 2 and up to 5 kg costs 8; above 5 and up to 10 kg costs 12. Members receive a 2-credit discount. Invalid weight produces Invalid weight.</p>
+        <p data-i18n>Write the inputs and output, pseudocode, a flowchart, and Python. Test 2, just above 2, 5, just above 5, 0, and 10; compare member and non-member results.</p>
+      </div>
+      <div class="activity">
+        <div class="activity-head">
+          <h3 data-i18n>Practice / Check a shipping prediction</h3><span class="activity-tag" data-i18n>Classification + discount</span>
+        </div>
+        <div class="activity-body">
+          <div class="fields">
+            <label class="field" for="shipping-weight"><span data-i18n>Weight (kg)</span><input id="shipping-weight" type="number" min="-2" max="12" step="0.1" value="2">
+            </label>
+            <label class="check-field"><input type="checkbox" id="shipping-member"><span data-i18n>Member</span>
+            </label>
+            <label class="field" for="shipping-prediction"><span data-i18n>Predicted credits</span><input id="shipping-prediction" type="number" min="0" max="12" step="1">
+            </label><button type="button" id="shipping-check" class="primary" data-i18n>Check prediction</button>
+          </div>
+          <div class="output"><small data-i18n>Printed output</small><code id="shipping-output">—</code>
+          </div>
+          <div class="feedback" id="shipping-feedback" role="status" data-i18n>Predict the price before checking. Inputs 0 and above 10 test invalid weight.
+          </div>
+          <details><summary data-i18n>Reveal the worked solution</summary>
+            <div class="grid-2">
+              <pre><code>INPUT weight, member
+IF weight ≤ 0 OR weight &gt; 10 THEN
+    OUTPUT "Invalid weight"
+ELSE
+    IF weight ≤ 2 THEN
+        cost ← 5
+    ELSE IF weight ≤ 5 THEN
+        cost ← 8
+    ELSE
+        cost ← 12
+    END IF
+    IF member THEN
+        cost ← cost - 2
+    END IF
+    OUTPUT cost
+END IF</code></pre>
+              <pre><code>weight = float(input("Weight (kg): "))
+member = input("Member (yes/no): ") == "yes"
+if weight &lt;= 0 or weight &gt; 10:
+    print("Invalid weight")
+else:
+    if weight &lt;= 2:
+        cost = 5
+    elif weight &lt;= 5:
+        cost = 8
+    else:
+        cost = 12
+    if member:
+        cost -= 2
+    print(f"Shipping: {cost} credits")</code></pre>
+            </div>
+            <h3 data-i18n>Shipping flowchart</h3>
+<svg class="flowchart" id="shipping-flow" viewBox="0 0 480 800" role="img" aria-labelledby="shipping-flow-title">
+  <title id="shipping-flow-title" data-i18n>Check weight validity, select base cost, apply the membership discount, output cost, and end.</title>
+  <defs><marker id="shipping-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0 0 L7 3.5 L0 7" fill="#8b97bd"/></marker></defs>
+  <path class="edge" d="M180 42 V65 M180 103 V135 M180 215 V250 M180 322 V355 M180 427 V460 M180 500 V530 M180 602 V665 M180 705 V750" marker-end="url(#shipping-arrow)"/>
+  <path class="edge" d="M280 175 H365 V210 M365 250 H455 V770 H235" marker-end="url(#shipping-arrow)"/>
+  <path class="edge" d="M275 286 H350 V310 M350 350 H425 V516 H180" marker-end="url(#shipping-arrow)"/>
+  <path class="edge" d="M275 391 H330 V415 M330 455 H405 V516 H180" marker-end="url(#shipping-arrow)"/>
+  <path class="edge" d="M275 566 H345 V590 M345 630 V650 H180" marker-end="url(#shipping-arrow)"/>
+  <rect class="node" x="125" y="8" width="110" height="34" rx="17"/><text x="180" y="25" data-i18n>Start</text>
+  <path class="node" d="M95 65 H285 L265 103 H75 Z"/><text x="180" y="84">INPUT weight, member</text>
+  <path class="node" id="shipping-node-valid" d="M180 135 L280 175 L180 215 L80 175 Z"/><text x="180" y="167">weight ≤ 0</text><text x="180" y="186">or weight &gt; 10?</text>
+  <text class="branch-label" x="303" y="160">True</text><text class="branch-label" x="203" y="232">False</text>
+  <path class="node" id="shipping-node-invalid" d="M300 210 H443 L428 250 H285 Z"/><text x="364" y="230">"Invalid weight"</text>
+  <path class="node" id="shipping-node-2" d="M180 250 L275 286 L180 322 L85 286 Z"/><text x="180" y="286">weight ≤ 2?</text>
+  <text class="branch-label" x="298" y="272">True</text><text class="branch-label" x="203" y="337">False</text>
+  <rect class="node" id="shipping-node-5" x="295" y="310" width="110" height="40"/><text x="350" y="330">cost ← 5</text>
+  <path class="node" id="shipping-node-5kg" d="M180 355 L275 391 L180 427 L85 391 Z"/><text x="180" y="391">weight ≤ 5?</text>
+  <text class="branch-label" x="298" y="377">True</text><text class="branch-label" x="203" y="443">False</text>
+  <rect class="node" id="shipping-node-8" x="275" y="415" width="110" height="40"/><text x="330" y="435">cost ← 8</text>
+  <rect class="node" id="shipping-node-12" x="125" y="460" width="110" height="40"/><text x="180" y="480">cost ← 12</text>
+  <path class="node" id="shipping-node-member" d="M180 530 L275 566 L180 602 L85 566 Z"/><text x="180" y="566">member?</text>
+  <text class="branch-label" x="298" y="552">True</text><text class="branch-label" x="203" y="620">False</text>
+  <rect class="node" id="shipping-node-discount" x="285" y="590" width="120" height="40"/><text x="345" y="610">cost ← cost - 2</text>
+  <path class="node" id="shipping-node-output" d="M110 665 H265 L250 705 H95 Z"/><text x="180" y="685">OUTPUT cost</text>
+  <rect class="node" x="125" y="750" width="110" height="36" rx="18"/><text x="180" y="768" data-i18n>End</text>
+</svg>
+<p data-i18n>The discount is a separate if because it applies after any valid weight category. In the script, only the exact input yes enables membership. The preview uses a checkbox for the same Boolean value.</p>
+          </details>
+        </div>
+      </div>
+      <div class="activity">
+        <div class="activity-head">
+          <h3 data-i18n>Quick recap / Four questions</h3><span class="activity-tag" data-i18n>Check understanding</span>
+        </div>
+        <div class="activity-body">
+          <form id="quiz-form">
+            <fieldset class="quiz-question"><legend data-i18n>1. What does type("5").__name__ produce?</legend>
+              <label><input type="radio" name="q1" value="a"><span data-i18n>int</span>
+              </label>
+              <label><input type="radio" name="q1" value="b"><span data-i18n>str</span>
+              </label>
+              <div class="quiz-answer" id="quiz-q1" hidden>
+              </div>
+            </fieldset>
+            <fieldset class="quiz-question"><legend data-i18n>2. What is -7 // 2?</legend>
+              <label><input type="radio" name="q2" value="a"><span data-i18n>-3</span>
+              </label>
+              <label><input type="radio" name="q2" value="b"><span data-i18n>-4</span>
+              </label>
+              <div class="quiz-answer" id="quiz-q2" hidden>
+              </div>
+            </fieldset>
+            <fieldset class="quiz-question"><legend data-i18n>3. Which condition includes only 10 through 30?</legend>
+              <label><input type="radio" name="q3" value="a"><span data-i18n>temperature &gt;= 10 and temperature &lt;= 30</span>
+              </label>
+              <label><input type="radio" name="q3" value="b"><span data-i18n>temperature &gt;= 10 or temperature &lt;= 30</span>
+              </label>
+              <div class="quiz-answer" id="quiz-q3" hidden>
+              </div>
+            </fieldset>
+            <fieldset class="quiz-question"><legend data-i18n>4. How many branches run in one if/elif/else chain?</legend>
+              <label><input type="radio" name="q4" value="a"><span data-i18n>Exactly one</span>
+              </label>
+              <label><input type="radio" name="q4" value="b"><span data-i18n>Every matching branch</span>
+              </label>
+              <div class="quiz-answer" id="quiz-q4" hidden>
+              </div>
+            </fieldset>
+            <div class="controls"><button type="submit" class="primary" data-i18n>Check answers</button><button type="button" id="quiz-reset" data-i18n>Reset</button>
+            </div>
+          </form>
+          <div class="feedback" id="quiz-feedback" role="status" data-i18n>Answer all four questions before checking.
+          </div>
+        </div>
+      </div>
+      <div class="section-label" data-i18n>Python source examples
+      </div>
+      <div class="sample-links"><a href="src/assignment_trace.py" download><span>assignment_trace.py</span><small data-i18n>Assignment and reassignment ↓</small></a><a href="src/temperature_converter.py" download><span>temperature_converter.py</span><small data-i18n>Conversion and formatted output ↓</small></a><a href="src/even_odd.py" download><span>even_odd.py</span><small data-i18n>Remainder and if/else ↓</small></a><a href="src/grade_classifier.py" download><span>grade_classifier.py</span><small data-i18n>if/elif/else chain ↓</small></a><a href="src/range_check.py" download><span>range_check.py</span><small data-i18n>Boolean range condition ↓</small></a><a href="src/shipping_cost.py" download><span>shipping_cost.py</span><small data-i18n>Combined decisions ↓</small></a><a href="src/string_methods.py" download><span>string_methods.py</span><small data-i18n>String methods and cleanup ↓</small></a><a href="src/math_library.py" download><span>math_library.py</span><small data-i18n>Math functions, constants, and geometry ↓</small></a>
+      </div>
+      <p data-i18n>From the repository folder, run a sample with a Python 3 interpreter:</p>
+      <pre><code>python3 week-02/src/shipping_cost.py</code></pre>
+    </section>
+    <section class="lesson" id="strings" aria-labelledby="strings-title">
+      <p class="eyebrow" data-i18n>10 / String methods</p>
+      <h2 id="strings-title" tabindex="-1" data-i18n>String methods</h2>
+      <p class="lead" data-i18n>Call a method on a string with text.method(...). A method returns a value; it does not change the original string.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th data-i18n>Method</th><th data-i18n>Purpose</th><th data-i18n>Return type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>text.strip()</code></td><td data-i18n>Remove whitespace at both ends</td><td><code>str</code></td>
+            </tr>
+            <tr><td><code>text.lower() / text.upper()</code></td><td data-i18n>Change letter case</td><td><code>str</code></td>
+            </tr>
+            <tr><td><code>text.replace(old, new)</code></td><td data-i18n>Replace every matching occurrence</td><td><code>str</code></td>
+            </tr>
+            <tr><td><code>text.split()</code></td><td data-i18n>Separate words using whitespace</td><td><code>list</code></td>
+            </tr>
+            <tr><td><code>separator.join(words)</code></td><td data-i18n>Join strings with a separator</td><td><code>str</code></td>
+            </tr>
+            <tr><td><code>text.startswith(prefix)</code></td><td data-i18n>Check a prefix</td><td><code>bool</code></td>
+            </tr>
+            <tr><td><code>text.find(part)</code></td><td data-i18n>First position, or −1 if absent</td><td><code>int</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="activity">
+        <div class="activity-head">
+          <h3 data-i18n>Practice / Explore a string method</h3><span class="activity-tag" data-i18n>Original → call → result</span>
+        </div>
+        <div class="activity-body">
+          <div class="fields">
+            <label class="field" for="string-text"><span data-i18n>Text</span><input id="string-text" type="text" maxlength="60" value="  Python is fun  ">
+            </label>
+            <label class="field" for="string-method"><span data-i18n>Method</span><select id="string-method"><option value="strip">strip()</option><option value="lower">lower()</option><option value="upper">upper()</option><option value="replace">replace(old, new)</option><option value="split">split()</option><option value="join">separator.join(text.split())</option><option value="startswith">startswith(prefix)</option><option value="find">find(part)</option></select>
+            </label>
+            <label class="field" for="string-search"><span data-i18n>Search text / prefix</span><input id="string-search" type="text" maxlength="30" value="Python">
+            </label>
+            <label class="field" for="string-replacement"><span data-i18n>Replacement / separator</span><input id="string-replacement" type="text" maxlength="30" value="Programming">
+            </label><button type="button" id="string-apply" class="primary" data-i18n>Apply method</button>
+          </div>
+          <pre id="string-code"><code>text = "  Python is fun  "
+result = text.strip()
+print(result)</code></pre>
+          <div class="grid-3">
+            <div class="output"><small data-i18n>Original string (representation)</small><code id="string-original">&quot;  Python is fun  &quot;</code>
+            </div>
+            <div class="output"><small data-i18n>Method call</small><code id="string-call">text.strip()</code>
+            </div>
+            <div class="output"><small data-i18n>Returned value (representation)</small><code id="string-result">—</code>
+            </div>
+          </div>
+          <div class="output"><small data-i18n>Printed output</small><code id="string-output">—</code>
+          </div>
+          <div class="memory">
+            <div><small data-i18n>Original length</small><strong id="string-length">17</strong>
+            </div>
+            <div><small>type(result).__name__</small><strong id="string-type">—</strong>
+            </div>
+          </div>
+          <div class="feedback" id="string-feedback" role="status" data-i18n>Choose a method, predict the returned value, then apply it.
+          </div>
+          <p class="help" data-i18n>The preview accepts up to 60 characters. split() groups consecutive whitespace and ignores empty ends; join() is called on the separator. find() and startswith() are case-sensitive.</p>
+        </div>
+      </div>
+      <div class="callout">
+        <p data-i18n>strip() removes whitespace at the ends, not between words. To keep a returned string, assign it: text = text.strip(). Positions returned by find() start at 0; −1 means no match.</p>
+      </div>
+      <div class="activity">
+        <div class="activity-head">
+          <h3 data-i18n>Practice / Trace a name cleanup</h3><span class="activity-tag" data-i18n>strip → lower → replace</span>
+        </div>
+        <div class="activity-body">
+          <div class="fields">
+            <label class="field" for="clean-input"><span data-i18n>Original name</span><input id="clean-input" type="text" maxlength="60" value="  Ada Lovelace  ">
+            </label>
+          </div>
+          <div class="grid-2">
+            <ol class="code-lines" id="clean-code"><li>raw_name = input(&quot;Name: &quot;)</li><li>clean_name = raw_name.strip()</li><li>clean_name = clean_name.lower()</li><li>clean_name = clean_name.replace(&quot; &quot;, &quot;_&quot;)</li><li>print(clean_name)</li></ol>
+            <div>
+              <div class="memory">
+                <div><small>raw_name</small><strong class="string-value" id="clean-original">—</strong>
+                </div>
+                <div><small>clean_name</small><strong class="string-value" id="clean-value">—</strong>
+                </div>
+              </div>
+              <div class="output"><small data-i18n>Printed output</small><code id="clean-output">—</code>
+              </div>
+              <div class="controls"><button type="button" id="clean-step" class="primary" data-i18n>Step</button><button type="button" id="clean-run" data-i18n>Run</button><button type="button" id="clean-reset" data-i18n>Reset</button>
+              </div>
+            </div>
+          </div>
+          <div class="feedback" id="clean-feedback" role="status" data-i18n>Trace each returned string. raw_name remains unchanged.
+          </div>
+        </div>
+      </div>
+      <div class="sample-links"><a href="src/string_methods.py" download><span>string_methods.py</span><small data-i18n>String methods and cleanup ↓</small></a>
+      </div>
+      <p class="references"><span data-i18n>Python documentation:</span> <a href="https://docs.python.org/3/library/stdtypes.html#string-methods" target="_blank" rel="noopener noreferrer" data-i18n>String methods</a>
+      </p>
+    </section>
+    <section class="lesson" id="math" aria-labelledby="math-title">
+      <p class="eyebrow" data-i18n>11 / Math library</p>
+      <h2 id="math-title" tabindex="-1" data-i18n>Math library</h2>
+      <p class="lead" data-i18n>The math module provides mathematical functions and constants. Import it once, then access its names with math.name. It is included with Python.</p>
+      <div class="grid-2">
+        <div class="card">
+          <h3 data-i18n>Import and call</h3>
+          <pre><code>import math
+
+print(math.sqrt(9))  # 3.0
+print(math.pi)       # 3.141592653589793</code></pre>
+        </div>
+        <div class="card">
+          <h3 data-i18n>Built-in or module function?</h3>
+          <p data-i18n>abs(), round(), and len() are built-ins. math.sqrt() and math.floor() require the import. math.pi is a constant, so it has no call parentheses.</p>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th data-i18n>Name</th><th data-i18n>Meaning</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>math.sqrt(x)</code></td><td data-i18n>Non-negative real square root</td>
+            </tr>
+            <tr><td><code>math.floor(x)</code></td><td data-i18n>Greatest integer at or below x</td>
+            </tr>
+            <tr><td><code>math.ceil(x)</code></td><td data-i18n>Smallest integer at or above x</td>
+            </tr>
+            <tr><td><code>math.trunc(x)</code></td><td data-i18n>Remove the fractional part toward zero</td>
+            </tr>
+            <tr><td><code>math.factorial(n)</code></td><td data-i18n>n! for a non-negative integer; 0! = 1</td>
+            </tr>
+            <tr><td><code>math.pi / math.e</code></td><td data-i18n>Constants π and e</td>
+            </tr>
+            <tr><td><code>math.radians(degrees)</code></td><td data-i18n>Convert degrees to radians</td>
+            </tr>
+            <tr><td><code>math.sin(x) / math.cos(x)</code></td><td data-i18n>Trigonometric functions; x is in radians</td>
+            </tr>
+            <tr><td><code>math.hypot(a, b)</code></td><td data-i18n>Distance √(a² + b²)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="activity">
+        <div class="activity-head">
+          <h3 data-i18n>Practice / Explore a math function</h3><span class="activity-tag" data-i18n>Value → function → result</span>
+        </div>
+        <div class="activity-body">
+          <div class="fields">
+            <label class="field" for="math-value"><span data-i18n>Value</span><input id="math-value" type="number" min="-20" max="100" step="any" value="9">
+            </label>
+            <label class="field" for="math-function"><span data-i18n>Function</span><select id="math-function"><option value="sqrt">math.sqrt()</option><option value="floor">math.floor()</option><option value="ceil">math.ceil()</option><option value="trunc">math.trunc()</option><option value="factorial">math.factorial()</option></select>
+            </label><button type="button" id="math-evaluate" class="primary" data-i18n>Evaluate</button>
+          </div>
+          <div class="grid-2">
+            <pre id="math-code"><code>import math
+value = 9
+result = math.sqrt(value)
+print(f"{result:.6f}")</code></pre>
+            <div>
+              <div class="output"><small data-i18n>Result or exception</small><code id="math-output">—</code>
+              </div>
+              <div class="output"><small data-i18n>Result type</small><code id="math-type">—</code>
+              </div>
+            </div>
+          </div>
+          <div class="memory">
+            <div><small>math.floor(value)</small><strong id="math-floor">—</strong>
+            </div>
+            <div><small>math.ceil(value)</small><strong id="math-ceil">—</strong>
+            </div>
+            <div><small>math.trunc(value)</small><strong id="math-trunc">—</strong>
+            </div>
+          </div>
+          <div class="feedback" id="math-feedback" role="status" data-i18n>Try −3.7 with floor, ceil, and trunc. Compare their directions.
+          </div>
+          <p class="help" data-i18n>Guided values: −20 to 100; factorial is limited to 10. For factorial, 5 is an int but 5.0 is a float. Negative sqrt inputs raise ValueError; factorial requires a non-negative integer.</p>
+        </div>
+      </div>
+      <div class="activity">
+        <div class="activity-head">
+          <h3 data-i18n>Practice / Circle area</h3><span class="activity-tag" data-i18n>π × radius²</span>
+        </div>
+        <div class="activity-body">
+          <div class="fields">
+            <label class="field" for="circle-radius"><span data-i18n>Radius (units)</span><input id="circle-radius" type="number" min="0" max="10" step="0.5" value="2">
+            </label><button type="button" id="circle-calculate" class="primary" data-i18n>Calculate</button>
+          </div>
+          <div class="grid-2">
+            <div>
+              <svg class="math-diagram" viewBox="0 0 320 280" role="img" aria-labelledby="circle-title"><title id="circle-title" data-i18n>Circle with a highlighted radius</title><circle class="math-shape" id="circle-shape" cx="160" cy="125" r="20"/><line class="math-radius" id="circle-radius-line" x1="160" y1="125" x2="180" y2="125"/><circle cx="160" cy="125" r="3" fill="currentColor"/><text x="160" y="265" id="circle-radius-label">radius = 2</text></svg>
+            </div>
+            <div>
+              <pre id="circle-code"><code>import math
+radius = 2.0
+area = math.pi * radius ** 2
+print(f"Circle area: {area:.3f}")</code></pre>
+              <div class="output"><small data-i18n>Printed output</small><code id="circle-output">—</code>
+              </div>
+            </div>
+          </div>
+          <div class="feedback" id="circle-feedback" role="status" data-i18n>Predict what happens to the area when the radius doubles.
+          </div>
+        </div>
+      </div>
+      <div class="activity">
+        <div class="activity-head">
+          <h3 data-i18n>Practice / Degrees, radians, and the unit circle</h3><span class="activity-tag" data-i18n>cos(θ) = x · sin(θ) = y</span>
+        </div>
+        <div class="activity-body">
+          <div class="fields">
+            <label class="field" for="trig-angle"><span data-i18n>Angle in degrees</span><input id="trig-angle" type="range" min="0" max="360" step="15" value="30">
+            </label><output id="trig-angle-label" for="trig-angle">30°</output>
+          </div>
+          <div class="grid-2">
+            <svg class="math-diagram" id="unit-circle" viewBox="0 0 340 260" role="img" aria-labelledby="unit-circle-title"><title id="unit-circle-title" data-i18n>Unit circle: the point has x equal to cosine and y equal to sine</title><line class="math-axis" x1="35" y1="130" x2="305" y2="130"/><line class="math-axis" x1="170" y1="15" x2="170" y2="245"/><circle class="math-shape" cx="170" cy="130" r="90"/><line class="math-projection" id="trig-x" x1="170" y1="130" x2="247.94" y2="130"/><line class="math-projection" id="trig-y" x1="247.94" y1="130" x2="247.94" y2="85"/><line class="math-radius" id="trig-radius" x1="170" y1="130" x2="247.94" y2="85"/><circle id="trig-point" cx="247.94" cy="85" r="5" fill="var(--accent)"/><text x="300" y="150">x</text><text x="186" y="20">y</text><text x="270" y="115">1</text><text x="158" y="33">1</text></svg>
+            <div>
+              <pre id="trig-code"><code>import math
+angle_degrees = 30.0
+angle_radians = math.radians(angle_degrees)
+print(f"Radians: {angle_radians:.6f}")
+print(f"Sine: {math.sin(angle_radians):.6f}")
+print(f"Cosine: {math.cos(angle_radians):.6f}")</code></pre>
+              <div class="output"><small data-i18n>Printed output</small><code id="trig-output">—</code>
+              </div>
+            </div>
+          </div>
+          <div class="feedback" id="trig-feedback" role="status" data-i18n>Move the angle to compare 0°, 90°, 180°, and 270°.
+          </div>
+        </div>
+      </div>
+      <div class="callout">
+        <p data-i18n>math.sin() and math.cos() expect radians, not degrees. Floating-point results are approximate: sin(π) may be near zero rather than exactly zero. math.isclose() compares with a tolerance; when comparing with zero, choose an absolute tolerance.</p>
+        <pre><code>import math
+print(math.isclose(math.sin(math.pi), 0.0, abs_tol=1e-9))</code></pre>
+      </div>
+      <div class="sample-links"><a href="src/math_library.py" download><span>math_library.py</span><small data-i18n>Math functions, constants, and geometry ↓</small></a>
+      </div>
+      <p class="references"><span data-i18n>Python documentation:</span> <a href="https://docs.python.org/3/library/math.html" target="_blank" rel="noopener noreferrer">math</a>
+      </p>
+    </section>
+    <section class="lesson" id="collections" aria-labelledby="collections-title">
+      <p class="eyebrow" data-i18n>12 / Collections preview</p>
+      <h2 id="collections-title" tabindex="-1" data-i18n>Collections preview</h2>
+      <p class="lead" data-i18n>Next week develops indexing, slicing, and collections before loops. Learn how to organize and access several values before processing them with loops.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th data-i18n>Type</th><th data-i18n>Model</th><th data-i18n>Typical use</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>list</code></td><td data-i18n>Ordered, mutable sequence</td><td data-i18n>Several scores</td>
+            </tr>
+            <tr><td><code>tuple</code></td><td data-i18n>Ordered, immutable sequence</td><td data-i18n>A coordinate pair</td>
+            </tr>
+            <tr><td><code>dict</code></td><td data-i18n>Mapping from unique keys to values</td><td data-i18n>A student record</td>
+            </tr>
+            <tr><td><code>set</code></td><td data-i18n>Unique elements; no positional indexing</td><td data-i18n>Distinct student names</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="activity">
+        <div class="activity-head">
+          <h3 data-i18n>Explore / Four collection models</h3><span class="activity-tag" data-i18n>Access and change</span>
+        </div>
+        <div class="activity-body">
+          <div class="tabs" role="group" aria-label="Choose a collection" data-i18n-aria-label><button type="button" data-collection="list" aria-pressed="true"><code>list</code></button><button type="button" data-collection="tuple" aria-pressed="false"><code>tuple</code></button><button type="button" data-collection="dict" aria-pressed="false"><code>dict</code></button><button type="button" data-collection="set" aria-pressed="false"><code>set</code></button>
+          </div>
+          <div class="grid-2">
+            <pre id="collection-code"><code>scores = [60, 85, 72]
+print(scores[0])
+scores.append(90)
+print(scores)</code></pre>
+            <div>
+              <div class="collection-items" id="collection-items">
+              </div>
+              <div class="output"><small data-i18n>Printed output</small><code id="collection-output">—</code>
+              </div>
+            </div>
+          </div>
+          <div class="controls"><button type="button" id="collection-apply" class="primary" data-i18n>Apply example</button><button type="button" id="collection-reset" data-i18n>Reset</button>
+          </div>
+          <div class="feedback" id="collection-feedback" role="status" data-i18n>A list keeps its items in order. Index 0 accesses the first item; append adds an item at the end.
+          </div>
+        </div>
+      </div>
+      <div class="callout">
+        <p data-i18n>Collection types group values. Python also has a numeric type named complex: signal = 3 + 4j stores a real and an imaginary part. It is a different idea from a collection.</p>
+      </div>
+      <div class="card">
+        <h3 data-i18n>Preparation for Week 3</h3>
+        <ol class="compact">
+          <li data-i18n>Strings, indexing, slicing, and len().
+          </li>
+          <li data-i18n>Lists: access, update, append, and mutability.
+          </li>
+          <li data-i18n>Tuples, dictionary keys, sets, and membership with in.
+          </li>
+          <li data-i18n>Then iteration: process collection items with for and repeat work with while.
+          </li>
+        </ol>
+        <p data-i18n>Which structure would you choose for three exam scores? For a student name associated with a score? For names that must not repeat? Explain your choice.</p>
+      </div>
+      <p class="references"><span data-i18n>Python documentation:</span> <a href="https://docs.python.org/3/tutorial/introduction.html" target="_blank" rel="noopener noreferrer" data-i18n>Values and expressions</a> · <a href="https://docs.python.org/3/tutorial/controlflow.html#if-statements" target="_blank" rel="noopener noreferrer" data-i18n>Conditional statements</a> · <a href="https://docs.python.org/3/tutorial/datastructures.html" target="_blank" rel="noopener noreferrer" data-i18n>Data structures</a>
+      </p>
+    </section>
+    <footer class="lesson-footer" aria-label="Navigate between lesson sections" data-i18n-aria-label><button type="button" id="previous-section" data-i18n>← Previous</button><small id="section-position"></small><button type="button" id="next-section" class="primary" data-i18n>Next section →</button>
+    </footer>
+  </main>
+</div><script src="translations.js"></script><script src="app.js"></script></body></html>

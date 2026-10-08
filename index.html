@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Weekly lecture notes, interactive practices, and Python examples for Algorithm and Programming 101.">
+  <title data-tr="Algoritma ve Programlama 101 · Haftalık dersler">Algorithm and Programming 101 · Weekly lectures</title>
+  <style>
+    :root { --paper:#faf6f0; --card:#fffdf9; --ink:#35251d; --muted:#746052; --accent:#aa4217; --soft:#f7e8d9; --line:#e4d4c5; --mono:ui-monospace,SFMono-Regular,Consolas,monospace; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--paper); color:var(--ink); font:16px/1.6 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+    h1,h2,h3,p { margin-top:0; }
+    h1,h2 { font-family:Georgia,"Times New Roman",serif; font-weight:400; line-height:1.1; letter-spacing:-.035em; }
+    h1 { font-size:clamp(2.8rem,5vw,4.7rem); margin-bottom:18px; }
+    h2 { font-size:clamp(2rem,3vw,3rem); margin-bottom:14px; }
+    h3 { font-size:1rem; margin-bottom:12px; }
+    p { margin-bottom:16px; }
+    a { color:var(--accent); text-underline-offset:4px; }
+    button { font:inherit; cursor:pointer; }
+    button,a { -webkit-tap-highlight-color:transparent; }
+    :focus-visible { outline:3px solid #cf651f; outline-offset:4px; }
+    .skip { position:fixed; top:-100px; left:16px; z-index:2; background:var(--card); padding:10px 15px; }
+    .skip:focus { top:16px; }
+    .topbar { display:flex; flex-wrap:wrap; gap:20px; justify-content:space-between; align-items:center; padding:23px max(24px,calc((100vw - 1200px)/2)); border-bottom:1px solid var(--line); }
+    .brand { display:flex; align-items:center; gap:12px; font-size:12px; font-weight:700; letter-spacing:.12em; }
+    .brand-mark { display:grid; place-items:center; width:32px; height:32px; flex-shrink:0; background:var(--ink); color:var(--paper); font:16px var(--mono); border-radius:5px; }
+    .language-switch { display:flex; gap:4px; }
+    .language-switch button { padding:7px 11px; border:1px solid var(--line); border-radius:7px; background:var(--card); color:var(--ink); font-size:12px; font-weight:600; }
+    .language-switch button[aria-pressed=true] { background:var(--accent); color:white; border-color:var(--accent); }
+    .language-switch button:disabled { opacity:.45; cursor:default; }
+    main { max-width:1248px; margin:auto; padding:48px 24px 32px; }
+    .intro { display:flex; align-items:end; justify-content:space-between; gap:30px; margin-bottom:34px; }
+    .eyebrow { color:var(--accent); font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.15em; margin-bottom:15px; }
+    .intro p:last-child { margin:0; color:var(--muted); max-width:640px; font-size:17px; }
+    .course-count { border-left:1px solid var(--line); padding-left:28px; min-width:175px; }
+    .course-count strong { display:block; font:42px/1.2 Georgia,serif; margin-bottom:6px; }
+    .course-count span { color:var(--muted); font-size:13px; }
+    .selector { display:grid; grid-template-columns:330px minmax(0,1fr); gap:28px; align-items:start; }
+    .week-list { position:sticky; top:24px; }
+    .list-label { font-size:11px; letter-spacing:.13em; text-transform:uppercase; color:var(--muted); margin:0 0 14px; }
+    .week-tabs { display:grid; gap:14px; }
+    .week-tab { --week-color:#235a46; --week-soft:#e7eee6; width:100%; padding:22px; text-align:left; background:var(--card); border:1px solid var(--line); border-radius:12px; color:var(--ink); }
+    .week-tab[data-week="week-02"] { --week-color:#6650c8; --week-soft:#eeebfc; }
+    .week-tab:hover { border-color:var(--week-color); }
+    .week-tab[aria-selected=true] { border:2px solid var(--week-color); padding:21px; background:var(--week-soft); }
+    .week-tab:disabled { cursor:default; }
+    .week-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:18px; }
+    .week-number { color:var(--week-color); font:32px/1 Georgia,serif; }
+    .week-label { color:var(--muted); font:11px var(--mono); text-transform:uppercase; letter-spacing:.1em; }
+    .selection-mark { width:24px; height:24px; border-radius:50%; display:grid; place-items:center; border:1px solid var(--line); color:transparent; font-size:13px; }
+    .week-tab[aria-selected=true] .selection-mark { background:var(--week-color); border-color:var(--week-color); color:white; }
+    .week-name { display:block; font-size:18px; line-height:1.35; font-weight:650; margin-bottom:10px; }
+    .week-summary { display:block; color:var(--muted); font-size:13px; line-height:1.6; margin-bottom:18px; }
+    .week-meta { display:flex; flex-wrap:wrap; gap:8px 16px; font-size:11px; color:var(--week-color); }
+    .next-week { margin:22px 0 0; padding:18px 0 0; border-top:1px solid var(--line); font-size:13px; color:var(--muted); }
+    .next-week strong { display:block; color:var(--ink); font-size:12px; margin-bottom:5px; }
+    .detail-panel { --accent:#235a46; --soft:#e7eee6; border:1px solid var(--line); background:var(--card); border-radius:16px; overflow:hidden; min-width:0; }
+    .detail-panel.week-two { --accent:#6650c8; --soft:#eeebfc; }
+    .detail-head { padding:30px 32px 24px; border-top:5px solid var(--accent); }
+    .detail-head > p:last-of-type { color:var(--muted); margin-bottom:20px; }
+    .detail-meta { display:flex; flex-wrap:wrap; gap:8px; }
+    .detail-meta span { font-size:11px; padding:4px 9px; border:1px solid var(--line); border-radius:5px; color:var(--muted); }
+    .concept-track { display:flex; gap:10px; align-items:center; padding:20px 32px; background:var(--soft); border-block:1px solid var(--line); }
+    .concept-step { min-width:0; flex:1; }
+    .concept-step small { display:block; color:var(--muted); font-size:10px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:5px; }
+    .concept-step code { display:block; font:12px/1.5 var(--mono); overflow-wrap:anywhere; }
+    .concept-arrow { color:var(--accent); }
+    .detail-body { padding:26px 32px; }
+    .detail-body h3 { display:flex; gap:15px; align-items:center; color:var(--muted); font-size:11px; letter-spacing:.1em; text-transform:uppercase; }
+    .detail-body h3::after { content:""; height:1px; background:var(--line); flex:1; }
+    .topic-list { display:grid; grid-template-columns:1fr 1fr; gap:4px 20px; list-style:none; padding:0; margin:0 0 25px; counter-reset:topic; }
+    .topic-list li { counter-increment:topic; min-width:0; }
+    .topic-list a { display:flex; gap:10px; padding:9px 0; font-size:13px; text-decoration:none; line-height:1.5; color:var(--ink); }
+    .topic-list a::before { content:counter(topic,decimal-leading-zero); font:10px/1.9 var(--mono); color:var(--accent); flex-shrink:0; }
+    .topic-list a:hover { color:var(--accent); text-decoration:underline; }
+    .practice-list { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:0 0 26px; padding:0; list-style:none; }
+    .practice-list li { padding:13px; background:var(--soft); border-radius:7px; font-size:12px; line-height:1.5; }
+    .sample-list { display:flex; flex-wrap:wrap; gap:8px; }
+    .sample-list a { padding:6px 9px; border:1px solid var(--line); border-radius:5px; text-decoration:none; font:11px var(--mono); }
+    .sample-list a:hover { background:var(--soft); }
+    .detail-footer { padding:20px 32px; border-top:1px solid var(--line); background:#fcf9f4; display:flex; flex-wrap:wrap; gap:14px; align-items:center; justify-content:space-between; }
+    .detail-footer small { font-size:11px; color:var(--muted); }
+    .open-lecture { display:inline-flex; align-items:center; justify-content:space-between; gap:24px; padding:12px 18px; border-radius:8px; background:var(--accent); color:white; text-decoration:none; font-size:13px; font-weight:600; }
+    .open-lecture:hover { filter:brightness(.9); }
+    .page-footer { margin-top:30px; padding-top:20px; border-top:1px solid var(--line); display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px; color:var(--muted); font-size:12px; }
+    .status { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+    body.enhanced .detail-panel[hidden] { display:none; }
+    body:not(.enhanced) .detail-panel { margin-bottom:24px; }
+    @media (max-width:1000px) { .selector { grid-template-columns:280px minmax(0,1fr); gap:20px; } .detail-head,.detail-body { padding-left:24px; padding-right:24px; } .concept-track,.detail-footer { padding-left:24px; padding-right:24px; } .topic-list { grid-template-columns:1fr; } .practice-list { grid-template-columns:1fr; } }
+    @media (max-width:760px) { .topbar { padding:18px; } .brand { font-size:10px; max-width:230px; } main { padding:30px 18px 20px; } .intro { align-items:start; flex-direction:column; gap:20px; } .course-count { border-left:0; padding-left:0; display:flex; align-items:center; gap:12px; } .course-count strong { font-size:26px; margin:0; } .selector { grid-template-columns:1fr; } .week-list { position:static; } .week-tabs { grid-template-columns:1fr 1fr; gap:10px; } .week-tab { padding:16px; } .week-tab[aria-selected=true] { padding:15px; } .week-name { font-size:15px; } .week-summary { display:none; } .week-meta { font-size:10px; gap:5px; } .week-number { font-size:26px; } .next-week { margin-top:16px; } .detail-head,.detail-body { padding:22px 20px; } .concept-track { padding:18px 20px; } .detail-footer { padding:18px 20px; } }
+    @media (max-width:420px) { .topbar { gap:12px; } .brand { max-width:180px; font-size:9px; } .week-tabs { grid-template-columns:1fr; } .week-top { margin-bottom:12px; } .week-meta { gap:14px; } .concept-track { flex-direction:column; align-items:stretch; gap:8px; } .concept-step { display:flex; align-items:center; gap:14px; } .concept-step small { width:64px; margin:0; } .concept-arrow { margin-left:26px; transform:rotate(90deg); width:16px; } .open-lecture { width:100%; } }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main" data-tr="Haftalara geç">Skip to weeks</a>
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark" aria-hidden="true">a↗</span><span data-tr="ALGORİTMA VE PROGRAMLAMA 101">ALGORITHM &amp; PROGRAMMING 101</span></div>
+    <div class="language-switch" role="group" aria-label="Language / Dil">
+      <button type="button" data-language="en" lang="en" aria-label="English" aria-pressed="true" disabled>EN</button>
+      <button type="button" data-language="tr" lang="tr" aria-label="Türkçe" aria-pressed="false" disabled>TR</button>
+    </div>
+  </header>
+  <main id="main" tabindex="-1">
+    <div class="intro">
+      <div>
+        <p class="eyebrow" data-tr="Ders notları ve uygulamalar">Lecture notes and practices</p>
+        <h1 data-tr="Haftalık dersler">Weekly lectures</h1>
+        <p data-tr="Konuları, etkileşimli uygulamaları ve Python örneklerini görmek için bir hafta seçin.">Select a week to view its topics, interactive practices, and Python examples.</p>
+      </div>
+      <div class="course-count"><strong>02</strong><span data-tr="hazır ders">available lectures</span></div>
+    </div>
+    <noscript><p>Both weeks are listed below. Open a lecture using its link.<br>İki hafta da aşağıda listelenmiştir. Bağlantısıyla bir dersi açabilirsiniz.</p></noscript>
+    <div class="selector">
+      <aside class="week-list" aria-labelledby="week-list-title">
+        <h2 class="list-label" id="week-list-title" data-tr="Bir hafta seçin">Select a week</h2>
+        <div class="week-tabs" role="tablist" aria-orientation="vertical" aria-labelledby="week-list-title">
+          <button class="week-tab" id="tab-week-01" type="button" role="tab" data-week="week-01" aria-controls="week-01" aria-selected="true" tabindex="0" disabled>
+            <span class="week-top"><span><span class="week-label" data-tr="Hafta">Week</span> <span class="week-number">01</span></span><span class="selection-mark" aria-hidden="true">✓</span></span>
+            <span class="week-name" data-tr="Algoritmalar ve Python">Algorithms and Python</span>
+            <span class="week-summary" data-tr="Algoritma temelleri, sözde kod, akış şemaları ve Python’a giriş.">Algorithm foundations, pseudocode, flowcharts, and an introduction to Python.</span>
+            <span class="week-meta"><span data-tr="10 bölüm">10 sections</span><span data-tr="5 Python örneği">5 Python samples</span></span>
+          </button>
+          <button class="week-tab" id="tab-week-02" type="button" role="tab" data-week="week-02" aria-controls="week-02" aria-selected="false" tabindex="-1" disabled>
+            <span class="week-top"><span><span class="week-label" data-tr="Hafta">Week</span> <span class="week-number">02</span></span><span class="selection-mark" aria-hidden="true">✓</span></span>
+            <span class="week-name" data-tr="Değişkenler, türler ve kararlar">Variables, types, and decisions</span>
+            <span class="week-summary" data-tr="Değerler, metin metotları, matematik, Boole mantığı ve koşullu ifadeler.">Values, string methods, math, Boolean logic, and conditional statements.</span>
+            <span class="week-meta"><span data-tr="13 bölüm">13 sections</span><span data-tr="8 Python örneği">8 Python samples</span></span>
+          </button>
+        </div>
+        <p class="next-week"><strong data-tr="Gelecek ders">Next lecture</strong><span data-tr="Döngülerden önce metinler ve koleksiyonlar: listeler, demetler, sözlükler ve kümeler.">Strings and collections before loops: lists, tuples, dictionaries, and sets.</span></p>
+      </aside>
+      <div class="week-details">
+        <section class="detail-panel" id="week-01" role="tabpanel" aria-labelledby="tab-week-01" tabindex="0">
+          <div class="detail-head">
+            <p class="eyebrow" data-tr="Hafta 01 / Temeller">Week 01 / Foundations</p>
+            <h2 data-tr="Algoritmalar ve Python">Algorithms and Python</h2>
+            <p data-tr="Bir problemi tanımlama, çözümü adımlarla ifade etme ve bu adımları Python’a dönüştürme.">Define a problem, describe its solution as steps, and express those steps in Python.</p>
+            <div class="detail-meta"><span data-tr="10 bölüm">10 sections</span><span data-tr="5 Python örneği">5 Python samples</span><span data-tr="EN / TR ders notları">EN / TR notes</span></div>
+          </div>
+          <div class="concept-track" aria-label="Input, process, output example" data-tr-label="Girdi, işlem ve çıktı örneği">
+            <div class="concept-step"><small data-tr="Girdi">Input</small><code>a = 8, b = 3</code></div><span class="concept-arrow" aria-hidden="true">→</span>
+            <div class="concept-step"><small data-tr="İşlem">Process</small><code>total = a + b</code></div><span class="concept-arrow" aria-hidden="true">→</span>
+            <div class="concept-step"><small data-tr="Çıktı">Output</small><code>11</code></div>
+          </div>
+          <div class="detail-body">
+            <h3 data-tr="Konular · Bölüme doğrudan geçin">Topics · Jump to a section</h3>
+            <ol class="topic-list">
+              <li><a href="week-01/index.html#algorithms" data-tr="Algoritmalar ve açık yönergeler">Algorithms and precise instructions</a></li>
+              <li><a href="week-01/index.html#problems" data-tr="Problem tanımı ve girdi–işlem–çıktı">Problem definition and input–process–output</a></li>
+              <li><a href="week-01/index.html#pseudocode" data-tr="Sıralama, değişkenler ve sözde kod">Sequence, variables, and pseudocode</a></li>
+              <li><a href="week-01/index.html#flowcharts" data-tr="Akış şemaları ve kararlar">Flowcharts and decisions</a></li>
+              <li><a href="week-01/index.html#testing" data-tr="İzleme, test etme ve hata ayıklama">Tracing, testing, and debugging</a></li>
+              <li><a href="week-01/index.html#python-story" data-tr="Python’ın tarihçesi ve yorumlayıcı">Python history and the interpreter</a></li>
+              <li><a href="week-01/index.html#python-syntax" data-tr="Python sözdizimi ve ifadeler">Python syntax and expressions</a></li>
+              <li><a href="week-01/index.html#python-input" data-tr="Girdi, tür dönüşümü ve çıktı">Input, conversion, and output</a></li>
+              <li><a href="week-01/index.html#practice" data-tr="Çevre hesabı ve tekrar">Perimeter exercise and recap</a></li>
+            </ol>
+            <h3 data-tr="Öne çıkan uygulamalar">Practice highlights</h3>
+            <ul class="practice-list"><li data-tr="Robota komut dizisi oluşturma">Build a robot command sequence</li><li data-tr="Karar akış şemasını izleme">Trace a decision flowchart</li><li data-tr="Dikdörtgenin çevresini hesaplama">Calculate a rectangle’s perimeter</li></ul>
+            <h3 data-tr="Python örnekleri · İndir">Python examples · Download</h3>
+            <div class="sample-list">
+              <a href="week-01/src/hello.py" download>hello.py</a><a href="week-01/src/sum.py" download>sum.py</a><a href="week-01/src/larger.py" download>larger.py</a><a href="week-01/src/rectangle.py" download>rectangle.py</a><a href="week-01/src/perimeter.py" download>perimeter.py</a>
+            </div>
+          </div>
+          <div class="detail-footer"><small data-tr="Ders notları ve etkileşimli alıştırmalar">Lecture notes and interactive exercises</small><a class="open-lecture" href="week-01/index.html"><span data-tr="Hafta 01 dersini aç">Open Week 01 lecture</span><span aria-hidden="true">↗</span></a></div>
+        </section>
+        <section class="detail-panel week-two" id="week-02" role="tabpanel" aria-labelledby="tab-week-02" tabindex="0">
+          <div class="detail-head">
+            <p class="eyebrow" data-tr="Hafta 02 / Değişkenler ve kararlar">Week 02 / Variables and decisions</p>
+            <h2 data-tr="Değişkenler, türler ve kararlar">Variables, types, and decisions</h2>
+            <p data-tr="Değerleri ve kararları izleme, metin metotlarıyla çalışma ve math modülünü kullanma. Son bölümde koleksiyonlara giriş.">Trace values and decisions, work with string methods, and use the math module. Finish with a preview of collections.</p>
+            <div class="detail-meta"><span data-tr="13 bölüm">13 sections</span><span data-tr="8 Python örneği">8 Python samples</span><span data-tr="EN / TR ders notları">EN / TR notes</span></div>
+          </div>
+          <div class="concept-track" aria-label="Score classification example" data-tr-label="Puan sınıflandırma örneği">
+            <div class="concept-step"><small data-tr="Değer">Value</small><code>score = 60</code></div><span class="concept-arrow" aria-hidden="true">→</span>
+            <div class="concept-step"><small data-tr="Koşul">Condition</small><code>score &gt;= 60</code></div><span class="concept-arrow" aria-hidden="true">→</span>
+            <div class="concept-step"><small data-tr="Çıktı">Output</small><code>"Pass"</code></div>
+          </div>
+          <div class="detail-body">
+            <h3 data-tr="Konular · Bölüme doğrudan geçin">Topics · Jump to a section</h3>
+            <ol class="topic-list">
+              <li><a href="week-02/index.html#recap" data-tr="Hafta 1 tekrarı ve çıktı tahmini">Week 1 recap and output prediction</a></li>
+              <li><a href="week-02/index.html#variables" data-tr="Değişkenler ve yeniden atama">Variables and reassignment</a></li>
+              <li><a href="week-02/index.html#types" data-tr="Temel veri türleri">Basic data types</a></li>
+              <li><a href="week-02/index.html#input" data-tr="Girdi dönüşümü ve biçimlendirilmiş çıktı">Input conversion and formatted output</a></li>
+              <li><a href="week-02/index.html#expressions" data-tr="İfadeler ve operatörler">Expressions and operators</a></li>
+              <li><a href="week-02/index.html#logic" data-tr="Karşılaştırmalar ve Boole mantığı">Comparisons and Boolean logic</a></li>
+              <li><a href="week-02/index.html#decisions" data-tr="Koşullu ifadeler">Conditional statements</a></li>
+              <li><a href="week-02/index.html#combining" data-tr="Bağımsız ve iç içe kararlar">Independent and nested decisions</a></li>
+              <li><a href="week-02/index.html#practice" data-tr="Kargo ücreti alıştırması ve tekrar">Shipping-cost exercise and recap</a></li>
+              <li><a href="week-02/index.html#strings" data-tr="Metin metotları">String methods</a></li>
+              <li><a href="week-02/index.html#math" data-tr="Matematik kütüphanesi">Math library</a></li>
+              <li><a href="week-02/index.html#collections" data-tr="Koleksiyonlara giriş">Collections preview</a></li>
+            </ol>
+            <h3 data-tr="Öne çıkan uygulamalar">Practice highlights</h3>
+            <ul class="practice-list"><li data-tr="Atamaları değer tablosunda izleme">Trace assignments in a value table</li><li data-tr="Metin metotlarını ve matematik fonksiyonlarını inceleme">Explore string methods and math functions</li><li data-tr="Üyelik indirimli kargo ücreti">Calculate shipping with a member discount</li></ul>
+            <h3 data-tr="Python örnekleri · İndir">Python examples · Download</h3>
+            <div class="sample-list">
+              <a href="week-02/src/assignment_trace.py" download>assignment_trace.py</a><a href="week-02/src/temperature_converter.py" download>temperature_converter.py</a><a href="week-02/src/even_odd.py" download>even_odd.py</a><a href="week-02/src/grade_classifier.py" download>grade_classifier.py</a><a href="week-02/src/range_check.py" download>range_check.py</a><a href="week-02/src/shipping_cost.py" download>shipping_cost.py</a><a href="week-02/src/string_methods.py" download>string_methods.py</a><a href="week-02/src/math_library.py" download>math_library.py</a>
+            </div>
+          </div>
+          <div class="detail-footer"><small data-tr="Ders notları ve etkileşimli alıştırmalar">Lecture notes and interactive exercises</small><a class="open-lecture" href="week-02/index.html"><span data-tr="Hafta 02 dersini aç">Open Week 02 lecture</span><span aria-hidden="true">↗</span></a></div>
+        </section>
+      </div>
+    </div>
+    <p class="status" id="selection-status" role="status"></p>
+    <footer class="page-footer"><span data-tr="Algoritma ve Programlama 101">Algorithm and Programming 101</span><span data-tr="Python 3 · İngilizce ve Türkçe">Python 3 · English and Turkish</span></footer>
+  </main>
+  <script>
+    "use strict";
+    const weekTabs = [...document.querySelectorAll("[data-week]")];
+    const panels = [...document.querySelectorAll('[role="tabpanel"]')];
+    const languageButtons = [...document.querySelectorAll("[data-language]")];
+    const localizedText = [...document.querySelectorAll("[data-tr]")].map((element) => ({ element, english:element.textContent }));
+    const localizedLabels = [...document.querySelectorAll("[data-tr-label]")].map((element) => ({ element, english:element.getAttribute("aria-label") }));
+    const pairedTabs = window.matchMedia("(min-width:421px) and (max-width:760px)");
+    function updateTabOrientation() {
+      document.querySelector('[role="tablist"]').setAttribute("aria-orientation", pairedTabs.matches ? "horizontal" : "vertical");
+    }
+    pairedTabs.addEventListener("change", updateTabOrientation);
+    updateTabOrientation();
+    let language = "en";
+    let selectedWeek = "week-01";
+
+    function announceSelection() {
+      const tab = weekTabs.find((item) => item.dataset.week === selectedWeek);
+      document.getElementById("selection-status").textContent = (language === "tr" ? "Seçilen ders: " : "Selected lecture: ") + tab.querySelector(".week-name").textContent;
+    }
+    function selectWeek(id, updateUrl = false) {
+      selectedWeek = panels.some((panel) => panel.id === id) ? id : "week-01";
+      weekTabs.forEach((tab) => {
+        const selected = tab.dataset.week === selectedWeek;
+        tab.setAttribute("aria-selected", String(selected));
+        tab.tabIndex = selected ? 0 : -1;
+      });
+      panels.forEach((panel) => panel.hidden = panel.id !== selectedWeek);
+      announceSelection();
+      try { localStorage.setItem("algorithm101-selected-week", selectedWeek); } catch { /* Selection also works without storage. */ }
+      if (updateUrl) {
+        try { history.replaceState(null, "", "#" + selectedWeek); } catch { /* URL persistence is optional. */ }
+      }
+    }
+    function setLanguage(value) {
+      language = value === "tr" ? "tr" : "en";
+      document.documentElement.lang = language;
+      localizedText.forEach(({ element, english }) => element.textContent = language === "tr" ? element.dataset.tr : english);
+      localizedLabels.forEach(({ element, english }) => element.setAttribute("aria-label", language === "tr" ? element.dataset.trLabel : english));
+      languageButtons.forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.language === language)));
+      document.querySelector('meta[name="description"]').content = language === "tr" ? "Algoritma ve Programlama 101 için haftalık ders notları, etkileşimli uygulamalar ve Python örnekleri." : "Weekly lecture notes, interactive practices, and Python examples for Algorithm and Programming 101.";
+      announceSelection();
+      try { localStorage.setItem("algorithm101-language", language); } catch { /* Language controls work without storage. */ }
+    }
+    document.querySelector(".skip").addEventListener("click", (event) => {
+      event.preventDefault();
+      const main = document.getElementById("main");
+      main.focus();
+      main.scrollIntoView({ block:"start" });
+    });
+    weekTabs.forEach((tab, index) => {
+      tab.addEventListener("click", () => selectWeek(tab.dataset.week, true));
+      tab.addEventListener("keydown", (event) => {
+        let next;
+        if (event.key === "ArrowDown" || event.key === "ArrowRight") next = (index + 1) % weekTabs.length;
+        if (event.key === "ArrowUp" || event.key === "ArrowLeft") next = (index + weekTabs.length - 1) % weekTabs.length;
+        if (event.key === "Home") next = 0;
+        if (event.key === "End") next = weekTabs.length - 1;
+        if (next === undefined) return;
+        event.preventDefault();
+        selectWeek(weekTabs[next].dataset.week, true);
+        weekTabs[next].focus();
+      });
+      tab.disabled = false;
+    });
+    languageButtons.forEach((button) => {
+      button.addEventListener("click", () => setLanguage(button.dataset.language));
+      button.disabled = false;
+    });
+    let savedWeek = "week-01", savedLanguage = "en";
+    try {
+      savedWeek = localStorage.getItem("algorithm101-selected-week") || savedWeek;
+      savedLanguage = localStorage.getItem("algorithm101-language") || savedLanguage;
+    } catch { /* Use defaults when storage is unavailable. */ }
+    document.body.classList.add("enhanced");
+    selectWeek(location.hash.slice(1) || savedWeek);
+    setLanguage(savedLanguage);
+    window.addEventListener("hashchange", () => selectWeek(location.hash.slice(1)));
+  </script>
+</body>
+</html>

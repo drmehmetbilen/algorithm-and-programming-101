@@ -15,7 +15,7 @@ const turkishTranslations = {
   "<span class=\"nav-num\">07</span> Read &amp; write Python": "<span class=\"nav-num\">07</span> Python oku ve yaz",
   "<span class=\"nav-num\">08</span> From input to output": "<span class=\"nav-num\">08</span> Girdiden çıktıya",
   "<span class=\"nav-num\">09</span> Practice &amp; recap": "<span class=\"nav-num\">09</span> Uygulama ve tekrar",
-  "Course notebook <span>/ Week 01</span>": "Ders defteri <span>/ Hafta 01</span>",
+  "<a href=\"../index.html\">All weeks</a> <span>/ Week 01</span>": "<a href=\"../index.html\">Tüm haftalar</a> <span>/ Hafta 01</span>",
   "Lecture view": "Ders görünümü",
   "Print notes": "Notları yazdır",
   "Week 01 / Overview": "Hafta 01 / Ders özeti",
