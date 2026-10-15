@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Week 3: Python strings, lists, tuples, dictionaries, sets, and references through code and interactive examples.">
+<title data-i18n>Week 03 · Strings and Collections</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#main" data-i18n>Skip to lesson</a>
+<aside class="sidebar">
+<div class="brand"><span class="brand-mark" aria-hidden="true">a↗</span><span data-i18n>ALGORITHM &amp; PROGRAMMING 101</span></div><p class="week-tag" data-i18n>Week 03 / Strings and collections</p>
+<nav class="nav" aria-label="Lesson sections"><a href="#overview" aria-current="page"><span class="nav-num">00</span><span data-i18n>Strings and collections</span></a>
+<a href="#recap"><span class="nav-num">01</span><span data-i18n>From one value to many</span></a>
+<a href="#strings"><span class="nav-num">02</span><span data-i18n>String indexing and slicing</span></a>
+<a href="#choosing"><span class="nav-num">03</span><span data-i18n>Choose a collection</span></a>
+<a href="#lists"><span class="nav-num">04</span><span data-i18n>Lists and their methods</span></a>
+<a href="#tuples"><span class="nav-num">05</span><span data-i18n>Tuples and unpacking</span></a>
+<a href="#dictionaries"><span class="nav-num">06</span><span data-i18n>Dictionaries and records</span></a>
+<a href="#sets"><span class="nav-num">07</span><span data-i18n>Sets and membership</span></a>
+<a href="#references"><span class="nav-num">08</span><span data-i18n>References and copies</span></a>
+<a href="#practice"><span class="nav-num">09</span><span data-i18n>Build a student profile</span></a>
+<a href="#next"><span class="nav-num">10</span><span data-i18n>Examples and next week</span></a></nav><a class="week-link" href="../week-02/index.html" data-i18n>← Week 2 notes</a>
+</aside>
+<div class="workspace"><header class="topbar"><div class="breadcrumb"><a href="../index.html" data-i18n>All weeks</a> / <span data-i18n>Week 03</span></div>
+<div class="language-switch" role="group" aria-label="Language / Dil"><button type="button" data-language="en" lang="en" aria-label="English" aria-pressed="true" disabled>EN</button><button type="button" data-language="tr" lang="tr" aria-label="Türkçe" aria-pressed="false" disabled>TR</button></div>
+</header><main id="main" tabindex="-1">
+<noscript><p class="callout">All code examples are readable without JavaScript. Enable JavaScript for interactive previews and EN/TR switching.<br>Kod örnekleri JavaScript olmadan okunabilir. Etkileşimli önizlemeler ve EN/TR geçişi için JavaScript’i etkinleştirin.</p>
+</noscript>
+<section class="lesson active" id="overview" aria-labelledby="overview-title">
+<p class="eyebrow" data-i18n>00 / Strings and collections</p>
+
+<h1 id="overview-title" tabindex="-1" data-i18n>Strings and collections</h1>
+<p class="lead" data-i18n>Access, change, and combine values. Each topic starts with code.</p>
+<pre><code>name = &quot;Ada&quot;
+scores = [72, 85, 91]
+position = (3, 5)
+student = {&quot;name&quot;: name, &quot;scores&quot;: scores}
+skills = {&quot;Python&quot;, &quot;C&quot;}
+
+print(name[0])                  # A
+print(scores[-1])               # 91
+print(student[&quot;scores&quot;][1])     # 85
+print(&quot;Python&quot; in skills)       # True</code></pre>
+<div class="section-label"><span data-i18n>Code activities</span></div>
+<div class="grid-3"><a class="card route-card" href="#strings"><h3 data-i18n>Index and slice</h3>
+<code>text[start:stop:step]</code></a>
+<a class="card route-card" href="#lists"><h3 data-i18n>Change a list</h3>
+<code>scores.append(95)</code></a>
+<a class="card route-card" href="#dictionaries"><h3 data-i18n>Edit a record</h3>
+<code>student[&quot;score&quot;] = 90</code></a>
+<a class="card route-card" href="#sets"><h3 data-i18n>Compare groups</h3>
+<code>group_a &amp; group_b</code></a>
+<a class="card route-card" href="#references"><h3 data-i18n>Trace references</h3>
+<code>backup = scores.copy()</code></a>
+<a class="card route-card" href="#practice"><h3 data-i18n>Build a profile</h3>
+<code>student[&quot;skills&quot;].add(&quot;SQL&quot;)</code></a></div><p class="callout" data-i18n>Use the controls to edit the displayed Python examples. The browser previews these fixed operations; download the .py files to edit and execute Python.</p>
+
+</section>
+
+<section class="lesson" id="recap" aria-labelledby="recap-title">
+<p class="eyebrow" data-i18n>01 / From one value to many</p>
+
+<h2 id="recap-title" tabindex="-1" data-i18n>From one value to many</h2>
+<p class="lead" data-i18n>Index 0 accesses the first item. Assigning an integer to first keeps that integer when the list changes.</p>
+<div class="activity"><div class="activity-head"><h3 data-i18n>Trace / A value and a list</h3>
+</div>
+<div class="activity-body"><div class="trace-layout"><ol class="code-lines" id="recap-code"><li>score = 72</li>
+<li>scores = [72, 85, 91]</li>
+<li>first = scores[0]</li>
+<li>scores[0] = 99</li>
+<li>print(first)</li>
+<li>print(scores)</li></ol><div><h3 data-i18n>Variables and objects</h3>
+<div class="object-scene" id="recap-memory" aria-live="polite"></div>
+<div class="output"><small data-i18n>Printed output</small><code id="recap-output" aria-live="polite">—</code></div></div></div>
+<div class="controls"><button type="button" id="recap-step" class="primary" data-i18n>Step</button><button type="button" id="recap-run" data-i18n>Run</button><button type="button" id="recap-reset" data-i18n>Reset</button></div>
+<div class="feedback" id="recap-feedback" role="status" data-i18n>Step through the code and follow the values.</div></div></div>
+<div class="grid-2 examples"><div class="code-example"><h3 data-i18n>Inspect the types</h3>
+<pre><code>print(type(72).__name__)            # int
+print(type([72, 85]).__name__)       # list
+print(type((3, 5)).__name__)         # tuple
+print(type({&quot;name&quot;: &quot;Ada&quot;}).__name__) # dict
+print(type({&quot;Python&quot;, &quot;C&quot;}).__name__) # set</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>Length and membership</h3>
+<pre><code>scores = [72, 85, 72]
+print(len(scores))    # 3
+print(72 in scores)   # True
+print(99 in scores)   # False
+print(scores.count(72))  # 2</code></pre>
+</div></div>
+<div class="sample-links"><a href="src/collection_basics.py" download>collection_basics.py ↓</a></div>
+</section>
+
+<section class="lesson" id="strings" aria-labelledby="strings-title">
+<p class="eyebrow" data-i18n>02 / String indexing and slicing</p>
+
+<h2 id="strings-title" tabindex="-1" data-i18n>String indexing and slicing</h2>
+<p class="lead" data-i18n>A single index selects one character; a slice produces a new string. A slice step cannot be zero.</p>
+<div class="activity"><div class="activity-head"><h3 data-i18n>Lab / Select characters in code</h3>
+</div>
+<div class="activity-body"><div class="fields"><label class="field" for="string-text"><span data-i18n>Text</span><input id="string-text" type="text" value="PYTHON" maxlength="24"></label><label class="field" for="string-mode"><span data-i18n>Expression</span><select id="string-mode"><option value="index">text[index]</option><option value="slice">text[start:stop:step]</option><option value="member">part in text</option></select></label><label class="field" for="string-index"><span data-i18n>Index</span><input id="string-index" type="number" value="1" min="-99" max="99" step="1"></label><label class="field" for="slice-start"><span data-i18n>Start (blank = default)</span><input id="slice-start" type="number" value="1" min="-99" max="99" step="1"></label><label class="field" for="slice-stop"><span data-i18n>Stop (excluded)</span><input id="slice-stop" type="number" value="5" min="-99" max="99" step="1"></label><label class="field" for="slice-step"><span data-i18n>Slice step</span><input id="slice-step" type="number" value="2" min="-20" max="20" step="1"></label><label class="field" for="string-part"><span data-i18n>Part</span><input id="string-part" type="text" value="TH" maxlength="24"></label></div>
+<div class="controls"><button type="button" id="string-run" class="primary" data-i18n>Run expression</button><button type="button" id="slice-reverse" data-i18n>Reverse slice</button><button type="button" id="slice-all" data-i18n>Full slice</button></div>
+<div class="sequence-strip" id="string-cells" aria-label="Character indexes"></div><p class="help" data-i18n>Top: positive indexes. Bottom: negative indexes. Highlighted cells are read in the order shown in the result.</p>
+<div class="grid-2"><pre id="string-code"><code>text = &quot;PYTHON&quot;
+result = text[1]
+print(repr(result))</code></pre>
+<div><div class="output"><small data-i18n>Printed output</small><code id="string-output" aria-live="polite">—</code></div>
+<div class="output"><small data-i18n>Result type</small><code id="string-type" aria-live="polite">—</code></div></div></div>
+<div class="feedback" id="string-feedback" role="status" data-i18n>Change the inputs, predict the result, then run the example.</div></div></div>
+<div class="grid-2 examples"><div class="code-example"><h3 data-i18n>Read a single character</h3>
+<pre><code>text = &quot;PYTHON&quot;
+print(text[0])     # P
+print(text[-1])    # N
+# text[6] raises IndexError
+# text[0] = &quot;J&quot; raises TypeError</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>Stop is excluded</h3>
+<pre><code>text = &quot;PYTHON&quot;
+print(text[1:5])    # YTHO
+print(text[:3])     # PYT
+print(text[3:])     # HON
+print(text[::2])    # PTO
+print(text[::-1])   # NOHTYP
+print(text[99:])    # empty string</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>Create a new string</h3>
+<pre><code>text = &quot;cat&quot;
+updated = &quot;b&quot; + text[1:]
+print(text)       # cat
+print(updated)    # bat</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>Strings and membership</h3>
+<pre><code>filename = &quot;report.csv&quot;
+print(filename[-3:])      # csv
+print(&quot;port&quot; in filename) # True
+print(&quot;CSV&quot; in filename)  # False
+print(filename[:-4])      # report</code></pre>
+</div></div>
+<div class="sample-links"><a href="src/string_indexing.py" download>string_indexing.py ↓</a>
+<a href="src/string_slicing.py" download>string_slicing.py ↓</a></div>
+</section>
+
+<section class="lesson" id="choosing" aria-labelledby="choosing-title">
+<p class="eyebrow" data-i18n>03 / Choose a collection</p>
+
+<h2 id="choosing-title" tabindex="-1" data-i18n>Choose a collection</h2>
+<div class="grid-2 examples"><div class="code-example"><h3 data-i18n>list / Ordered items</h3>
+<pre><code>scores = [80, 95, 80]
+scores.append(100)
+print(scores[0])   # 80
+print(scores)      # [80, 95, 80, 100]</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>tuple / A fixed grouping</h3>
+<pre><code>point = (3, 5)
+x, y = point
+print(x, y)        # 3 5
+# point[0] = 9 raises TypeError</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>dict / Named values</h3>
+<pre><code>student = {&quot;name&quot;: &quot;Ada&quot;, &quot;score&quot;: 90}
+print(student[&quot;name&quot;])  # Ada
+student[&quot;score&quot;] = 95
+print(student[&quot;score&quot;]) # 95</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>set / Unique members</h3>
+<pre><code>skills = {&quot;Python&quot;, &quot;C&quot;, &quot;Python&quot;}
+print(len(skills))        # 2
+print(&quot;Python&quot; in skills) # True
+print(sorted(skills))     # [&#x27;C&#x27;, &#x27;Python&#x27;]</code></pre>
+</div></div>
+<div class="activity"><div class="activity-head"><h3 data-i18n>Practice / Match the requirement</h3>
+</div>
+<div class="activity-body"><div class="fields"><label class="field" for="choose-scenario"><span data-i18n>Requirement</span><select id="choose-scenario"><option value="scores">1</option><option value="point">2</option><option value="record">3</option><option value="unique">4</option></select></label></div><p id="choose-prompt" data-i18n>Store exam scores in their original order, including duplicates.</p>
+<div class="controls"><button type="button" data-choice="list">list</button><button type="button" data-choice="tuple">tuple</button><button type="button" data-choice="dict">dict</button><button type="button" data-choice="set">set</button></div><pre id="choose-code"><code>scores = [80, 95, 80]</code></pre>
+<div class="feedback" id="choose-feedback" role="status" data-i18n>Choose a type and explain your choice.</div></div></div><p class="callout" data-i18n>Lists and tuples use positions. Dictionaries preserve insertion order and use unique, hashable keys. Sets have no positional indexes or guaranteed display order.</p>
+
+</section>
+
+<section class="lesson" id="lists" aria-labelledby="lists-title">
+<p class="eyebrow" data-i18n>04 / Lists and their methods</p>
+
+<h2 id="lists-title" tabindex="-1" data-i18n>Lists and their methods</h2>
+<p class="lead" data-i18n>List methods can change the same list. remove() deletes the first matching value; pop() removes and returns an item by index.</p>
+<div class="activity"><div class="activity-head"><h3 data-i18n>Lab / Execute a list statement</h3>
+</div>
+<div class="activity-body"><div class="fields"><label class="field" for="list-operation"><span data-i18n>Statement</span><select id="list-operation"><option value="append">scores.append(value)</option><option value="extend">scores.extend([value, extra])</option><option value="insert">scores.insert(index, value)</option><option value="set">scores[index] = value</option><option value="remove">scores.remove(value)</option><option value="pop">scores.pop(index)</option><option value="sort">scores.sort()</option><option value="reverse">scores.reverse()</option></select></label><label class="field" for="list-value"><span data-i18n>Value</span><input id="list-value" type="number" value="95" min="-999" max="999" step="1"></label><label class="field" for="list-extra"><span data-i18n>Extra value</span><input id="list-extra" type="number" value="100" min="-999" max="999" step="1"></label><label class="field" for="list-index"><span data-i18n>Index</span><input id="list-index" type="number" value="0" min="-99" max="99" step="1"></label></div>
+<div class="controls"><button type="button" id="list-apply" class="primary" data-i18n>Apply statement</button><button type="button" id="list-reset" data-i18n>Reset list</button></div><pre id="list-code"><code>scores = [72, 85, 72]
+result = scores.append(95)
+print(result)
+print(scores)</code></pre>
+<div class="sequence-strip" id="list-cells"></div>
+<div class="grid-2"><div class="output"><small data-i18n>Returned value</small><code id="list-result" aria-live="polite">—</code></div>
+<div class="output"><small data-i18n>Printed output</small><code id="list-output" aria-live="polite">—</code></div></div>
+<div class="feedback" id="list-feedback" role="status" data-i18n>The list starts with three items. Apply several statements to build a program.</div><p class="help" data-i18n>Preview limit: 12 items and 20 successful statements. Reset starts a new program.</p>
+<details><summary data-i18n>Program so far</summary><pre id="list-history"><code>scores = [72, 85, 72]</code></pre>
+</details></div></div>
+<div class="grid-2 examples"><div class="code-example"><h3 data-i18n>append versus extend</h3>
+<pre><code>a = [1, 2]
+a.append([3, 4])
+print(a)  # [1, 2, [3, 4]]
+
+b = [1, 2]
+b.extend([3, 4])
+print(b)  # [1, 2, 3, 4]</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>remove versus pop</h3>
+<pre><code>scores = [72, 85, 72]
+result = scores.remove(72)
+print(result)  # None
+print(scores)  # [85, 72]
+last = scores.pop()
+print(last)    # 72
+print(scores)  # [85]</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>sort versus sorted</h3>
+<pre><code>scores = [91, 72, 85]
+ordered = sorted(scores)
+print(scores)   # [91, 72, 85]
+print(ordered)  # [72, 85, 91]
+result = scores.sort()
+print(result)   # None
+print(scores)   # [72, 85, 91]</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>Index, slice, and aggregate</h3>
+<pre><code>scores = [72, 85, 91]
+print(scores[-1])       # 91
+print(scores[:2])       # [72, 85]
+scores[1] = 90
+print(sum(scores))      # 253
+print(min(scores))      # 72
+print(max(scores))      # 91</code></pre>
+</div></div>
+<div class="sample-links"><a href="src/list_operations.py" download>list_operations.py ↓</a></div>
+</section>
+
+<section class="lesson" id="tuples" aria-labelledby="tuples-title">
+<p class="eyebrow" data-i18n>05 / Tuples and unpacking</p>
+
+<h2 id="tuples-title" tabindex="-1" data-i18n>Tuples and unpacking</h2>
+<p class="lead" data-i18n>A tuple keeps its item references fixed. Unpacking assigns each item to a variable; the counts must match.</p>
+<div class="activity"><div class="activity-head"><h3 data-i18n>Trace / Unpack coordinates</h3>
+</div>
+<div class="activity-body"><div class="fields"><label class="field" for="tuple-x"><span data-i18n>First coordinate</span><input id="tuple-x" type="number" value="3" min="-99" max="99" step="1"></label><label class="field" for="tuple-y"><span data-i18n>Second coordinate</span><input id="tuple-y" type="number" value="5" min="-99" max="99" step="1"></label></div>
+<div class="trace-layout"><ol class="code-lines" id="tuple-code"><li>point = (3, 5)</li>
+<li>x, y = point</li>
+<li>print(x)</li>
+<li>print(y)</li></ol><div><h3 data-i18n>Variables and objects</h3>
+<div class="object-scene" id="tuple-memory" aria-live="polite"></div>
+<div class="output"><small data-i18n>Printed output</small><code id="tuple-output" aria-live="polite">—</code></div></div></div>
+<div class="controls"><button type="button" id="tuple-step" class="primary" data-i18n>Step</button><button type="button" id="tuple-run" data-i18n>Run</button><button type="button" id="tuple-reset" data-i18n>Reset</button></div>
+<div class="feedback" id="tuple-feedback" role="status" data-i18n>Step through the code and follow the values.</div></div></div>
+<div class="activity"><div class="activity-head"><h3 data-i18n>Lab / A comma changes the type</h3>
+</div>
+<div class="activity-body"><div class="fields"><label class="field" for="tuple-expression"><span data-i18n>Expression</span><select id="tuple-expression"><option value="group">(5)</option><option value="single">(5,)</option><option value="empty">()</option><option value="pair">(3, 5)</option><option value="error">point[0] = 9</option><option value="unpack">x, y, z = (3, 5)</option></select></label></div><pre id="tuple-check-code"><code>value = (5)
+print(type(value).__name__)</code></pre>
+<div class="controls"><button type="button" id="tuple-check" class="primary" data-i18n>Run example</button></div>
+<div class="output"><small data-i18n>Printed output</small><code id="tuple-check-output" aria-live="polite">—</code></div>
+<div class="feedback" id="tuple-check-feedback" role="status" data-i18n>Change the inputs, predict the result, then run the example.</div></div></div>
+<div class="grid-2 examples"><div class="code-example"><h3 data-i18n>Unpack a record</h3>
+<pre><code>record = (1042, &quot;Ada&quot;, 90)
+student_id, name, score = record
+print(name, score)  # Ada 90
+print(record[1:])   # (&#x27;Ada&#x27;, 90)</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>An inner list can change</h3>
+<pre><code>record = (&quot;Ada&quot;, [80, 90])
+record[1].append(100)
+print(record)  # (&#x27;Ada&#x27;, [80, 90, 100])
+# record[1] = [100] raises TypeError
+# The tuple still refers to the same list.</code></pre>
+</div></div>
+<div class="sample-links"><a href="src/tuple_unpacking.py" download>tuple_unpacking.py ↓</a></div>
+</section>
+
+<section class="lesson" id="dictionaries" aria-labelledby="dictionaries-title">
+<p class="eyebrow" data-i18n>06 / Dictionaries and records</p>
+
+<h2 id="dictionaries-title" tabindex="-1" data-i18n>Dictionaries and records</h2>
+<p class="lead" data-i18n>Use a key to access a value. In a dictionary, in checks keys, and get() can supply a default for a missing key.</p>
+<div class="activity"><div class="activity-head"><h3 data-i18n>Lab / Read and update a record</h3>
+</div>
+<div class="activity-body"><div class="fields"><label class="field" for="dict-operation"><span data-i18n>Statement</span><select id="dict-operation"><option value="read">student[key]</option><option value="get">student.get(key, &quot;Not found&quot;)</option><option value="set">student[key] = value</option><option value="del">del student[key]</option><option value="in">key in student</option><option value="keys">list(student.keys())</option><option value="values">list(student.values())</option><option value="items">list(student.items())</option></select></label><label class="field" for="dict-key"><span data-i18n>Key</span><input id="dict-key" type="text" value="score" maxlength="24"></label><label class="field" for="dict-value-type"><span data-i18n>Value type</span><select id="dict-value-type"><option value="int">int</option><option value="str">str</option></select></label><label class="field" for="dict-value"><span data-i18n>Value</span><input id="dict-value" type="text" value="95" maxlength="30"></label></div>
+<div class="controls"><button type="button" id="dict-apply" class="primary" data-i18n>Apply statement</button><button type="button" id="dict-reset" data-i18n>Reset record</button></div><pre id="dict-code"><code>student = {&quot;name&quot;: &quot;Ada&quot;, &quot;score&quot;: 90}
+result = student[&quot;score&quot;]
+print(result)</code></pre>
+<div id="dict-cells" class="dictionary-grid"></div>
+<div class="output"><small data-i18n>Printed output</small><code id="dict-output" aria-live="polite">—</code></div>
+<div class="feedback" id="dict-feedback" role="status" data-i18n>Keys are unique. Assigning an existing key replaces its value.</div><p class="help" data-i18n>Preview limit: 8 keys. Keys are strings; values are strings or whole numbers.</p>
+</div></div>
+<div class="grid-2 examples"><div class="code-example"><h3 data-i18n>A missing key</h3>
+<pre><code>student = {&quot;name&quot;: &quot;Ada&quot;}
+print(student.get(&quot;city&quot;, &quot;Unknown&quot;)) # Unknown
+print(student.get(&quot;city&quot;))            # None
+print(&quot;city&quot; in student)              # False
+# student[&quot;city&quot;] raises KeyError</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>Membership checks keys</h3>
+<pre><code>student = {&quot;name&quot;: &quot;Ada&quot;, &quot;score&quot;: 90}
+print(&quot;name&quot; in student)           # True
+print(&quot;Ada&quot; in student)            # False
+print(&quot;Ada&quot; in student.values())   # True
+print(list(student.keys()))        # [&#x27;name&#x27;, &#x27;score&#x27;]</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>Update, insert, delete</h3>
+<pre><code>student = {&quot;name&quot;: &quot;Ada&quot;, &quot;score&quot;: 90}
+student[&quot;score&quot;] = 95
+student[&quot;city&quot;] = &quot;Ankara&quot;
+del student[&quot;city&quot;]
+print(student)
+# {&#x27;name&#x27;: &#x27;Ada&#x27;, &#x27;score&#x27;: 95}</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>Access nested values</h3>
+<pre><code>student = {&quot;name&quot;: &quot;Ada&quot;, &quot;scores&quot;: [80, 90]}
+student[&quot;scores&quot;].append(100)
+print(student[&quot;scores&quot;][0])  # 80
+print(sum(student[&quot;scores&quot;])) # 270</code></pre>
+</div></div>
+<div class="sample-links"><a href="src/dictionary_records.py" download>dictionary_records.py ↓</a></div>
+</section>
+
+<section class="lesson" id="sets" aria-labelledby="sets-title">
+<p class="eyebrow" data-i18n>07 / Sets and membership</p>
+
+<h2 id="sets-title" tabindex="-1" data-i18n>Sets and membership</h2>
+<p class="lead" data-i18n>A set keeps each distinct member once. The highlighted regions show the result of the selected operation.</p>
+<div class="activity"><div class="activity-head"><h3 data-i18n>Lab / Compare two groups</h3>
+</div>
+<div class="activity-body"><div class="fields"><label class="field" for="set-a"><span data-i18n>Group A (comma-separated numbers)</span><input id="set-a" type="text" value="1, 2, 3, 3" maxlength="80"></label><label class="field" for="set-b"><span data-i18n>Group B (comma-separated numbers)</span><input id="set-b" type="text" value="3, 4, 5" maxlength="80"></label><label class="field" for="set-operation"><span data-i18n>Expression</span><select id="set-operation"><option value="union">a | b</option><option value="intersection">a &amp; b</option><option value="difference">a - b</option><option value="symmetric">a ^ b</option><option value="add">a.add(value)</option><option value="discard">a.discard(value)</option><option value="member">value in a</option></select></label><label class="field" for="set-value"><span data-i18n>Value</span><input id="set-value" type="number" value="3" min="-99" max="99" step="1"></label></div>
+<div class="controls"><button type="button" id="set-run" class="primary" data-i18n>Run example</button></div><pre id="set-code"><code>a = {1, 2, 3, 3}
+b = {3, 4, 5}
+result = a | b
+print(sorted(result))</code></pre>
+<div class="set-regions"><div><h3 data-i18n>Only A</h3>
+<div id="set-only-a" class="set-items"></div></div>
+<div><h3 data-i18n>Both</h3>
+<div id="set-both" class="set-items"></div></div>
+<div><h3 data-i18n>Only B</h3>
+<div id="set-only-b" class="set-items"></div></div></div>
+<div class="output"><small data-i18n>Printed output</small><code id="set-output" aria-live="polite">—</code></div>
+<div class="feedback" id="set-feedback" role="status" data-i18n>Change the inputs, predict the result, then run the example.</div><p class="help" data-i18n>Up to 10 whole numbers per input, from −99 to 99. Each run starts from these inputs. sorted() makes the output predictable; it returns a list.</p>
+</div></div>
+<div class="grid-2 examples"><div class="code-example"><h3 data-i18n>Remove duplicate values</h3>
+<pre><code>names = [&quot;Ada&quot;, &quot;Lin&quot;, &quot;Ada&quot;]
+unique = set(names)
+print(len(unique))     # 2
+print(sorted(unique))  # [&#x27;Ada&#x27;, &#x27;Lin&#x27;]</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>An empty set</h3>
+<pre><code>a = {}       # empty dictionary
+b = set()    # empty set
+print(type(a).__name__)  # dict
+print(type(b).__name__)  # set
+b.add(&quot;Python&quot;)
+b.discard(&quot;C&quot;)  # no error if absent</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>Compare course groups</h3>
+<pre><code>python = {&quot;Ada&quot;, &quot;Lin&quot;}
+robotics = {&quot;Lin&quot;, &quot;Sam&quot;}
+print(sorted(python &amp; robotics)) # [&#x27;Lin&#x27;]
+print(sorted(python - robotics)) # [&#x27;Ada&#x27;]
+print(sorted(python | robotics)) # [&#x27;Ada&#x27;, &#x27;Lin&#x27;, &#x27;Sam&#x27;]</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>Members must be hashable</h3>
+<pre><code>points = {(1, 2), (3, 4)}
+print((1, 2) in points)  # True
+# {[1, 2]} raises TypeError: lists are unhashable
+# points[0] raises TypeError: no positional index</code></pre>
+</div></div>
+<div class="sample-links"><a href="src/set_operations.py" download>set_operations.py ↓</a></div>
+</section>
+
+<section class="lesson" id="references" aria-labelledby="references-title">
+<p class="eyebrow" data-i18n>08 / References and copies</p>
+
+<h2 id="references-title" tabindex="-1" data-i18n>References and copies</h2>
+<p class="lead" data-i18n>Assignment gives another name to the same object. Compare it with copy() one line at a time.</p>
+<div class="activity"><div class="activity-head"><h3 data-i18n>Trace / Two names, which objects?</h3>
+</div>
+<div class="activity-body"><div class="fields"><label class="field" for="refs-mode"><span data-i18n>Program</span><select id="refs-mode"><option value="alias">backup = scores</option><option value="copy">backup = scores.copy()</option><option value="nested">backup = groups.copy()</option></select></label></div>
+<div class="trace-layout"><ol class="code-lines" id="refs-code"><li>scores = [80, 90]</li>
+<li>backup = scores</li>
+<li>scores.append(100)</li>
+<li>print(scores)</li>
+<li>print(backup)</li>
+<li>print(scores is backup)</li></ol><div><h3 data-i18n>Variables and objects</h3>
+<div class="object-scene" id="refs-memory" aria-live="polite"></div>
+<div class="output"><small data-i18n>Printed output</small><code id="refs-output" aria-live="polite">—</code></div></div></div>
+<div class="controls"><button type="button" id="refs-step" class="primary" data-i18n>Step</button><button type="button" id="refs-run" data-i18n>Run</button><button type="button" id="refs-reset" data-i18n>Reset</button></div>
+<div class="feedback" id="refs-feedback" role="status" data-i18n>Step through the code and follow the values.</div></div></div><p class="callout" data-i18n>Object labels identify objects in the diagram; they are not real memory addresses. is checks identity; == compares values. A shallow copy creates a new outer collection and shares references to its items.</p>
+<div class="grid-2 examples"><div class="code-example"><h3 data-i18n>Equal values, distinct lists</h3>
+<pre><code>a = [80, 90]
+b = a.copy()
+print(a == b)  # True
+print(a is b)  # False
+b[0] = 0
+print(a)       # [80, 90]
+print(b)       # [0, 90]</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>A new outer list, shared inner list</h3>
+<pre><code>groups = [[80, 90], [70]]
+backup = groups.copy()
+backup[0].append(100)
+print(groups[0])            # [80, 90, 100]
+print(groups is backup)     # False
+print(groups[0] is backup[0]) # True</code></pre>
+</div></div>
+<div class="sample-links"><a href="src/references_and_copies.py" download>references_and_copies.py ↓</a>
+<a href="src/shallow_copy.py" download>shallow_copy.py ↓</a></div>
+</section>
+
+<section class="lesson" id="practice" aria-labelledby="practice-title">
+<p class="eyebrow" data-i18n>09 / Build a student profile</p>
+
+<h2 id="practice-title" tabindex="-1" data-i18n>Build a student profile</h2>
+<p class="lead" data-i18n>Change the scores in the controls, predict the average, and trace the full program.</p>
+<div class="activity"><div class="activity-head"><h3 data-i18n>Trace / A dictionary containing collections</h3>
+</div>
+<div class="activity-body"><div class="fields"><label class="field" for="profile-first"><span data-i18n>First score</span><input id="profile-first" type="number" value="80" min="0" max="100" step="1"></label><label class="field" for="profile-second"><span data-i18n>Second score</span><input id="profile-second" type="number" value="90" min="0" max="100" step="1"></label><label class="field" for="profile-new"><span data-i18n>New score</span><input id="profile-new" type="number" value="100" min="0" max="100" step="1"></label></div>
+<div class="trace-layout"><ol class="code-lines" id="profile-code"><li>student = {&quot;name&quot;: &quot;Ada&quot;, &quot;scores&quot;: [80, 90], &quot;skills&quot;: {&quot;Python&quot;}}</li>
+<li>student[&quot;scores&quot;].append(100)</li>
+<li>student[&quot;skills&quot;].add(&quot;SQL&quot;)</li>
+<li>average = sum(student[&quot;scores&quot;]) / len(student[&quot;scores&quot;])</li>
+<li>print(student[&quot;name&quot;])</li>
+<li>print(student[&quot;scores&quot;])</li>
+<li>print(sorted(student[&quot;skills&quot;]))</li>
+<li>print(f&quot;Average: {average:.1f}&quot;)</li></ol><div><h3 data-i18n>Variables and objects</h3>
+<div class="object-scene" id="profile-memory" aria-live="polite"></div>
+<div class="output"><small data-i18n>Printed output</small><code id="profile-output" aria-live="polite">—</code></div></div></div>
+<div class="controls"><button type="button" id="profile-step" class="primary" data-i18n>Step</button><button type="button" id="profile-run" data-i18n>Run</button><button type="button" id="profile-reset" data-i18n>Reset</button></div>
+<div class="feedback" id="profile-feedback" role="status" data-i18n>Step through the code and follow the values.</div></div></div><details><summary data-i18n>Your turn / Extend the program</summary><p data-i18n>Add a city, replace the first score, and check whether Python is among the skills. Run your edited file, then compare with this solution.</p>
+<pre><code>student[&quot;city&quot;] = &quot;Ankara&quot;
+student[&quot;scores&quot;][0] = 85
+has_python = &quot;Python&quot; in student[&quot;skills&quot;]
+print(student[&quot;city&quot;])
+print(student[&quot;scores&quot;])
+print(has_python)</code></pre>
+</details><div class="activity"><div class="activity-head"><h3 data-i18n>Practice / Read the code before running</h3>
+</div>
+<div class="activity-body"><fieldset class="quiz-question" data-answer="0" data-feedback="A step of 2 selects indexes 1 and 3."><legend><span data-i18n>Predict the output</span></legend><pre><code>text = &quot;PYTHON&quot;
+print(text[1:5:2])</code></pre>
+<label><input type="radio" name="quiz-slice" value="0"><code>YH</code></label><label><input type="radio" name="quiz-slice" value="1"><code>YT</code></label><label><input type="radio" name="quiz-slice" value="2"><code>YTHO</code></label><p class="quiz-answer" id="quiz-slice-feedback" hidden></p>
+</fieldset><fieldset class="quiz-question" data-answer="2" data-feedback="append changes the list and returns None."><legend><span data-i18n>Predict the output</span></legend><pre><code>scores = [80]
+result = scores.append(90)
+print(result)</code></pre>
+<label><input type="radio" name="quiz-append" value="0"><code>[80, 90]</code></label><label><input type="radio" name="quiz-append" value="1"><code>90</code></label><label><input type="radio" name="quiz-append" value="2"><code>None</code></label><p class="quiz-answer" id="quiz-append-feedback" hidden></p>
+</fieldset><fieldset class="quiz-question" data-answer="1" data-feedback="The comma makes a single-element tuple: (5,)."><legend><span data-i18n>Predict the output</span></legend><pre><code>value = (5)
+print(type(value).__name__)</code></pre>
+<label><input type="radio" name="quiz-tuple" value="0"><code>tuple</code></label><label><input type="radio" name="quiz-tuple" value="1"><code>int</code></label><label><input type="radio" name="quiz-tuple" value="2"><code>list</code></label><p class="quiz-answer" id="quiz-tuple-feedback" hidden></p>
+</fieldset><fieldset class="quiz-question" data-answer="2" data-feedback="get returns the supplied default when the key is absent."><legend><span data-i18n>Predict the output</span></legend><pre><code>student = {&quot;name&quot;: &quot;Ada&quot;}
+print(student.get(&quot;score&quot;, 0))</code></pre>
+<label><input type="radio" name="quiz-dict" value="0"><code>KeyError</code></label><label><input type="radio" name="quiz-dict" value="1"><code>None</code></label><label><input type="radio" name="quiz-dict" value="2"><code>0</code></label><p class="quiz-answer" id="quiz-dict-feedback" hidden></p>
+</fieldset><fieldset class="quiz-question" data-answer="1" data-feedback="Both names refer to the same list."><legend><span data-i18n>Predict the output</span></legend><pre><code>a = [1, 2]
+b = a
+b.append(3)
+print(a)</code></pre>
+<label><input type="radio" name="quiz-alias" value="0"><code>[1, 2]</code></label><label><input type="radio" name="quiz-alias" value="1"><code>[1, 2, 3]</code></label><label><input type="radio" name="quiz-alias" value="2"><code>[3]</code></label><p class="quiz-answer" id="quiz-alias-feedback" hidden></p>
+</fieldset><button type="button" id="quiz-check" class="primary" data-i18n>Check answers</button><div class="feedback" id="quiz-feedback" role="status" data-i18n>Select an answer for each program.</div></div></div>
+<div class="sample-links"><a href="src/student_profile.py" download>student_profile.py ↓</a></div>
+</section>
+
+<section class="lesson" id="next" aria-labelledby="next-title">
+<p class="eyebrow" data-i18n>10 / Examples and next week</p>
+
+<h2 id="next-title" tabindex="-1" data-i18n>Examples and next week</h2>
+<h3 data-i18n>Download and edit the examples</h3>
+<div class="sample-links"><a href="src/collection_basics.py" download>collection_basics.py ↓</a>
+<a href="src/string_indexing.py" download>string_indexing.py ↓</a>
+<a href="src/string_slicing.py" download>string_slicing.py ↓</a>
+<a href="src/list_operations.py" download>list_operations.py ↓</a>
+<a href="src/tuple_unpacking.py" download>tuple_unpacking.py ↓</a>
+<a href="src/dictionary_records.py" download>dictionary_records.py ↓</a>
+<a href="src/set_operations.py" download>set_operations.py ↓</a>
+<a href="src/references_and_copies.py" download>references_and_copies.py ↓</a>
+<a href="src/shallow_copy.py" download>shallow_copy.py ↓</a>
+<a href="src/student_profile.py" download>student_profile.py ↓</a></div><h3 data-i18n>Next: processing every item</h3>
+<div class="grid-2 examples"><div class="code-example"><h3 data-i18n>This week / Access known positions</h3>
+<pre><code>scores = [80, 90, 100]
+print(scores[0])
+print(scores[1])
+print(scores[2])</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>Week 4 preview / Repeat the operation</h3>
+<pre><code>scores = [80, 90, 100]
+for score in scores:
+    print(score)</code></pre>
+</div></div><p class="callout" data-i18n>Next week: for, while, range(), and accumulating results. This week’s exercises use direct access and collection methods.</p>
+<p class="references"><span data-i18n>Python documentation:</span> <a href="https://docs.python.org/3/tutorial/datastructures.html" target="_blank" rel="noopener noreferrer">Data structures</a> · <a href="https://docs.python.org/3/library/stdtypes.html#common-sequence-operations" target="_blank" rel="noopener noreferrer">Sequence operations</a></p>
+
+</section>
+<footer class="lesson-footer"><button type="button" id="previous-section" data-i18n>← Previous</button><small id="section-position"></small><button type="button" id="next-section" class="primary" data-i18n>Next section →</button></footer>
+</main></div>
+<script src="translations.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

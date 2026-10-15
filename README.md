@@ -74,6 +74,40 @@ python3 week-02/src/math_library.py
 
 Samples assume valid numeric input. The grade classifier assumes an integer score from 0 to 100. Shipping accepts numeric weights in `(0, 10]` kg, prints `Invalid weight` outside that range, and treats the exact answer `yes` as membership. Rates are fixed classroom examples in credits. Browser controls preview these programs with the input limits shown in each activity.
 
-Week 3 will begin with strings and collections: indexing, slicing, basic operations, mutability, dictionary keys, and set membership. Iteration follows those topics.
+## Week 3
+
+Open [week-03/index.html](week-03/index.html). Keep its CSS, JavaScript, and `src/` folder together. The EN/TR lecture emphasizes Python code: 11 sections, code comparisons, four step/run/reset traces, and interactive string, list, tuple, dictionary, set, and collection-selection activities. Code, comments, variable names, and output remain English.
+
+Topics:
+
+1. Values and collections recap
+2. String indexing, negative indexes, slicing, and membership
+3. Choosing between lists, tuples, dictionaries, and sets
+4. List statements, method return values, and mutation
+5. Tuples, unpacking, and immutability
+6. Dictionary access, updates, missing keys, and nested values
+7. Set membership and operations
+8. References, identity, copying, and shared nested lists
+9. Student-profile walkthrough and code-prediction questions
+10. Downloadable examples and a brief Week 4 loop preview
+
+The browser simulates the displayed statements with editable parameters; it does not execute arbitrary Python. Examples and activities work offline. Notes and code remain readable without JavaScript. Input limits are shown in each activity. Set output is sorted explicitly for reproducibility.
+
+Run and edit these examples locally:
+
+```sh
+python3 week-03/src/collection_basics.py
+python3 week-03/src/string_indexing.py
+python3 week-03/src/string_slicing.py
+python3 week-03/src/list_operations.py
+python3 week-03/src/tuple_unpacking.py
+python3 week-03/src/dictionary_records.py
+python3 week-03/src/set_operations.py
+python3 week-03/src/references_and_copies.py
+python3 week-03/src/shallow_copy.py
+python3 week-03/src/student_profile.py
+```
+
+Week 4 introduces `for`, `while`, `range()`, and accumulating results.
 
 Future weeks follow the same structure: `week-NN/index.html`, with a `src/` folder when the lesson includes source examples.

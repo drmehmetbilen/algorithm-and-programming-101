@@ -40,6 +40,7 @@
     .list-label { font-size:11px; letter-spacing:.13em; text-transform:uppercase; color:var(--muted); margin:0 0 14px; }
     .week-tabs { display:grid; gap:14px; }
     .week-tab { --week-color:#235a46; --week-soft:#e7eee6; width:100%; padding:22px; text-align:left; background:var(--card); border:1px solid var(--line); border-radius:12px; color:var(--ink); }
+    .week-tab[data-week="week-03"] { --week-color:#16787c; --week-soft:#e4f2f1; }
     .week-tab[data-week="week-02"] { --week-color:#6650c8; --week-soft:#eeebfc; }
     .week-tab:hover { border-color:var(--week-color); }
     .week-tab[aria-selected=true] { border:2px solid var(--week-color); padding:21px; background:var(--week-soft); }
@@ -55,6 +56,7 @@
     .next-week { margin:22px 0 0; padding:18px 0 0; border-top:1px solid var(--line); font-size:13px; color:var(--muted); }
     .next-week strong { display:block; color:var(--ink); font-size:12px; margin-bottom:5px; }
     .detail-panel { --accent:#235a46; --soft:#e7eee6; border:1px solid var(--line); background:var(--card); border-radius:16px; overflow:hidden; min-width:0; }
+    .detail-panel.week-three { --accent:#16787c; --soft:#e4f2f1; }
     .detail-panel.week-two { --accent:#6650c8; --soft:#eeebfc; }
     .detail-head { padding:30px 32px 24px; border-top:5px solid var(--accent); }
     .detail-head > p:last-of-type { color:var(--muted); margin-bottom:20px; }
@@ -107,9 +109,9 @@
         <h1 data-tr="Haftalık dersler">Weekly lectures</h1>
         <p data-tr="Konuları, etkileşimli uygulamaları ve Python örneklerini görmek için bir hafta seçin.">Select a week to view its topics, interactive practices, and Python examples.</p>
       </div>
-      <div class="course-count"><strong>02</strong><span data-tr="hazır ders">available lectures</span></div>
+      <div class="course-count"><strong>03</strong><span data-tr="hazır ders">available lectures</span></div>
     </div>
-    <noscript><p>Both weeks are listed below. Open a lecture using its link.<br>İki hafta da aşağıda listelenmiştir. Bağlantısıyla bir dersi açabilirsiniz.</p></noscript>
+    <noscript><p>All weeks are listed below. Open a lecture using its link.<br>Tüm haftalar aşağıda listelenmiştir. Bağlantısıyla bir dersi açabilirsiniz.</p></noscript>
     <div class="selector">
       <aside class="week-list" aria-labelledby="week-list-title">
         <h2 class="list-label" id="week-list-title" data-tr="Bir hafta seçin">Select a week</h2>
@@ -126,8 +128,14 @@
             <span class="week-summary" data-tr="Değerler, metin metotları, matematik, Boole mantığı ve koşullu ifadeler.">Values, string methods, math, Boolean logic, and conditional statements.</span>
             <span class="week-meta"><span data-tr="13 bölüm">13 sections</span><span data-tr="8 Python örneği">8 Python samples</span></span>
           </button>
+          <button class="week-tab" id="tab-week-03" type="button" role="tab" data-week="week-03" aria-controls="week-03" aria-selected="false" tabindex="-1" disabled>
+            <span class="week-top"><span><span class="week-label" data-tr="Hafta">Week</span> <span class="week-number">03</span></span><span class="selection-mark" aria-hidden="true">✓</span></span>
+            <span class="week-name" data-tr="Metinler ve koleksiyonlar">Strings and collections</span>
+            <span class="week-summary" data-tr="Kod üzerinden indeksleme, dilimleme, listeler, demetler, sözlükler, kümeler ve kopyalar.">Code walkthroughs for indexing, slicing, lists, tuples, dictionaries, sets, and copies.</span>
+            <span class="week-meta"><span data-tr="11 bölüm">11 sections</span><span data-tr="10 Python örneği">10 Python samples</span></span>
+          </button>
         </div>
-        <p class="next-week"><strong data-tr="Gelecek ders">Next lecture</strong><span data-tr="Döngülerden önce metinler ve koleksiyonlar: listeler, demetler, sözlükler ve kümeler.">Strings and collections before loops: lists, tuples, dictionaries, and sets.</span></p>
+        <p class="next-week"><strong data-tr="Gelecek ders">Next lecture</strong><span data-tr="for, while ve range() ile koleksiyonların öğelerini işleme.">Process collection items with for, while, and range().</span></p>
       </aside>
       <div class="week-details">
         <section class="detail-panel" id="week-01" role="tabpanel" aria-labelledby="tab-week-01" tabindex="0">
@@ -200,6 +208,39 @@
             </div>
           </div>
           <div class="detail-footer"><small data-tr="Ders notları ve etkileşimli alıştırmalar">Lecture notes and interactive exercises</small><a class="open-lecture" href="week-02/index.html"><span data-tr="Hafta 02 dersini aç">Open Week 02 lecture</span><span aria-hidden="true">↗</span></a></div>
+        </section>
+        <section class="detail-panel week-three" id="week-03" role="tabpanel" aria-labelledby="tab-week-03" tabindex="0">
+          <div class="detail-head">
+            <p class="eyebrow" data-tr="Hafta 03 / Metinler ve koleksiyonlar">Week 03 / Strings and collections</p>
+            <h2 data-tr="Metinler ve koleksiyonlar">Strings and collections</h2>
+            <p data-tr="Kod örneklerini değiştirin, yönergeleri çalıştırın ve değerlerle nesnelerin değişimini izleyin. Döngülerden önce koleksiyonlarla çalışma.">Change code examples, execute statements, and trace values and objects. Work with collections before loops.</p>
+            <div class="detail-meta"><span data-tr="11 bölüm">11 sections</span><span data-tr="10 Python örneği">10 Python samples</span><span data-tr="EN / TR ders notları">EN / TR notes</span></div>
+          </div>
+          <div class="concept-track" aria-label="List copy example" data-tr-label="Liste kopyalama örneği">
+            <div class="concept-step"><small data-tr="Liste">List</small><code>scores = [80, 90]</code></div><span class="concept-arrow" aria-hidden="true">→</span>
+            <div class="concept-step"><small data-tr="Kopya">Copy</small><code>backup = scores.copy()</code></div><span class="concept-arrow" aria-hidden="true">→</span>
+            <div class="concept-step"><small data-tr="Kimlik">Identity</small><code>scores is backup → False</code></div>
+          </div>
+          <div class="detail-body">
+            <h3 data-tr="Konular · Bölüme doğrudan geçin">Topics · Jump to a section</h3>
+            <ol class="topic-list">
+              <li><a href="week-03/index.html#recap" data-tr="Tek değerden çok değere">From one value to many</a></li>
+              <li><a href="week-03/index.html#strings" data-tr="Metin indeksleme ve dilimleme">String indexing and slicing</a></li>
+              <li><a href="week-03/index.html#choosing" data-tr="Koleksiyon seçme">Choose a collection</a></li>
+              <li><a href="week-03/index.html#lists" data-tr="Listeler ve metotları">Lists and their methods</a></li>
+              <li><a href="week-03/index.html#tuples" data-tr="Demetler ve açma">Tuples and unpacking</a></li>
+              <li><a href="week-03/index.html#dictionaries" data-tr="Sözlükler ve kayıtlar">Dictionaries and records</a></li>
+              <li><a href="week-03/index.html#sets" data-tr="Kümeler ve üyelik">Sets and membership</a></li>
+              <li><a href="week-03/index.html#references" data-tr="Referanslar ve kopyalar">References and copies</a></li>
+              <li><a href="week-03/index.html#practice" data-tr="Öğrenci profili oluşturma">Build a student profile</a></li>
+              <li><a href="week-03/index.html#next" data-tr="Örnekler ve gelecek hafta">Examples and next week</a></li>
+            </ol>
+            <h3 data-tr="Öne çıkan uygulamalar">Practice highlights</h3>
+            <ul class="practice-list"><li data-tr="İndeksleri ve dilimleri görselleştirme">Visualize indexes and slices</li><li data-tr="Liste ve sözlük yönergeleriyle çalışma">Execute list and dictionary statements</li><li data-tr="Paylaşılan nesneleri ve kopyaları izleme">Trace shared objects and copies</li></ul>
+            <h3 data-tr="Python örnekleri · İndir">Python examples · Download</h3>
+            <div class="sample-list"><a href="week-03/src/collection_basics.py" download>collection_basics.py</a><a href="week-03/src/dictionary_records.py" download>dictionary_records.py</a><a href="week-03/src/list_operations.py" download>list_operations.py</a><a href="week-03/src/references_and_copies.py" download>references_and_copies.py</a><a href="week-03/src/set_operations.py" download>set_operations.py</a><a href="week-03/src/shallow_copy.py" download>shallow_copy.py</a><a href="week-03/src/string_indexing.py" download>string_indexing.py</a><a href="week-03/src/string_slicing.py" download>string_slicing.py</a><a href="week-03/src/student_profile.py" download>student_profile.py</a><a href="week-03/src/tuple_unpacking.py" download>tuple_unpacking.py</a></div>
+          </div>
+          <div class="detail-footer"><small data-tr="Kod örnekleri ve etkileşimli alıştırmalar">Code examples and interactive exercises</small><a class="open-lecture" href="week-03/index.html"><span data-tr="Hafta 03 dersini aç">Open Week 03 lecture</span><span aria-hidden="true">↗</span></a></div>
         </section>
       </div>
     </div>
