@@ -40,6 +40,7 @@
     .list-label { font-size:11px; letter-spacing:.13em; text-transform:uppercase; color:var(--muted); margin:0 0 14px; }
     .week-tabs { display:grid; gap:14px; }
     .week-tab { --week-color:#235a46; --week-soft:#e7eee6; width:100%; padding:22px; text-align:left; background:var(--card); border:1px solid var(--line); border-radius:12px; color:var(--ink); }
+    .week-tab[data-week="week-04"] { --week-color:#6650c8; --week-soft:#eeebfc; }
     .week-tab[data-week="week-03"] { --week-color:#16787c; --week-soft:#e4f2f1; }
     .week-tab[data-week="week-02"] { --week-color:#6650c8; --week-soft:#eeebfc; }
     .week-tab:hover { border-color:var(--week-color); }
@@ -56,6 +57,7 @@
     .next-week { margin:22px 0 0; padding:18px 0 0; border-top:1px solid var(--line); font-size:13px; color:var(--muted); }
     .next-week strong { display:block; color:var(--ink); font-size:12px; margin-bottom:5px; }
     .detail-panel { --accent:#235a46; --soft:#e7eee6; border:1px solid var(--line); background:var(--card); border-radius:16px; overflow:hidden; min-width:0; }
+    .detail-panel.week-four { --accent:#6650c8; --soft:#eeebfc; }
     .detail-panel.week-three { --accent:#16787c; --soft:#e4f2f1; }
     .detail-panel.week-two { --accent:#6650c8; --soft:#eeebfc; }
     .detail-head { padding:30px 32px 24px; border-top:5px solid var(--accent); }
@@ -109,7 +111,7 @@
         <h1 data-tr="Haftalık dersler">Weekly lectures</h1>
         <p data-tr="Konuları, etkileşimli uygulamaları ve Python örneklerini görmek için bir hafta seçin.">Select a week to view its topics, interactive practices, and Python examples.</p>
       </div>
-      <div class="course-count"><strong>03</strong><span data-tr="hazır ders">available lectures</span></div>
+      <div class="course-count"><strong>04</strong><span data-tr="hazır ders">available lectures</span></div>
     </div>
     <noscript><p>All weeks are listed below. Open a lecture using its link.<br>Tüm haftalar aşağıda listelenmiştir. Bağlantısıyla bir dersi açabilirsiniz.</p></noscript>
     <div class="selector">
@@ -134,8 +136,14 @@
             <span class="week-summary" data-tr="Kod üzerinden indeksleme, dilimleme, listeler, demetler, sözlükler, kümeler ve kopyalar.">Code walkthroughs for indexing, slicing, lists, tuples, dictionaries, sets, and copies.</span>
             <span class="week-meta"><span data-tr="11 bölüm">11 sections</span><span data-tr="10 Python örneği">10 Python samples</span></span>
           </button>
+          <button class="week-tab" id="tab-week-04" type="button" role="tab" data-week="week-04" aria-controls="week-04" aria-selected="false" tabindex="-1" disabled>
+            <span class="week-top"><span><span class="week-label" data-tr="Hafta">Week</span> <span class="week-number">04</span></span><span class="selection-mark" aria-hidden="true">✓</span></span>
+            <span class="week-name" data-tr="Döngüler">Loops</span>
+            <span class="week-summary" data-tr="for, while, range(), sayaçlar, filtreleme ve iç içe döngüler için kod örnekleri.">Code examples for for, while, range(), counters, filtering, and nested loops.</span>
+            <span class="week-meta"><span data-tr="11 bölüm">11 sections</span><span data-tr="12 Python örneği">12 Python samples</span></span>
+          </button>
         </div>
-        <p class="next-week"><strong data-tr="Gelecek ders">Next lecture</strong><span data-tr="for, while ve range() ile koleksiyonların öğelerini işleme.">Process collection items with for, while, and range().</span></p>
+
       </aside>
       <div class="week-details">
         <section class="detail-panel" id="week-01" role="tabpanel" aria-labelledby="tab-week-01" tabindex="0">
@@ -241,6 +249,39 @@
             <div class="sample-list"><a href="week-03/src/collection_basics.py" download>collection_basics.py</a><a href="week-03/src/dictionary_records.py" download>dictionary_records.py</a><a href="week-03/src/list_operations.py" download>list_operations.py</a><a href="week-03/src/references_and_copies.py" download>references_and_copies.py</a><a href="week-03/src/set_operations.py" download>set_operations.py</a><a href="week-03/src/shallow_copy.py" download>shallow_copy.py</a><a href="week-03/src/string_indexing.py" download>string_indexing.py</a><a href="week-03/src/string_slicing.py" download>string_slicing.py</a><a href="week-03/src/student_profile.py" download>student_profile.py</a><a href="week-03/src/tuple_unpacking.py" download>tuple_unpacking.py</a></div>
           </div>
           <div class="detail-footer"><small data-tr="Kod örnekleri ve etkileşimli alıştırmalar">Code examples and interactive exercises</small><a class="open-lecture" href="week-03/index.html"><span data-tr="Hafta 03 dersini aç">Open Week 03 lecture</span><span aria-hidden="true">↗</span></a></div>
+        </section>
+        <section class="detail-panel week-four" id="week-04" role="tabpanel" aria-labelledby="tab-week-04" tabindex="0">
+          <div class="detail-head">
+            <p class="eyebrow" data-tr="Hafta 04 / Döngüler">Week 04 / Loops</p>
+            <h2 data-tr="Döngüler">Loops</h2>
+            <p data-tr="Kod örnekleri, değişken tabloları ve adım adım döngü izleme.">Code examples, variable tables, and step-by-step loop execution.</p>
+            <div class="detail-meta"><span data-tr="11 bölüm">11 sections</span><span data-tr="12 Python örneği">12 Python samples</span><span data-tr="EN / TR ders notları">EN / TR notes</span></div>
+          </div>
+          <div class="concept-track" aria-label="Accumulator example" data-tr-label="Toplam biriktirme örneği">
+            <div class="concept-step"><small data-tr="Girdi">Input</small><code>scores = [10, 20, 30]</code></div><span class="concept-arrow" aria-hidden="true">→</span>
+            <div class="concept-step"><small data-tr="Döngü">Loop</small><code>total += score</code></div><span class="concept-arrow" aria-hidden="true">→</span>
+            <div class="concept-step"><small data-tr="Çıktı">Output</small><code>60</code></div>
+          </div>
+          <div class="detail-body">
+            <h3 data-tr="Konular · Bölüme doğrudan geçin">Topics · Jump to a section</h3>
+            <ol class="topic-list">
+              <li><a href="week-04/index.html#for" data-tr="Koleksiyonlarda for">for over collections</a></li>
+              <li><a href="week-04/index.html#range" data-tr="range()">range()</a></li>
+              <li><a href="week-04/index.html#accumulators" data-tr="Sayaçlar ve toplamlar">Counters and totals</a></li>
+              <li><a href="week-04/index.html#conditions" data-tr="Döngü içinde koşullar">Conditions inside loops</a></li>
+              <li><a href="week-04/index.html#while" data-tr="while döngüleri">while loops</a></li>
+              <li><a href="week-04/index.html#control" data-tr="break ve continue">break and continue</a></li>
+              <li><a href="week-04/index.html#debugging" data-tr="Döngülerde hata ayıklama">Debugging loops</a></li>
+              <li><a href="week-04/index.html#nested" data-tr="İç içe döngüler">Nested loops</a></li>
+              <li><a href="week-04/index.html#practice" data-tr="Çözümlü programlar">Worked programs</a></li>
+              <li><a href="week-04/index.html#examples" data-tr="Python dosyaları">Python files</a></li>
+            </ol>
+            <h3 data-tr="Öne çıkan uygulamalar">Practice highlights</h3>
+            <ul class="practice-list"><li data-tr="Değişkenleri ve döngü adımlarını izleme">Trace variables and loop steps</li><li data-tr="Hatalı kodu düzeltilmiş kodla karşılaştırma">Compare bugs with corrected code</li><li data-tr="Puan raporu, sepet ve sayı tahmini">Score report, basket, and number guessing</li></ul>
+            <h3 data-tr="Python örnekleri · İndir">Python examples · Download</h3>
+            <div class="sample-list"><a href="week-04/src/for_collections.py" download>for_collections.py</a><a href="week-04/src/range_examples.py" download>range_examples.py</a><a href="week-04/src/accumulators.py" download>accumulators.py</a><a href="week-04/src/filter_scores.py" download>filter_scores.py</a><a href="week-04/src/while_countdown.py" download>while_countdown.py</a><a href="week-04/src/sentinel_input.py" download>sentinel_input.py</a><a href="week-04/src/loop_control.py" download>loop_control.py</a><a href="week-04/src/debug_loops.py" download>debug_loops.py</a><a href="week-04/src/nested_loops.py" download>nested_loops.py</a><a href="week-04/src/score_report.py" download>score_report.py</a><a href="week-04/src/shopping_basket.py" download>shopping_basket.py</a><a href="week-04/src/number_guessing.py" download>number_guessing.py</a></div>
+          </div>
+          <div class="detail-footer"><small data-tr="Kod örnekleri ve etkileşimli alıştırmalar">Code examples and interactive exercises</small><a class="open-lecture" href="week-04/index.html"><span data-tr="Hafta 04 dersini aç">Open Week 04 lecture</span><span aria-hidden="true">↗</span></a></div>
         </section>
       </div>
     </div>

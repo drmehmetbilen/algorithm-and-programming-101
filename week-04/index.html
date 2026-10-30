@@ -1,0 +1,667 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Week 4: Python loops, code examples, and interactive execution traces.">
+<title data-i18n>Week 04 · Loops</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#main" data-i18n>Skip to lesson</a>
+<aside class="sidebar">
+<div class="brand"><span class="brand-mark" aria-hidden="true">a↗</span><span data-i18n>ALGORITHM &amp; PROGRAMMING 101</span></div>
+<p data-i18n class="week-tag">Week 04 / Loops</p>
+<nav class="nav" aria-label="Lesson sections"><a href="#overview" aria-current="page"><span class="nav-num">00</span><span data-i18n>Loops</span></a>
+<a href="#for"><span class="nav-num">01</span><span data-i18n>for over collections</span></a>
+<a href="#range"><span class="nav-num">02</span><span data-i18n>range()</span></a>
+<a href="#accumulators"><span class="nav-num">03</span><span data-i18n>Counters and totals</span></a>
+<a href="#conditions"><span class="nav-num">04</span><span data-i18n>Conditions inside loops</span></a>
+<a href="#while"><span class="nav-num">05</span><span data-i18n>while loops</span></a>
+<a href="#control"><span class="nav-num">06</span><span data-i18n>break and continue</span></a>
+<a href="#debugging"><span class="nav-num">07</span><span data-i18n>Debugging loops</span></a>
+<a href="#nested"><span class="nav-num">08</span><span data-i18n>Nested loops</span></a>
+<a href="#practice"><span class="nav-num">09</span><span data-i18n>Worked programs</span></a>
+<a href="#examples"><span class="nav-num">10</span><span data-i18n>Python files</span></a></nav>
+<a data-i18n class="week-link" href="../week-03/index.html">← Week 3 notes</a>
+</aside>
+<div class="workspace"><header class="topbar">
+<div class="breadcrumb"><a data-i18n href="../index.html#week-04">All weeks</a> / <span data-i18n>Week 04</span></div>
+<div class="language-switch" role="group" aria-label="Language / Dil"><button type="button" data-language="en" lang="en" aria-label="English" aria-pressed="true" disabled>EN</button><button type="button" data-language="tr" lang="tr" aria-label="Türkçe" aria-pressed="false" disabled>TR</button></div>
+</header><main id="main" tabindex="-1">
+<noscript><p>Code is readable without JavaScript. Enable it for interactive traces and EN/TR switching.<br>Kodlar JavaScript olmadan okunabilir. Etkileşimli izleme ve EN/TR geçişi için JavaScript’i etkinleştirin.</p></noscript>
+<section class="lesson active" id="overview" aria-labelledby="overview-title">
+<p data-i18n class="eyebrow">00 / Loops</p>
+<h1 data-i18n id="overview-title" tabindex="-1">Loops</h1>
+<div class="grid-2 examples">
+<div class="code-example"><h3 data-i18n>Repeated statements</h3>
+<pre><code>scores = [72, 85, 91]
+print(scores[0])
+print(scores[1])
+print(scores[2])
+# Three items -&gt; three print statements.</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>The same operation in a loop</h3>
+<pre><code>scores = [72, 85, 91]
+for score in scores:
+    print(score)
+print(&quot;Done&quot;)</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>The loop body</h3>
+<pre><code>for score in [72, 85]:
+    print(&quot;Score:&quot;, score)  # Runs twice.
+    print(score &gt;= 60)      # Also runs twice.
+print(&quot;Finished&quot;)          # Runs once.</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>Zero iterations</h3>
+<pre><code>for score in []:
+    print(score)  # Never runs.
+print(&quot;Finished&quot;)  # Still runs.</code></pre>
+</div>
+</div><div class="grid-2 examples"><div class="code-example"><h3 data-i18n>Pseudocode</h3>
+<pre><code>SET remaining TO 3
+WHILE remaining &gt; 0
+    OUTPUT remaining
+    SET remaining TO remaining - 1
+END WHILE
+OUTPUT &quot;Go&quot;</code></pre>
+</div><div class="code-example"><h3 data-i18n>Loop flowchart</h3>
+<svg class="flowchart" viewBox="0 0 430 360" role="img" aria-labelledby="flow-title">
+<title id="flow-title">remaining = 3; while remaining &gt; 0: print, subtract, repeat; otherwise exit</title>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8" fill="#8b97bd"/></marker></defs>
+<g class="edge" marker-end="url(#arrow)"><path d="M175 53 V81"/><path d="M175 159 V191"/><path d="M175 236 V263"/><path d="M175 308 V333 H34 V121 H85"/><path d="M265 121 H350 V263"/></g>
+<rect class="node" x="100" y="10" width="150" height="43" rx="8"/><text x="175" y="32">remaining = 3</text>
+<path class="node" d="M175 81 L265 121 L175 159 L85 121 Z"/><text x="175" y="121">remaining &gt; 0</text>
+<text class="branch-label" x="195" y="177">True</text><text class="branch-label" x="310" y="106">False</text>
+<rect class="node" x="85" y="191" width="180" height="45" rx="6"/><text x="175" y="214">print(remaining)</text>
+<rect class="node" x="85" y="263" width="180" height="45" rx="6"/><text x="175" y="285">remaining -= 1</text>
+<rect class="node" x="285" y="263" width="130" height="45" rx="20"/><text x="350" y="285">print("Go")</text></svg></div></div><p data-i18n class="help">Controls simulate the displayed Python. Download the files to edit and run Python locally.</p>
+</section>
+
+<section class="lesson" id="for" aria-labelledby="for-title">
+<p data-i18n class="eyebrow">01 / for over collections</p>
+<h2 data-i18n id="for-title" tabindex="-1">for over collections</h2>
+<div class="grid-2 examples">
+<div class="code-example"><h3 data-i18n>List items</h3>
+<pre><code>scores = [72, 85, 91]
+for score in scores:
+    print(score)
+print(&quot;Done&quot;)</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>Characters</h3>
+<pre><code>for character in &quot;CODE&quot;:
+    print(character)
+# C, O, D, E on separate lines.</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>Tuple unpacking</h3>
+<pre><code>points = [(2, 3), (4, 1)]
+for x, y in points:
+    print(x + y)  # 5, then 5</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>Dictionary keys and values</h3>
+<pre><code>student = {&quot;name&quot;: &quot;Ada&quot;, &quot;score&quot;: 90}
+for key in student:
+    print(key)  # name, then score
+for value in student.values():
+    print(value)  # Ada, then 90</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>Dictionary items</h3>
+<pre><code>scores = {&quot;Ada&quot;: 90, &quot;Lin&quot;: 75}
+for name, score in scores.items():
+    print(name, score)
+# Ada 90
+# Lin 75</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>Set order</h3>
+<pre><code>skills = {&quot;Python&quot;, &quot;C&quot;, &quot;SQL&quot;}
+# A set has no guaranteed iteration order.
+for skill in sorted(skills):
+    print(skill)  # C, Python, SQL</code></pre>
+</div>
+</div><div class="activity" id="for-lab">
+<div class="activity-head"><h3 data-i18n>Trace the collection</h3><span class="activity-tag">Python</span></div>
+<div class="activity-body"><div class="fields"><label class="field" for="for-kind"><span data-i18n>Collection</span><select id="for-kind"><option data-i18n value="list">list</option><option data-i18n value="string">str</option><option data-i18n value="tuple">tuple</option><option data-i18n value="keys">dict.keys()</option><option data-i18n value="values">dict.values()</option><option data-i18n value="items">dict.items()</option><option data-i18n value="set">sorted(set)</option></select></label></div>
+<div class="trace-layout"><ol class="code-lines" id="for-code"><li>scores = [72, 85, 91]</li><li>for score in scores:</li><li>    print(score)</li><li>print(&quot;Done&quot;)</li></ol>
+<div class="trace-state"><h3><span data-i18n>Variables</span></h3><div class="variable-grid" id="for-variables"></div>
+<div class="iteration-cells" id="for-cells"></div>
+<div class="output"><small><span data-i18n>Printed output</span></small><code id="for-output" aria-live="polite">—</code></div></div></div>
+<div class="controls"><button data-i18n type="button" id="for-back">Back</button><button data-i18n type="button" id="for-step" class="primary">Step</button><button data-i18n type="button" id="for-run">Run</button><button data-i18n type="button" id="for-finish">Show result</button><button data-i18n type="button" id="for-reset">Reset</button></div>
+<p class="trace-status" id="for-status" role="status"></p></div></div><div class="sample-links"><a href="src/for_collections.py" download>for_collections.py ↓</a></div>
+</section>
+
+<section class="lesson" id="range" aria-labelledby="range-title">
+<p data-i18n class="eyebrow">02 / range()</p>
+<h2 data-i18n id="range-title" tabindex="-1">range()</h2>
+<div class="grid-2 examples">
+<div class="code-example"><h3 data-i18n>Start at zero</h3>
+<pre><code>for number in range(4):
+    print(number)  # 0, 1, 2, 3
+# 4 is excluded.</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>Choose the start</h3>
+<pre><code>for number in range(2, 5):
+    print(number)  # 2, 3, 4</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>Positive steps</h3>
+<pre><code>for number in range(2, 10, 2):
+    print(number)  # 2, 4, 6, 8</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>Count backward</h3>
+<pre><code>for number in range(5, 0, -1):
+    print(number)  # 5, 4, 3, 2, 1</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>Empty ranges</h3>
+<pre><code>print(list(range(3, 3)))      # []
+print(list(range(5, 0, 1)))   # []
+print(list(range(0, 5, -1)))  # []
+# range(0, 5, 0) raises ValueError.</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>Items with positions</h3>
+<pre><code>names = [&quot;Ada&quot;, &quot;Lin&quot;, &quot;Sam&quot;]
+for index in range(len(names)):
+    print(index, names[index])
+# 0 Ada / 1 Lin / 2 Sam</code></pre>
+</div>
+</div><div class="activity" id="range-lab">
+<div class="activity-head"><h3 data-i18n>Trace range()</h3><span class="activity-tag">Python</span></div>
+<div class="activity-body"><div class="fields"><label class="field" for="range-form"><span data-i18n>Form</span><select id="range-form"><option data-i18n value="3">range(start, stop, step)</option><option data-i18n value="2">range(start, stop)</option><option data-i18n value="1">range(stop)</option></select></label><label class="field" for="range-start"><span data-i18n>Start</span><input id="range-start" type="number" value="1" min="-12" max="12" step="1"></label><label class="field" for="range-stop"><span data-i18n>Stop</span><input id="range-stop" type="number" value="6" min="-12" max="12" step="1"></label><label class="field" for="range-increment"><span data-i18n>Step size</span><input id="range-increment" type="number" value="1" min="-6" max="6" step="1"></label></div><p data-i18n class="help">Bounds: −12 to 12. Step: −6 to 6; zero raises ValueError.</p>
+<div class="trace-layout"><ol class="code-lines" id="range-code"><li>for number in range(1, 6, 1):</li><li>    print(number)</li><li>print(&quot;Done&quot;)</li></ol>
+<div class="trace-state"><h3><span data-i18n>Variables</span></h3><div class="variable-grid" id="range-variables"></div>
+<div class="iteration-cells" id="range-cells"></div>
+<div class="output"><small><span data-i18n>Printed output</span></small><code id="range-output" aria-live="polite">—</code></div></div></div>
+<div class="controls"><button data-i18n type="button" id="range-back">Back</button><button data-i18n type="button" id="range-step" class="primary">Step</button><button data-i18n type="button" id="range-run">Run</button><button data-i18n type="button" id="range-finish">Show result</button><button data-i18n type="button" id="range-reset">Reset</button></div>
+<p class="trace-status" id="range-status" role="status"></p></div></div><div class="sample-links"><a href="src/range_examples.py" download>range_examples.py ↓</a></div>
+</section>
+
+<section class="lesson" id="accumulators" aria-labelledby="accumulators-title">
+<p data-i18n class="eyebrow">03 / Counters and totals</p>
+<h2 data-i18n id="accumulators-title" tabindex="-1">Counters and totals</h2>
+<div class="grid-2 examples">
+<div class="code-example"><h3 data-i18n>Total</h3>
+<pre><code>total = 0                 # Initialize once.
+for price in [30, 10, 25]:
+    total += price        # 30 -&gt; 40 -&gt; 65
+print(total)              # 65</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>Count matching items</h3>
+<pre><code>count = 0
+for score in [45, 60, 85, 32]:
+    if score &gt;= 60:
+        count += 1
+print(count)  # 2</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>Average and empty input</h3>
+<pre><code>scores = [72, 85, 91]
+total = 0
+count = 0
+for score in scores:
+    total += score
+    count += 1
+print(total, count)
+if count &gt; 0:
+    print(f&quot;Average: {total / count:.1f}&quot;)
+else:
+    print(&quot;No scores&quot;)</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>Product</h3>
+<pre><code>product = 1  # Multiplication starts at 1.
+for factor in [2, 3, 4]:
+    product *= factor
+print(product)  # 24</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>Largest value</h3>
+<pre><code>numbers = [-8, -3, -12]
+largest = numbers[0]  # This list is not empty.
+for number in numbers:
+    if number &gt; largest:
+        largest = number
+print(largest)  # -3</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>Keep the running totals</h3>
+<pre><code>total = 0
+running = []
+for value in [5, 3, 7]:
+    total += value
+    running.append(total)
+print(running)  # [5, 8, 15]</code></pre>
+</div>
+</div><div class="activity" id="total-lab">
+<div class="activity-head"><h3 data-i18n>Trace total and count</h3><span class="activity-tag">Python</span></div>
+<div class="activity-body"><div class="fields"><label class="field" for="total-scores"><span data-i18n>Scores</span><input id="total-scores" type="text" value="72, 85, 91" maxlength="60"></label></div><p data-i18n class="help">Up to 8 whole numbers from 0 to 100, separated by commas. Empty input creates [].</p>
+<div class="trace-layout"><ol class="code-lines" id="total-code"><li>scores = [72, 85, 91]</li><li>total = 0</li><li>count = 0</li><li>for score in scores:</li><li>    total += score</li><li>    count += 1</li><li>print(total, count)</li><li>if count &gt; 0:</li><li>    print(f&quot;Average: {total / count:.1f}&quot;)</li><li>else:</li><li>    print(&quot;No scores&quot;)</li></ol>
+<div class="trace-state"><h3><span data-i18n>Variables</span></h3><div class="variable-grid" id="total-variables"></div>
+<div class="iteration-cells" id="total-cells"></div>
+<div class="output"><small><span data-i18n>Printed output</span></small><code id="total-output" aria-live="polite">—</code></div></div></div>
+<div class="controls"><button data-i18n type="button" id="total-back">Back</button><button data-i18n type="button" id="total-step" class="primary">Step</button><button data-i18n type="button" id="total-run">Run</button><button data-i18n type="button" id="total-finish">Show result</button><button data-i18n type="button" id="total-reset">Reset</button></div>
+<p class="trace-status" id="total-status" role="status"></p></div></div><div class="sample-links"><a href="src/accumulators.py" download>accumulators.py ↓</a></div>
+</section>
+
+<section class="lesson" id="conditions" aria-labelledby="conditions-title">
+<p data-i18n class="eyebrow">04 / Conditions inside loops</p>
+<h2 data-i18n id="conditions-title" tabindex="-1">Conditions inside loops</h2>
+<div class="grid-2 examples">
+<div class="code-example"><h3 data-i18n>Collect passing scores</h3>
+<pre><code>scores = [45, 60, 85, 32]
+passing = []
+for score in scores:
+    if score &gt;= 60:
+        passing.append(score)
+print(passing)</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>Transform every item</h3>
+<pre><code>squares = []
+for number in [2, 3, 4]:
+    squares.append(number * number)
+print(squares)  # [4, 9, 16]</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>Split into two groups</h3>
+<pre><code>even = []
+odd = []
+for number in [1, 2, 3, 4]:
+    if number % 2 == 0:
+        even.append(number)
+    else:
+        odd.append(number)
+print(even, odd)  # [2, 4] [1, 3]</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>Search with a flag</h3>
+<pre><code>found = False
+for name in [&quot;Ada&quot;, &quot;Lin&quot;, &quot;Sam&quot;]:
+    if name == &quot;Lin&quot;:
+        found = True
+print(found)  # True</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>Count vowels</h3>
+<pre><code>count = 0
+for character in &quot;algorithm&quot;:
+    if character in &quot;aeiou&quot;:
+        count += 1
+print(count)  # 3</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>Build a dictionary</h3>
+<pre><code>lengths = {}
+for name in [&quot;Ada&quot;, &quot;Lin&quot;, &quot;Grace&quot;]:
+    lengths[name] = len(name)
+print(lengths)
+# {&#x27;Ada&#x27;: 3, &#x27;Lin&#x27;: 3, &#x27;Grace&#x27;: 5}</code></pre>
+</div>
+</div><div class="activity" id="filter-lab">
+<div class="activity-head"><h3 data-i18n>Trace the filter</h3><span class="activity-tag">Python</span></div>
+<div class="activity-body"><div class="fields"><label class="field" for="filter-scores"><span data-i18n>Scores</span><input id="filter-scores" type="text" value="45, 60, 85, 32" maxlength="60"></label><label class="field" for="filter-limit"><span data-i18n>Pass mark (0–100)</span><input id="filter-limit" type="number" value="60" min="0" max="100" step="1"></label></div><p data-i18n class="help">Up to 8 whole numbers from 0 to 100, separated by commas. Empty input creates [].</p>
+<div class="trace-layout"><ol class="code-lines" id="filter-code"><li>scores = [45, 60, 85, 32]</li><li>passing = []</li><li>for score in scores:</li><li>    if score &gt;= 60:</li><li>        passing.append(score)</li><li>print(passing)</li></ol>
+<div class="trace-state"><h3><span data-i18n>Variables</span></h3><div class="variable-grid" id="filter-variables"></div>
+<div class="iteration-cells" id="filter-cells"></div>
+<div class="output"><small><span data-i18n>Printed output</span></small><code id="filter-output" aria-live="polite">—</code></div></div></div>
+<div class="controls"><button data-i18n type="button" id="filter-back">Back</button><button data-i18n type="button" id="filter-step" class="primary">Step</button><button data-i18n type="button" id="filter-run">Run</button><button data-i18n type="button" id="filter-finish">Show result</button><button data-i18n type="button" id="filter-reset">Reset</button></div>
+<p class="trace-status" id="filter-status" role="status"></p></div></div><div class="sample-links"><a href="src/filter_scores.py" download>filter_scores.py ↓</a></div>
+</section>
+
+<section class="lesson" id="while" aria-labelledby="while-title">
+<p data-i18n class="eyebrow">05 / while loops</p>
+<h2 data-i18n id="while-title" tabindex="-1">while loops</h2>
+<div class="grid-2 examples">
+<div class="code-example"><h3 data-i18n>Countdown</h3>
+<pre><code>remaining = 3
+while remaining &gt; 0:
+    print(remaining)
+    remaining -= 1
+print(&quot;Go&quot;)</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>Condition is checked first</h3>
+<pre><code>remaining = 0
+while remaining &gt; 0:
+    print(remaining)  # Does not run.
+    remaining -= 1
+print(&quot;Go&quot;)</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>Repeat until a sentinel</h3>
+<pre><code># input() returns these strings in order: &quot;4&quot;, &quot;6&quot;, &quot;-1&quot;
+total = 0
+value = int(input(&quot;Number (-1 to stop): &quot;))
+while value != -1:
+    total += value
+    value = int(input(&quot;Number (-1 to stop): &quot;))
+print(total)</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>Reach a target</h3>
+<pre><code>value = 1
+while value &lt; 20:
+    value *= 2
+    print(value)  # 2, 4, 8, 16, 32</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>for: process each item</h3>
+<pre><code>scores = [72, 85, 91]
+for score in scores:
+    print(score)</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>while: repeat while a condition holds</h3>
+<pre><code>scores = [72, 85, 91]
+index = 0
+while index &lt; len(scores):
+    print(scores[index])
+    index += 1  # Required for progress.</code></pre>
+</div>
+</div><div class="activity" id="while-lab">
+<div class="activity-head"><h3 data-i18n>Trace the condition and update</h3><span class="activity-tag">Python</span></div>
+<div class="activity-body"><div class="fields"><label class="field" for="while-mode"><span data-i18n>Example</span><select id="while-mode"><option data-i18n value="countdown">Countdown</option><option data-i18n value="sentinel">Sentinel input</option></select></label><label class="field" for="while-start"><span data-i18n>Initial value</span><input id="while-start" type="number" value="3" min="0" max="8" step="1"></label><label class="field" for="while-inputs"><span data-i18n>Input sequence</span><input id="while-inputs" type="text" value="4, 6, -1" maxlength="60"></label></div><p data-i18n class="help">Countdown: 0–8. Input sequence: up to 8 integers from −1 to 100; include −1 to stop.</p>
+<div class="trace-layout"><ol class="code-lines" id="while-code"><li>remaining = 3</li><li>while remaining &gt; 0:</li><li>    print(remaining)</li><li>    remaining -= 1</li><li>print(&quot;Go&quot;)</li></ol>
+<div class="trace-state"><h3><span data-i18n>Variables</span></h3><div class="variable-grid" id="while-variables"></div>
+<div class="iteration-cells" id="while-cells"></div>
+<div class="output"><small><span data-i18n>Printed output</span></small><code id="while-output" aria-live="polite">—</code></div></div></div>
+<div class="controls"><button data-i18n type="button" id="while-back">Back</button><button data-i18n type="button" id="while-step" class="primary">Step</button><button data-i18n type="button" id="while-run">Run</button><button data-i18n type="button" id="while-finish">Show result</button><button data-i18n type="button" id="while-reset">Reset</button></div>
+<p class="trace-status" id="while-status" role="status"></p></div></div><div class="sample-links"><a href="src/while_countdown.py" download>while_countdown.py ↓</a><a href="src/sentinel_input.py" download>sentinel_input.py ↓</a></div>
+</section>
+
+<section class="lesson" id="control" aria-labelledby="control-title">
+<p data-i18n class="eyebrow">06 / break and continue</p>
+<h2 data-i18n id="control-title" tabindex="-1">break and continue</h2>
+<div class="grid-2 examples">
+<div class="code-example"><h3 data-i18n>break: stop the loop</h3>
+<pre><code>names = [&quot;Ada&quot;, &quot;Lin&quot;, &quot;Sam&quot;]
+for name in names:
+    if name == &quot;Lin&quot;:
+        print(&quot;Found&quot;)
+        break  # Sam is never visited.
+print(&quot;Done&quot;)</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>continue: skip the remaining body</h3>
+<pre><code>numbers = [4, -2, 7, 0, 9]
+for number in numbers:
+    if number &lt; 0:
+        continue
+    print(number)
+print(&quot;Done&quot;)</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>Search with a saved result</h3>
+<pre><code>match = None
+for score in [45, 72, 91]:
+    if score &gt;= 60:
+        match = score
+        break
+print(match)  # 72, not 91</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>An unsuccessful search</h3>
+<pre><code>found = False
+for name in [&quot;Ada&quot;, &quot;Lin&quot;]:
+    if name == &quot;Sam&quot;:
+        found = True
+        break
+if not found:
+    print(&quot;Not found&quot;)</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>Update before continue</h3>
+<pre><code>number = 0
+while number &lt; 5:
+    number += 1
+    if number == 3:
+        continue
+    print(number)  # 1, 2, 4, 5</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>Stop at a sentinel</h3>
+<pre><code>for value in [4, 6, -1, 99]:
+    if value == -1:
+        break
+    print(value)  # 4, 6</code></pre>
+</div>
+</div><div class="activity" id="control-lab">
+<div class="activity-head"><h3 data-i18n>Compare break and continue</h3><span class="activity-tag">Python</span></div>
+<div class="activity-body"><div class="fields"><label class="field" for="control-mode"><span data-i18n>Statement</span><select id="control-mode"><option data-i18n value="continue">continue when number &lt; 0</option><option data-i18n value="break">break when number == 0</option></select></label><label class="field" for="control-values"><span data-i18n>Numbers</span><input id="control-values" type="text" value="4, -2, 7, 0, 9" maxlength="60"></label></div><p data-i18n class="help">Up to 8 comma-separated integers from −20 to 20. Empty input is allowed.</p>
+<div class="trace-layout"><ol class="code-lines" id="control-code"><li>numbers = [4, -2, 7, 0, 9]</li><li>for number in numbers:</li><li>    if number &lt; 0:</li><li>        continue</li><li>    print(number)</li><li>print(&quot;Done&quot;)</li></ol>
+<div class="trace-state"><h3><span data-i18n>Variables</span></h3><div class="variable-grid" id="control-variables"></div>
+<div class="iteration-cells" id="control-cells"></div>
+<div class="output"><small><span data-i18n>Printed output</span></small><code id="control-output" aria-live="polite">—</code></div></div></div>
+<div class="controls"><button data-i18n type="button" id="control-back">Back</button><button data-i18n type="button" id="control-step" class="primary">Step</button><button data-i18n type="button" id="control-run">Run</button><button data-i18n type="button" id="control-finish">Show result</button><button data-i18n type="button" id="control-reset">Reset</button></div>
+<p class="trace-status" id="control-status" role="status"></p></div></div><div class="sample-links"><a href="src/loop_control.py" download>loop_control.py ↓</a></div>
+</section>
+
+<section class="lesson" id="debugging" aria-labelledby="debugging-title">
+<p data-i18n class="eyebrow">07 / Debugging loops</p>
+<h2 data-i18n id="debugging-title" tabindex="-1">Debugging loops</h2>
+<div class="grid-2 examples">
+<div class="code-example"><h3 data-i18n>Bug / Reset inside the loop</h3>
+<pre><code>total = 0
+for score in [10, 20, 30]:
+    total = 0  # Erases the previous total.
+    total += score
+print(total)  # 30</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>Fix / Initialize once</h3>
+<pre><code>scores = [10, 20, 30]
+total = 0
+for score in scores:
+    total += score
+print(total)  # 60</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>Bug / Stop excludes the last value</h3>
+<pre><code>total = 0
+for number in range(1, 5):
+    total += number
+print(total)  # 10, not 15</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>Fix / Include five</h3>
+<pre><code>total = 0
+for number in range(1, 6):
+    total += number
+print(total)  # 15</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>Bug / Wrong indentation</h3>
+<pre><code>for score in [10, 20, 30]:
+    total = score
+print(total)  # Only 30 is printed.</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>Fix / Print inside the loop</h3>
+<pre><code>for score in [10, 20, 30]:
+    print(score)  # 10, 20, 30</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>Bug / Mutating the source list</h3>
+<pre><code>numbers = [1, 2, 3, 4]
+for number in numbers:
+    if number &lt; 3:
+        numbers.remove(number)
+print(numbers)  # [2, 3, 4]; 2 was skipped.</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>Fix / Build a new list</h3>
+<pre><code>numbers = [1, 2, 3, 4]
+kept = []
+for number in numbers:
+    if number &gt;= 3:
+        kept.append(number)
+print(kept)  # [3, 4]</code></pre>
+</div>
+</div><div class="activity" id="debug-lab">
+<div class="activity-head"><h3 data-i18n>Missing update: inspect five iterations</h3><span class="activity-tag">Python</span></div>
+<div class="activity-body"><div class="fields"><label class="field" for="debug-mode"><span data-i18n>Version</span><select id="debug-mode"><option data-i18n value="broken">Missing update</option><option data-i18n value="fixed">Update included</option></select></label></div>
+<div class="trace-layout"><ol class="code-lines" id="debug-code"><li>remaining = 3</li><li>while remaining &gt; 0:</li><li>    print(remaining)</li><li>    # Missing: remaining -= 1</li><li>print(&quot;Go&quot;)</li></ol>
+<div class="trace-state"><h3><span data-i18n>Variables</span></h3><div class="variable-grid" id="debug-variables"></div>
+<div class="iteration-cells" id="debug-cells"></div>
+<div class="output"><small><span data-i18n>Printed output</span></small><code id="debug-output" aria-live="polite">—</code></div></div></div>
+<div class="controls"><button data-i18n type="button" id="debug-back">Back</button><button data-i18n type="button" id="debug-step" class="primary">Step</button><button data-i18n type="button" id="debug-run">Run</button><button data-i18n type="button" id="debug-finish">Show result</button><button data-i18n type="button" id="debug-reset">Reset</button></div>
+<p class="trace-status" id="debug-status" role="status"></p></div></div><div class="sample-links"><a href="src/debug_loops.py" download>debug_loops.py ↓</a></div>
+</section>
+
+<section class="lesson" id="nested" aria-labelledby="nested-title">
+<p data-i18n class="eyebrow">08 / Nested loops</p>
+<h2 data-i18n id="nested-title" tabindex="-1">Nested loops</h2>
+<div class="grid-2 examples">
+<div class="code-example"><h3 data-i18n>Row and column</h3>
+<pre><code>for row in range(1, 4):
+    for column in range(1, 5):
+        print(row, column, row * column)
+print(&quot;Done&quot;)</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>All pairs</h3>
+<pre><code>for color in [&quot;red&quot;, &quot;blue&quot;]:
+    for size in [&quot;S&quot;, &quot;M&quot;]:
+        print(color, size)
+# red S / red M / blue S / blue M</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>Nested lists</h3>
+<pre><code>matrix = [[1, 2], [3, 4]]
+total = 0
+for row in matrix:
+    for value in row:
+        total += value
+print(total)  # 10</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>Count the body executions</h3>
+<pre><code>count = 0
+for row in range(3):
+    for column in range(4):
+        count += 1
+print(count)  # 3 * 4 = 12</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>break exits only the inner loop</h3>
+<pre><code>for row in range(2):
+    for column in range(3):
+        if column == 1:
+            break
+        print(row, column)
+# 0 0
+# 1 0</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>Print a small pattern</h3>
+<pre><code>for row in range(1, 4):
+    line = &quot;&quot;
+    for column in range(row):
+        line += &quot;*&quot;
+    print(line)
+# * / ** / *** on separate lines.</code></pre>
+</div>
+</div><div class="activity" id="nested-lab">
+<div class="activity-head"><h3 data-i18n>Trace row and column</h3><span class="activity-tag">Python</span></div>
+<div class="activity-body"><div class="fields"><label class="field" for="nested-rows"><span data-i18n>Rows (1–5)</span><input id="nested-rows" type="number" value="3" min="1" max="5" step="1"></label><label class="field" for="nested-columns"><span data-i18n>Columns (1–5)</span><input id="nested-columns" type="number" value="4" min="1" max="5" step="1"></label></div>
+<div class="trace-layout"><ol class="code-lines" id="nested-code"><li>for row in range(1, 4):</li><li>    for column in range(1, 5):</li><li>        print(row, column, row * column)</li><li>print(&quot;Done&quot;)</li></ol>
+<div class="trace-state"><h3><span data-i18n>Variables</span></h3><div class="variable-grid" id="nested-variables"></div>
+<div class="iteration-cells" id="nested-cells"></div>
+<div class="output"><small><span data-i18n>Printed output</span></small><code id="nested-output" aria-live="polite">—</code></div></div></div>
+<div class="controls"><button data-i18n type="button" id="nested-back">Back</button><button data-i18n type="button" id="nested-step" class="primary">Step</button><button data-i18n type="button" id="nested-run">Run</button><button data-i18n type="button" id="nested-finish">Show result</button><button data-i18n type="button" id="nested-reset">Reset</button></div>
+<p class="trace-status" id="nested-status" role="status"></p></div></div><div class="sample-links"><a href="src/nested_loops.py" download>nested_loops.py ↓</a></div>
+</section>
+
+<section class="lesson" id="practice" aria-labelledby="practice-title">
+<p data-i18n class="eyebrow">09 / Worked programs</p>
+<h2 data-i18n id="practice-title" tabindex="-1">Worked programs</h2>
+<div class="grid-2 examples">
+<div class="code-example"><h3 data-i18n>Score report</h3>
+<pre><code>scores = [45, 60, 85, 90]
+total = 0
+passed = 0
+for score in scores:
+    total += score
+    if score &gt;= 60:
+        passed += 1
+print(&quot;Passed:&quot;, passed)
+if len(scores) &gt; 0:
+    print(f&quot;Average: {total / len(scores):.1f}&quot;)
+else:
+    print(&quot;No scores&quot;)</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>Shopping basket</h3>
+<pre><code>basket = [
+    {&quot;name&quot;: &quot;Notebook&quot;, &quot;price&quot;: 30, &quot;quantity&quot;: 2},
+    {&quot;name&quot;: &quot;Pen&quot;, &quot;price&quot;: 10, &quot;quantity&quot;: 3},
+]
+total = 0
+for item in basket:
+    subtotal = item[&quot;price&quot;] * item[&quot;quantity&quot;]
+    total += subtotal
+    print(item[&quot;name&quot;], subtotal)
+print(&quot;Total:&quot;, total)</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>Number guessing</h3>
+<pre><code># Enter guesses from 1 to 10. At most three attempts.
+secret = 7
+attempts = 0
+found = False
+while attempts &lt; 3 and not found:
+    guess = int(input(&quot;Guess: &quot;))
+    attempts += 1
+    if guess == secret:
+        found = True
+    elif guess &lt; secret:
+        print(&quot;Higher&quot;)
+    else:
+        print(&quot;Lower&quot;)
+print(&quot;Found&quot; if found else &quot;No attempts left&quot;)</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>Count repeated values</h3>
+<pre><code>counts = {}
+for word in [&quot;red&quot;, &quot;blue&quot;, &quot;red&quot;]:
+    counts[word] = counts.get(word, 0) + 1
+print(counts)  # {&#x27;red&#x27;: 2, &#x27;blue&#x27;: 1}</code></pre>
+</div>
+</div><div class="activity" id="report-lab">
+<div class="activity-head"><h3 data-i18n>Trace the score report</h3><span class="activity-tag">Python</span></div>
+<div class="activity-body"><div class="fields"><label class="field" for="report-scores"><span data-i18n>Scores</span><input id="report-scores" type="text" value="45, 60, 85, 90" maxlength="60"></label></div><p data-i18n class="help">Up to 8 whole numbers from 0 to 100, separated by commas. Empty input creates [].</p>
+<div class="trace-layout"><ol class="code-lines" id="report-code"><li>scores = [45, 60, 85, 90]</li><li>total = 0</li><li>passed = 0</li><li>for score in scores:</li><li>    total += score</li><li>    if score &gt;= 60:</li><li>        passed += 1</li><li>print(&quot;Passed:&quot;, passed)</li><li>if len(scores) &gt; 0:</li><li>    print(f&quot;Average: {total / len(scores):.1f}&quot;)</li><li>else:</li><li>    print(&quot;No scores&quot;)</li></ol>
+<div class="trace-state"><h3><span data-i18n>Variables</span></h3><div class="variable-grid" id="report-variables"></div>
+<div class="iteration-cells" id="report-cells"></div>
+<div class="output"><small><span data-i18n>Printed output</span></small><code id="report-output" aria-live="polite">—</code></div></div></div>
+<div class="controls"><button data-i18n type="button" id="report-back">Back</button><button data-i18n type="button" id="report-step" class="primary">Step</button><button data-i18n type="button" id="report-run">Run</button><button data-i18n type="button" id="report-finish">Show result</button><button data-i18n type="button" id="report-reset">Reset</button></div>
+<p class="trace-status" id="report-status" role="status"></p></div></div><div class="activity" id="basket-lab">
+<div class="activity-head"><h3 data-i18n>Trace the basket</h3><span class="activity-tag">Python</span></div>
+<div class="activity-body"><div class="fields"><label class="field" for="basket-notebooks"><span data-i18n>Notebook quantity (0–9)</span><input id="basket-notebooks" type="number" value="2" min="0" max="9" step="1"></label><label class="field" for="basket-pens"><span data-i18n>Pen quantity (0–9)</span><input id="basket-pens" type="number" value="3" min="0" max="9" step="1"></label></div>
+<div class="trace-layout"><ol class="code-lines" id="basket-code"><li>basket = [</li><li>    {&quot;name&quot;: &quot;Notebook&quot;, &quot;price&quot;: 30, &quot;quantity&quot;: 2},</li><li>    {&quot;name&quot;: &quot;Pen&quot;, &quot;price&quot;: 10, &quot;quantity&quot;: 3},</li><li>]</li><li>total = 0</li><li>for item in basket:</li><li>    subtotal = item[&quot;price&quot;] * item[&quot;quantity&quot;]</li><li>    total += subtotal</li><li>    print(item[&quot;name&quot;], subtotal)</li><li>print(&quot;Total:&quot;, total)</li></ol>
+<div class="trace-state"><h3><span data-i18n>Variables</span></h3><div class="variable-grid" id="basket-variables"></div>
+<div class="iteration-cells" id="basket-cells"></div>
+<div class="output"><small><span data-i18n>Printed output</span></small><code id="basket-output" aria-live="polite">—</code></div></div></div>
+<div class="controls"><button data-i18n type="button" id="basket-back">Back</button><button data-i18n type="button" id="basket-step" class="primary">Step</button><button data-i18n type="button" id="basket-run">Run</button><button data-i18n type="button" id="basket-finish">Show result</button><button data-i18n type="button" id="basket-reset">Reset</button></div>
+<p class="trace-status" id="basket-status" role="status"></p></div></div><div class="activity" id="guess-lab">
+<div class="activity-head"><h3 data-i18n>Trace the guesses</h3><span class="activity-tag">Python</span></div>
+<div class="activity-body"><div class="fields"><label class="field" for="guess-secret"><span data-i18n>Secret number</span><input id="guess-secret" type="number" value="7" min="1" max="10" step="1"></label><label class="field" for="guess-inputs"><span data-i18n>Three guesses</span><input id="guess-inputs" type="text" value="4, 9, 7" maxlength="30"></label></div><p data-i18n class="help">Provide three integers from 1 to 10. Inputs after a correct guess are not read.</p>
+<div class="trace-layout"><ol class="code-lines" id="guess-code"><li># Enter guesses from 1 to 10. At most three attempts.</li><li>secret = 7</li><li>attempts = 0</li><li>found = False</li><li>while attempts &lt; 3 and not found:</li><li>    guess = int(input(&quot;Guess: &quot;))</li><li>    attempts += 1</li><li>    if guess == secret:</li><li>        found = True</li><li>    elif guess &lt; secret:</li><li>        print(&quot;Higher&quot;)</li><li>    else:</li><li>        print(&quot;Lower&quot;)</li><li>print(&quot;Found&quot; if found else &quot;No attempts left&quot;)</li></ol>
+<div class="trace-state"><h3><span data-i18n>Variables</span></h3><div class="variable-grid" id="guess-variables"></div>
+<div class="iteration-cells" id="guess-cells"></div>
+<div class="output"><small><span data-i18n>Printed output</span></small><code id="guess-output" aria-live="polite">—</code></div></div></div>
+<div class="controls"><button data-i18n type="button" id="guess-back">Back</button><button data-i18n type="button" id="guess-step" class="primary">Step</button><button data-i18n type="button" id="guess-run">Run</button><button data-i18n type="button" id="guess-finish">Show result</button><button data-i18n type="button" id="guess-reset">Reset</button></div>
+<p class="trace-status" id="guess-status" role="status"></p></div></div><div class="activity"><div class="activity-head"><h3 data-i18n>Predict the output</h3></div><div class="activity-body"><fieldset class="quiz-question" data-answer="10"><legend>01 / range</legend><pre><code>total = 0
+for number in range(1, 5):
+    total += number
+print(total)</code></pre><label><input type="radio" name="quiz-1" value="10"><code class="quiz-option">10</code></label><label><input type="radio" name="quiz-1" value="15"><code class="quiz-option">15</code></label><label><input type="radio" name="quiz-1" value="5"><code class="quiz-option">5</code></label><p class="quiz-answer" id="quiz-answer-1" hidden></p></fieldset><fieldset class="quiz-question" data-answer="1
+3"><legend>02 / continue</legend><pre><code>for number in [1, 2, 3]:
+    if number == 2:
+        continue
+    print(number)</code></pre><label><input type="radio" name="quiz-2" value="1
+3"><code class="quiz-option">1
+3</code></label><label><input type="radio" name="quiz-2" value="1"><code class="quiz-option">1</code></label><label><input type="radio" name="quiz-2" value="1
+2
+3"><code class="quiz-option">1
+2
+3</code></label><p class="quiz-answer" id="quiz-answer-2" hidden></p></fieldset><fieldset class="quiz-question" data-answer="Done"><legend>03 / while</legend><pre><code>number = 3
+while number &lt; 3:
+    print(number)
+print(&quot;Done&quot;)</code></pre><label><input type="radio" name="quiz-3" value="3
+Done"><code class="quiz-option">3
+Done</code></label><label><input type="radio" name="quiz-3" value="Done"><code class="quiz-option">Done</code></label><label><input type="radio" name="quiz-3" value="3"><code class="quiz-option">3</code></label><p class="quiz-answer" id="quiz-answer-3" hidden></p></fieldset><fieldset class="quiz-question" data-answer="6"><legend>04 / <span data-i18n>Nested loops</span></legend><pre><code>count = 0
+for row in range(2):
+    for column in range(3):
+        count += 1
+print(count)</code></pre><label><input type="radio" name="quiz-4" value="5"><code class="quiz-option">5</code></label><label><input type="radio" name="quiz-4" value="6"><code class="quiz-option">6</code></label><label><input type="radio" name="quiz-4" value="3"><code class="quiz-option">3</code></label><p class="quiz-answer" id="quiz-answer-4" hidden></p></fieldset><button data-i18n type="button" id="quiz-check" class="primary">Check answers</button><p id="quiz-status" role="status"></p></div></div><div class="sample-links"><a href="src/score_report.py" download>score_report.py ↓</a><a href="src/shopping_basket.py" download>shopping_basket.py ↓</a><a href="src/number_guessing.py" download>number_guessing.py ↓</a></div>
+</section>
+
+<section class="lesson" id="examples" aria-labelledby="examples-title">
+<p data-i18n class="eyebrow">10 / Python files</p>
+<h2 data-i18n id="examples-title" tabindex="-1">Python files</h2>
+<div class="sample-links"><a href="src/for_collections.py" download>for_collections.py ↓</a><a href="src/range_examples.py" download>range_examples.py ↓</a><a href="src/accumulators.py" download>accumulators.py ↓</a><a href="src/filter_scores.py" download>filter_scores.py ↓</a><a href="src/while_countdown.py" download>while_countdown.py ↓</a><a href="src/sentinel_input.py" download>sentinel_input.py ↓</a><a href="src/loop_control.py" download>loop_control.py ↓</a><a href="src/debug_loops.py" download>debug_loops.py ↓</a><a href="src/nested_loops.py" download>nested_loops.py ↓</a><a href="src/score_report.py" download>score_report.py ↓</a><a href="src/shopping_basket.py" download>shopping_basket.py ↓</a><a href="src/number_guessing.py" download>number_guessing.py ↓</a></div><div class="grid-2 examples">
+<div class="code-example"><h3 data-i18n>Run a sample</h3>
+<pre><code># From the repository folder:
+# python3 week-04/src/score_report.py
+# python3 week-04/src/sentinel_input.py
+# python3 week-04/src/number_guessing.py</code></pre>
+</div>
+<div class="code-example"><h3 data-i18n>Edit and compare</h3>
+<pre><code>scores = [45, 60, 85, 90]
+# Try [] and [60, 60, 60].
+total = 0
+for score in scores:
+    total += score
+print(total)</code></pre>
+</div>
+</div>
+</section>
+<footer class="lesson-footer"><button data-i18n type="button" id="previous-section">← Previous</button><small id="section-position"></small><button data-i18n type="button" id="next-section" class="primary">Next section →</button></footer>
+</main></div>
+<script src="translations.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

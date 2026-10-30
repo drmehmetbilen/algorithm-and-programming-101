@@ -108,6 +108,45 @@ python3 week-03/src/shallow_copy.py
 python3 week-03/src/student_profile.py
 ```
 
-Week 4 introduces `for`, `while`, `range()`, and accumulating results.
+## Week 4
+
+Open [week-04/index.html](week-04/index.html). The lecture keeps the same sidebar, section navigation, palette, and EN/TR buttons. Teaching is centered on code, English comments, and bug/fix comparisons: 11 sections, 65 static code blocks (including pseudocode), 11 interactive traces, and 12 Python downloads.
+
+Topics:
+
+1. Repeated statements, loop bodies, pseudocode, and a loop flowchart
+2. `for` over strings, lists, tuples, dictionaries, and sorted sets
+3. `range()` arguments, exclusive stops, and negative steps
+4. Counters, totals, products, averages, and running results
+5. Conditions, filtering, transformations, and searches
+6. `while`, countdowns, and sentinel input
+7. `break` and `continue`
+8. Debugging initialization, indentation, mutation, and missing updates
+9. Nested loops and row/column tracing
+10. Score reports, shopping baskets, number guessing, and output predictions
+11. Downloadable Python examples
+
+Each trace supports Back, Step, Run/Pause, Show result, and Reset. Editable inputs regenerate the displayed code and clear its trace. Variables, current items, and printed output stay beside the code. EN/TR switching preserves the current inputs and execution position; code, comments, and output remain English.
+
+These offline browser activities simulate specific programs; they do not execute arbitrary Python. The sentinel and guessing activities supply an editable sequence of simulated keyboard inputs; the output panel shows `print()` output, while input prompts appear in the code. The intentionally nonterminating example stops its **preview** after five iterations and explicitly identifies the infinite loop. Input bounds are enforced in the browser. All static examples remain readable without JavaScript.
+
+Run and edit the source files from the repository folder:
+
+```sh
+python3 week-04/src/for_collections.py
+python3 week-04/src/range_examples.py
+python3 week-04/src/accumulators.py
+python3 week-04/src/filter_scores.py
+python3 week-04/src/while_countdown.py
+python3 week-04/src/sentinel_input.py
+python3 week-04/src/loop_control.py
+python3 week-04/src/debug_loops.py
+python3 week-04/src/nested_loops.py
+python3 week-04/src/score_report.py
+python3 week-04/src/shopping_basket.py
+python3 week-04/src/number_guessing.py
+```
+
+`sentinel_input.py` accepts integers until `-1`. `number_guessing.py` accepts up to three integer guesses from 1 to 10. These introductory programs assume valid integer input; exception handling is a later topic.
 
 Future weeks follow the same structure: `week-NN/index.html`, with a `src/` folder when the lesson includes source examples.
