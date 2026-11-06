@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-tr="Kısa Sınav 01 · Python Temelleri">Quiz 01 · Python Foundations</title>
+  <link rel="stylesheet" href="../week-04/styles.css">
+  <style>
+    .quiz-section { margin:36px 0; scroll-margin-top:18px; }
+    .quiz-section h2 { font-size:clamp(1.8rem,3vw,2.7rem); }
+    .question { margin-bottom:16px; }
+    .question-heading { display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:4px 16px; margin-bottom:12px; }
+    .question-heading h3 { margin:0; }
+    .question h4 { margin:0 0 6px; font-size:14px; }
+    .points { flex-shrink:0; padding:2px 9px; border-radius:6px; color:var(--dark); background:var(--soft); font-size:13px; }
+    .question pre { margin-bottom:16px; }
+    .answer { display:grid; gap:6px; margin-top:16px; font-size:14px; }
+    .answer textarea { width:100%; resize:vertical; padding:10px 12px; border:1px solid #a4accb; border-radius:8px; color:var(--ink); background:var(--card); font:inherit; font-weight:400; }
+    .answer .code-answer { font-family:var(--mono); }
+    .trace-answer { max-width:360px; margin:16px 0; }
+    .trace-answer input[type=text] { width:100%; font:14px var(--mono); }
+    .question .grid-2 { margin-bottom:12px; }
+    @media print {
+      @page { margin:15mm; }
+      body { background:#fff; color:#000; font-size:11pt; }
+      .sidebar,.topbar,.skip { display:none; }
+      .workspace { margin:0; }
+      main { padding:0; }
+      h1 { font-size:26pt; }
+      .quiz-section { margin:20px 0; }
+      .quiz-section h2 { font-size:19pt; break-after:avoid; }
+      .question { break-inside:avoid; box-shadow:none; padding:14px; }
+      .question .grid-2 { grid-template-columns:1fr 1fr; }
+      .question pre { color:#000; background:#fff; border:1px solid #ccc; white-space:pre-wrap; }
+      .answer textarea { resize:none; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main" data-tr="Sınava geç">Skip to quiz</a>
+  <aside class="sidebar">
+    <div class="brand"><span class="brand-mark" aria-hidden="true">a↗</span><span data-tr="ALGORİTMA VE PROGRAMLAMA 101">ALGORITHM &amp; PROGRAMMING 101</span></div>
+    <p class="week-tag" data-tr="Kısa Sınav 01 / 1–4. Haftalar">Quiz 01 / Weeks 1–4</p>
+    <nav class="nav" aria-label="Quiz sections" data-tr-label="Sınav bölümleri">
+      <a href="#writing"><span class="nav-num">01</span><span data-tr="Kod yazma">Write code</span></a>
+      <a href="#interpretation"><span class="nav-num">02</span><span data-tr="Kod yorumlama">Interpret code</span></a>
+      <a href="#theory"><span class="nav-num">03</span><span data-tr="Kuramsal sorular">Theory</span></a>
+    </nav>
+    <a class="week-link" href="../week-04/index.html#examples" data-tr="← 4. Hafta ders notları">← Week 4 notes</a>
+  </aside>
+
+  <div class="workspace">
+    <header class="topbar">
+      <div class="breadcrumb"><a href="../index.html#week-04" data-tr="Tüm haftalar">All weeks</a> / <span data-tr="Kısa Sınav 01">Quiz 01</span></div>
+      <div class="language-switch" role="group" aria-label="Language / Dil">
+        <button type="button" data-language="en" lang="en" aria-label="English" aria-pressed="true" disabled>EN</button>
+        <button type="button" data-language="tr" lang="tr" aria-label="Türkçe" aria-pressed="false" disabled>TR</button>
+      </div>
+    </header>
+
+    <main id="main" tabindex="-1">
+      <p class="eyebrow" data-tr="Kısa Sınav 01 / 1–4. Haftalar">Quiz 01 / Weeks 1–4</p>
+      <h1 data-tr="Python Temelleri Kısa Sınavı">Python Foundations Quiz</h1>
+      <p class="lead" data-tr="8 soru · 100 puan">8 questions · 100 points</p>
+      <p data-tr="Tüm soruları yanıtlayın. Yanıtlarınızı aşağıdaki alanlara veya ayrı bir yanıt kâğıdına yazabilirsiniz.">Answer all questions. Use the spaces below or a separate answer sheet.</p>
+
+      <section class="quiz-section" id="writing" aria-labelledby="writing-title">
+        <h2 id="writing-title" data-tr="Kod yazma">Write code</h2>
+
+        <article class="card question" aria-labelledby="q1-title">
+          <div class="question-heading"><h3 id="q1-title" data-tr="1. Ad listesini temizleme">1. Clean a list of names</h3><span class="points" data-tr="25 puan">25 points</span></div>
+          <pre><code>names = [" Ada ", "", "LIN", "  ", "Sam"]</code></pre>
+          <p data-tr="Bir for döngüsü kullanarak her adın başındaki ve sonundaki boşlukları silin ve adı küçük harfe dönüştürün. Temizlendikten sonra boş kalan adları atlayın. Kalan adları aynı sırayla clean_names adlı yeni bir listeye ekleyin ve bu listeyi yazdırın.">Use a for loop to remove leading and trailing whitespace from each name and convert it to lowercase. Skip names that are empty after cleaning. Add the remaining names to a new list called clean_names in the original order, then print it.</p>
+          <h4 data-tr="Beklenen çıktı">Expected output</h4>
+          <pre><code>['ada', 'lin', 'sam']</code></pre>
+          <label class="answer" for="q1-answer"><span data-tr="Python kodunuz">Your Python code</span><textarea id="q1-answer" class="code-answer" rows="7" spellcheck="false" autocapitalize="off"></textarea></label>
+        </article>
+
+        <article class="card question" aria-labelledby="q2-title">
+          <div class="question-heading"><h3 id="q2-title" data-tr="2. Sensör ölçümlerini işleme">2. Process sensor readings</h3><span class="points" data-tr="25 puan">25 points</span></div>
+          <p data-tr="Bir while döngüsüyle kullanıcı -1 girene kadar ölçümleri birer birer okuyun. Ölçümler negatif olmayan tam sayılardır. -1 değerini ölçüm olarak saymayın. Döngü bittiğinde ölçüm sayısını ve en yüksek ölçümü yazdırın. İlk girdi -1 ise yalnızca No readings yazdırın.">Read one sensor reading at a time in a while loop until the user enters -1. Readings are nonnegative integers. Exclude -1 from the count. When the loop ends, print the number of readings and the highest reading. If the first input is -1, print only No readings.</p>
+          <div class="grid-2">
+            <div>
+              <h4 data-tr="Örnek girdi">Example input</h4>
+              <pre><code>4
+9
+0
+-1</code></pre>
+              <h4 data-tr="Beklenen çıktı">Expected output</h4>
+              <pre><code>Count: 3
+Highest: 9</code></pre>
+            </div>
+            <div>
+              <h4 data-tr="Ölçüm yoksa girdi">Input with no readings</h4>
+              <pre><code>-1</code></pre>
+              <h4 data-tr="Beklenen çıktı">Expected output</h4>
+              <pre><code>No readings</code></pre>
+            </div>
+          </div>
+          <label class="answer" for="q2-answer"><span data-tr="Python kodunuz">Your Python code</span><textarea id="q2-answer" class="code-answer" rows="10" spellcheck="false" autocapitalize="off"></textarea></label>
+        </article>
+      </section>
+
+      <section class="quiz-section" id="interpretation" aria-labelledby="interpretation-title">
+        <h2 id="interpretation-title" data-tr="Kod yorumlama">Interpret code</h2>
+
+        <article class="card question" aria-labelledby="q3-title">
+          <div class="question-heading"><h3 id="q3-title" data-tr="3. Sözlük döngüsünü izleme">3. Trace a dictionary loop</h3><span class="points" data-tr="15 puan">15 points</span></div>
+          <pre><code>stock = {"pen": 3, "notebook": 0, "eraser": 2}
+total = 0
+
+for item, quantity in stock.items():
+    if quantity &gt; 0:
+        print(item)
+        total += quantity
+
+print(total)</code></pre>
+          <p data-tr="Her yineleme sonunda total değişkeninin değerini tabloya yazın. Ardından programın ekran çıktısını satır satır yazın.">Fill in the value of total at the end of each iteration. Then write the exact output, line by line.</p>
+          <table class="trace-answer">
+            <thead><tr><th scope="col" data-tr="Yineleme">Iteration</th><th scope="col"><code>total</code></th></tr></thead>
+            <tbody>
+              <tr><th scope="row">1</th><td><input type="text" inputmode="numeric" aria-label="total after iteration 1" data-tr-label="1. yinelemeden sonra total"></td></tr>
+              <tr><th scope="row">2</th><td><input type="text" inputmode="numeric" aria-label="total after iteration 2" data-tr-label="2. yinelemeden sonra total"></td></tr>
+              <tr><th scope="row">3</th><td><input type="text" inputmode="numeric" aria-label="total after iteration 3" data-tr-label="3. yinelemeden sonra total"></td></tr>
+            </tbody>
+          </table>
+          <label class="answer" for="q3-answer"><span data-tr="Ekran çıktısı">Printed output</span><textarea id="q3-answer" class="code-answer" rows="3" spellcheck="false" autocapitalize="off"></textarea></label>
+        </article>
+
+        <article class="card question" aria-labelledby="q4-title">
+          <div class="question-heading"><h3 id="q4-title" data-tr="4. Bitmeyen döngüyü düzeltme">4. Fix a loop that never ends</h3><span class="points" data-tr="15 puan">15 points</span></div>
+          <pre><code>remaining = 4
+
+while remaining &gt; 0:
+    if remaining == 2:
+        continue
+    print(remaining)
+    remaining -= 1</code></pre>
+          <ol class="compact" type="a">
+            <li data-tr="Döngü takılana kadar ekrana ne yazdırılır?">What prints before the loop gets stuck?</li>
+            <li data-tr="remaining hangi değerde kalır? Nedenini açıklayın.">What value does remaining get stuck at? Explain why.</li>
+            <li data-tr="Döngüyü, 2 hariç 4’ten 1’e kadar sayıları azalan sırayla yazdırıp sona erecek şekilde düzeltin.">Fix the loop so that it prints the numbers from 4 down to 1, skipping 2, and then terminates.</li>
+          </ol>
+          <label class="answer" for="q4-answer"><span data-tr="Yanıtlarınız ve düzeltilmiş Python kodu">Your answers and corrected Python code</span><textarea id="q4-answer" class="code-answer" rows="8" spellcheck="false" autocapitalize="off"></textarea></label>
+        </article>
+      </section>
+
+      <section class="quiz-section" id="theory" aria-labelledby="theory-title">
+        <h2 id="theory-title" data-tr="Kuramsal sorular">Theory</h2>
+        <p data-tr="Her soruyu bir veya iki cümleyle yanıtlayın.">Answer each question in one or two sentences.</p>
+
+        <article class="card question" aria-labelledby="q5-title">
+          <div class="question-heading"><h3 id="q5-title" data-tr="5. Algoritma ve sözde kod">5. Algorithm and pseudocode</h3><span class="points" data-tr="5 puan">5 points</span></div>
+          <p data-tr="Algoritma nedir? Python kodunu yazmadan önce sözde kod kullanmak ne işe yarar?">What is an algorithm? How can pseudocode help before you write Python?</p>
+          <label class="answer" for="q5-answer"><span data-tr="Yanıtınız">Your answer</span><textarea id="q5-answer" rows="3"></textarea></label>
+        </article>
+
+        <article class="card question" aria-labelledby="q6-title">
+          <div class="question-heading"><h3 id="q6-title" data-tr="6. Girdi ve tür dönüşümü">6. Input and type conversion</h3><span class="points" data-tr="5 puan">5 points</span></div>
+          <pre><code>age_text = input("Age: ")</code></pre>
+          <p data-tr="Kullanıcı 18 girerse age_text değişkeninin türü ne olur? Değeri 18 tam sayısıyla sayısal olarak karşılaştırmadan önce neden tür dönüşümü gerekir?">If the user enters 18, what is the type of age_text? Why is a conversion needed before comparing the value numerically with the integer 18?</p>
+          <label class="answer" for="q6-answer"><span data-tr="Yanıtınız">Your answer</span><textarea id="q6-answer" rows="3"></textarea></label>
+        </article>
+
+        <article class="card question" aria-labelledby="q7-title">
+          <div class="question-heading"><h3 id="q7-title" data-tr="7. Koleksiyon seçimi">7. Choose a collection</h3><span class="points" data-tr="5 puan">5 points</span></div>
+          <p data-tr="Ders kodunu kullanarak o dersin öğretim elemanını bulmak istiyorsunuz. Liste mi, sözlük mü kullanırdınız? Nedenini açıklayın.">You want to look up a course instructor by course code. Would you use a list or a dictionary? Explain why.</p>
+          <label class="answer" for="q7-answer"><span data-tr="Yanıtınız">Your answer</span><textarea id="q7-answer" rows="3"></textarea></label>
+        </article>
+
+        <article class="card question" aria-labelledby="q8-title">
+          <div class="question-heading"><h3 id="q8-title" data-tr="8. Döngü seçimi">8. Choose a loop</h3><span class="points" data-tr="5 puan">5 points</span></div>
+          <p data-tr="for döngüsünün uygun olduğu bir durum ve while döngüsünün uygun olduğu başka bir durum örneği verin. Her birinde seçtiğiniz döngünün neden uygun olduğunu açıklayın.">Give one example where a for loop is a good fit and one where a while loop is a good fit. Explain each choice.</p>
+          <label class="answer" for="q8-answer"><span data-tr="Yanıtınız">Your answer</span><textarea id="q8-answer" rows="3"></textarea></label>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    "use strict";
+    const languageButtons = [...document.querySelectorAll("[data-language]")];
+    const text = [...document.querySelectorAll("[data-tr]")].map(element => ({ element, english: element.textContent }));
+    const labels = [...document.querySelectorAll("[data-tr-label]")].map(element => ({ element, english: element.getAttribute("aria-label") }));
+
+    function setLanguage(value) {
+      const language = value === "tr" ? "tr" : "en";
+      document.documentElement.lang = language;
+      for (const { element, english } of text) {
+        element.textContent = language === "tr" ? element.dataset.tr : english;
+      }
+      for (const { element, english } of labels) {
+        element.setAttribute("aria-label", language === "tr" ? element.dataset.trLabel : english);
+      }
+      for (const button of languageButtons) {
+        button.setAttribute("aria-pressed", String(button.dataset.language === language));
+      }
+      try { localStorage.setItem("algorithm101-language", language); } catch { /* Storage is optional. */ }
+    }
+
+    for (const button of languageButtons) {
+      button.addEventListener("click", () => setLanguage(button.dataset.language));
+      button.disabled = false;
+    }
+    let savedLanguage = "en";
+    try { savedLanguage = localStorage.getItem("algorithm101-language"); } catch { /* Use English by default. */ }
+    setLanguage(savedLanguage);
+  </script>
+</body>
+</html>

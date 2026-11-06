@@ -43,6 +43,7 @@
     .week-tab[data-week="week-04"] { --week-color:#6650c8; --week-soft:#eeebfc; }
     .week-tab[data-week="week-03"] { --week-color:#16787c; --week-soft:#e4f2f1; }
     .week-tab[data-week="week-02"] { --week-color:#6650c8; --week-soft:#eeebfc; }
+    .quiz-link { --week-color:#4b36a4; display:block; margin-top:14px; text-decoration:none; }
     .week-tab:hover { border-color:var(--week-color); }
     .week-tab[aria-selected=true] { border:2px solid var(--week-color); padding:21px; background:var(--week-soft); }
     .week-tab:disabled { cursor:default; }
@@ -143,7 +144,11 @@
             <span class="week-meta"><span data-tr="11 bölüm">11 sections</span><span data-tr="12 Python örneği">12 Python samples</span></span>
           </button>
         </div>
-
+        <a class="week-tab quiz-link" href="quiz-01/index.html">
+          <span class="week-top"><span><span class="week-label" data-tr="Kısa Sınav">Quiz</span> <span class="week-number">01</span></span><span aria-hidden="true">↗</span></span>
+          <span class="week-name" data-tr="Python Temelleri Kısa Sınavı">Python Foundations Quiz</span>
+          <span class="week-meta"><span data-tr="1–4. haftalar">Weeks 1–4</span><span data-tr="8 soru · 100 puan">8 questions · 100 points</span></span>
+        </a>
       </aside>
       <div class="week-details">
         <section class="detail-panel" id="week-01" role="tabpanel" aria-labelledby="tab-week-01" tabindex="0">

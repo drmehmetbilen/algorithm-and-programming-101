@@ -1,5 +1,7 @@
 // Turkish UI text. Code, comments, and output stay in English.
 const turkishTranslations = {
+  "Python Foundations Quiz": "Python Temelleri Kısa Sınavı",
+  "Weeks 1–4 · 8 questions · 100 points": "1–4. haftalar · 8 soru · 100 puan",
   "Repeated statements": "Tekrarlanan ifadeler",
   "The same operation in a loop": "Aynı işlem döngü içinde",
   "The loop body": "Döngü gövdesi",
