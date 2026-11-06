@@ -9,14 +9,11 @@
     .quiz-section { margin:36px 0; scroll-margin-top:18px; }
     .quiz-section h2 { font-size:clamp(1.8rem,3vw,2.7rem); }
     .question { margin-bottom:16px; }
-    .question-heading { display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:4px 16px; margin-bottom:12px; }
-    .question-heading h3 { margin:0; }
     .question h4 { margin:0 0 6px; font-size:14px; }
-    .points { flex-shrink:0; padding:2px 9px; border-radius:6px; color:var(--dark); background:var(--soft); font-size:13px; }
     .question pre { margin-bottom:16px; }
     .answer { display:grid; gap:6px; margin-top:16px; font-size:14px; }
     .answer textarea { width:100%; resize:vertical; padding:10px 12px; border:1px solid #a4accb; border-radius:8px; color:var(--ink); background:var(--card); font:inherit; font-weight:400; }
-    .answer .code-answer { font-family:var(--mono); }
+    .answer .output-answer { font-family:var(--mono); }
     .trace-answer { max-width:360px; margin:16px 0; }
     .trace-answer input[type=text] { width:100%; font:14px var(--mono); }
     .question .grid-2 { margin-bottom:12px; }
@@ -61,23 +58,22 @@
     <main id="main" tabindex="-1">
       <p class="eyebrow" data-tr="Kısa Sınav 01 / 1–4. Haftalar">Quiz 01 / Weeks 1–4</p>
       <h1 data-tr="Python Temelleri Kısa Sınavı">Python Foundations Quiz</h1>
-      <p class="lead" data-tr="8 soru · 100 puan">8 questions · 100 points</p>
-      <p data-tr="Tüm soruları yanıtlayın. Yanıtlarınızı aşağıdaki alanlara veya ayrı bir yanıt kâğıdına yazabilirsiniz.">Answer all questions. Use the spaces below or a separate answer sheet.</p>
+      <p class="lead" data-tr="8 soru">8 questions</p>
+      <p data-tr="Tüm soruları yanıtlayın. Kod gerektiren soruların yanıtlarını ayrı bir kâğıda yazın.">Answer all questions. Use a separate answer sheet for questions that require code.</p>
 
       <section class="quiz-section" id="writing" aria-labelledby="writing-title">
         <h2 id="writing-title" data-tr="Kod yazma">Write code</h2>
 
         <article class="card question" aria-labelledby="q1-title">
-          <div class="question-heading"><h3 id="q1-title" data-tr="1. Ad listesini temizleme">1. Clean a list of names</h3><span class="points" data-tr="25 puan">25 points</span></div>
+          <h3 id="q1-title" data-tr="1. Ad listesini temizleme">1. Clean a list of names</h3>
           <pre><code>names = [" Ada ", "", "LIN", "  ", "Sam"]</code></pre>
           <p data-tr="Bir for döngüsü kullanarak her adın başındaki ve sonundaki boşlukları silin ve adı küçük harfe dönüştürün. Temizlendikten sonra boş kalan adları atlayın. Kalan adları aynı sırayla clean_names adlı yeni bir listeye ekleyin ve bu listeyi yazdırın.">Use a for loop to remove leading and trailing whitespace from each name and convert it to lowercase. Skip names that are empty after cleaning. Add the remaining names to a new list called clean_names in the original order, then print it.</p>
           <h4 data-tr="Beklenen çıktı">Expected output</h4>
           <pre><code>['ada', 'lin', 'sam']</code></pre>
-          <label class="answer" for="q1-answer"><span data-tr="Python kodunuz">Your Python code</span><textarea id="q1-answer" class="code-answer" rows="7" spellcheck="false" autocapitalize="off"></textarea></label>
         </article>
 
         <article class="card question" aria-labelledby="q2-title">
-          <div class="question-heading"><h3 id="q2-title" data-tr="2. Sensör ölçümlerini işleme">2. Process sensor readings</h3><span class="points" data-tr="25 puan">25 points</span></div>
+          <h3 id="q2-title" data-tr="2. Sensör ölçümlerini işleme">2. Process sensor readings</h3>
           <p data-tr="Bir while döngüsüyle kullanıcı -1 girene kadar ölçümleri birer birer okuyun. Ölçümler negatif olmayan tam sayılardır. -1 değerini ölçüm olarak saymayın. Döngü bittiğinde ölçüm sayısını ve en yüksek ölçümü yazdırın. İlk girdi -1 ise yalnızca No readings yazdırın.">Read one sensor reading at a time in a while loop until the user enters -1. Readings are nonnegative integers. Exclude -1 from the count. When the loop ends, print the number of readings and the highest reading. If the first input is -1, print only No readings.</p>
           <div class="grid-2">
             <div>
@@ -97,7 +93,6 @@ Highest: 9</code></pre>
               <pre><code>No readings</code></pre>
             </div>
           </div>
-          <label class="answer" for="q2-answer"><span data-tr="Python kodunuz">Your Python code</span><textarea id="q2-answer" class="code-answer" rows="10" spellcheck="false" autocapitalize="off"></textarea></label>
         </article>
       </section>
 
@@ -105,7 +100,7 @@ Highest: 9</code></pre>
         <h2 id="interpretation-title" data-tr="Kod yorumlama">Interpret code</h2>
 
         <article class="card question" aria-labelledby="q3-title">
-          <div class="question-heading"><h3 id="q3-title" data-tr="3. Sözlük döngüsünü izleme">3. Trace a dictionary loop</h3><span class="points" data-tr="15 puan">15 points</span></div>
+          <h3 id="q3-title" data-tr="3. Sözlük döngüsünü izleme">3. Trace a dictionary loop</h3>
           <pre><code>stock = {"pen": 3, "notebook": 0, "eraser": 2}
 total = 0
 
@@ -124,11 +119,11 @@ print(total)</code></pre>
               <tr><th scope="row">3</th><td><input type="text" inputmode="numeric" aria-label="total after iteration 3" data-tr-label="3. yinelemeden sonra total"></td></tr>
             </tbody>
           </table>
-          <label class="answer" for="q3-answer"><span data-tr="Ekran çıktısı">Printed output</span><textarea id="q3-answer" class="code-answer" rows="3" spellcheck="false" autocapitalize="off"></textarea></label>
+          <label class="answer" for="q3-answer"><span data-tr="Ekran çıktısı">Printed output</span><textarea id="q3-answer" class="output-answer" rows="3" spellcheck="false" autocapitalize="off"></textarea></label>
         </article>
 
         <article class="card question" aria-labelledby="q4-title">
-          <div class="question-heading"><h3 id="q4-title" data-tr="4. Bitmeyen döngüyü düzeltme">4. Fix a loop that never ends</h3><span class="points" data-tr="15 puan">15 points</span></div>
+          <h3 id="q4-title" data-tr="4. Bitmeyen döngüyü düzeltme">4. Fix a loop that never ends</h3>
           <pre><code>remaining = 4
 
 while remaining &gt; 0:
@@ -141,7 +136,6 @@ while remaining &gt; 0:
             <li data-tr="remaining hangi değerde kalır? Nedenini açıklayın.">What value does remaining get stuck at? Explain why.</li>
             <li data-tr="Döngüyü, 2 hariç 4’ten 1’e kadar sayıları azalan sırayla yazdırıp sona erecek şekilde düzeltin.">Fix the loop so that it prints the numbers from 4 down to 1, skipping 2, and then terminates.</li>
           </ol>
-          <label class="answer" for="q4-answer"><span data-tr="Yanıtlarınız ve düzeltilmiş Python kodu">Your answers and corrected Python code</span><textarea id="q4-answer" class="code-answer" rows="8" spellcheck="false" autocapitalize="off"></textarea></label>
         </article>
       </section>
 
@@ -150,26 +144,26 @@ while remaining &gt; 0:
         <p data-tr="Her soruyu bir veya iki cümleyle yanıtlayın.">Answer each question in one or two sentences.</p>
 
         <article class="card question" aria-labelledby="q5-title">
-          <div class="question-heading"><h3 id="q5-title" data-tr="5. Algoritma ve sözde kod">5. Algorithm and pseudocode</h3><span class="points" data-tr="5 puan">5 points</span></div>
+          <h3 id="q5-title" data-tr="5. Algoritma ve sözde kod">5. Algorithm and pseudocode</h3>
           <p data-tr="Algoritma nedir? Python kodunu yazmadan önce sözde kod kullanmak ne işe yarar?">What is an algorithm? How can pseudocode help before you write Python?</p>
           <label class="answer" for="q5-answer"><span data-tr="Yanıtınız">Your answer</span><textarea id="q5-answer" rows="3"></textarea></label>
         </article>
 
         <article class="card question" aria-labelledby="q6-title">
-          <div class="question-heading"><h3 id="q6-title" data-tr="6. Girdi ve tür dönüşümü">6. Input and type conversion</h3><span class="points" data-tr="5 puan">5 points</span></div>
+          <h3 id="q6-title" data-tr="6. Girdi ve tür dönüşümü">6. Input and type conversion</h3>
           <pre><code>age_text = input("Age: ")</code></pre>
           <p data-tr="Kullanıcı 18 girerse age_text değişkeninin türü ne olur? Değeri 18 tam sayısıyla sayısal olarak karşılaştırmadan önce neden tür dönüşümü gerekir?">If the user enters 18, what is the type of age_text? Why is a conversion needed before comparing the value numerically with the integer 18?</p>
           <label class="answer" for="q6-answer"><span data-tr="Yanıtınız">Your answer</span><textarea id="q6-answer" rows="3"></textarea></label>
         </article>
 
         <article class="card question" aria-labelledby="q7-title">
-          <div class="question-heading"><h3 id="q7-title" data-tr="7. Koleksiyon seçimi">7. Choose a collection</h3><span class="points" data-tr="5 puan">5 points</span></div>
+          <h3 id="q7-title" data-tr="7. Koleksiyon seçimi">7. Choose a collection</h3>
           <p data-tr="Ders kodunu kullanarak o dersin öğretim elemanını bulmak istiyorsunuz. Liste mi, sözlük mü kullanırdınız? Nedenini açıklayın.">You want to look up a course instructor by course code. Would you use a list or a dictionary? Explain why.</p>
           <label class="answer" for="q7-answer"><span data-tr="Yanıtınız">Your answer</span><textarea id="q7-answer" rows="3"></textarea></label>
         </article>
 
         <article class="card question" aria-labelledby="q8-title">
-          <div class="question-heading"><h3 id="q8-title" data-tr="8. Döngü seçimi">8. Choose a loop</h3><span class="points" data-tr="5 puan">5 points</span></div>
+          <h3 id="q8-title" data-tr="8. Döngü seçimi">8. Choose a loop</h3>
           <p data-tr="for döngüsünün uygun olduğu bir durum ve while döngüsünün uygun olduğu başka bir durum örneği verin. Her birinde seçtiğiniz döngünün neden uygun olduğunu açıklayın.">Give one example where a for loop is a good fit and one where a while loop is a good fit. Explain each choice.</p>
           <label class="answer" for="q8-answer"><span data-tr="Yanıtınız">Your answer</span><textarea id="q8-answer" rows="3"></textarea></label>
         </article>

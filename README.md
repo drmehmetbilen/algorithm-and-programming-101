@@ -151,6 +151,6 @@ python3 week-04/src/number_guessing.py
 
 ## Quiz 01 · Python Foundations
 
-Open [quiz-01/index.html](quiz-01/index.html) from the course selector or the last section of Week 4. The bilingual quiz covers Weeks 1–4 and totals 100 points across two code-writing questions, two code-interpretation questions, and four theory questions. Use the answer fields in the browser or print a blank copy. The language buttons preserve typed answers and keep all Python code in English.
+Open [quiz-01/index.html](quiz-01/index.html) from the course selector or the last section of Week 4. The bilingual quiz covers Weeks 1–4 with two code-writing questions, two code-interpretation questions, and four theory questions. Use a separate answer sheet for questions that require code. The trace table, output field, and theory answer fields can be filled in the browser. The language buttons preserve typed answers and keep all Python code in English.
 
 Future weeks follow the same structure: `week-NN/index.html`, with a `src/` folder when the lesson includes source examples.
